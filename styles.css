@@ -322,30 +322,33 @@ input, select, textarea { font: inherit; color: inherit; }
 .hero {
   position: relative;
   min-height: 100vh;
-  padding: 130px var(--gutter) 80px;
+  padding: 108px var(--gutter) 70px;
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1.35fr 1fr;
+  grid-template-rows: auto auto 1fr;
   gap: 0 60px;
-  align-items: end;
+  align-items: start;
 }
 .hero__meta {
   grid-column: 1 / -1;
   display: flex; justify-content: space-between; align-items: center;
-  padding-bottom: 18px;
+  padding-bottom: 16px;
   border-bottom: 1px solid var(--line);
-  margin-bottom: clamp(40px, 6vw, 80px);
+  margin-bottom: clamp(28px, 4vw, 48px);
 }
 .hero h1.display {
   grid-column: 1 / 2;
-  align-self: end;
+  grid-row: 2 / 3;
+  align-self: start;
+  margin-top: clamp(8px, 2vw, 24px);
 }
 .hero__foot {
   grid-column: 1 / 2;
-  margin-top: clamp(40px, 6vw, 70px);
-  display: flex; flex-direction: column; gap: 28px;
+  grid-row: 3 / 4;
+  margin-top: clamp(32px, 5vw, 56px);
+  display: flex; flex-direction: column; gap: 24px;
   max-width: 580px;
 }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -354,13 +357,13 @@ input, select, textarea { font: inherit; color: inherit; }
   grid-row: 2 / 4;
   margin: 0;
   position: relative;
-  align-self: end;
+  align-self: start;
   overflow: hidden;
   border-radius: var(--radius-img);
 }
 .hero__image img {
   width: 100%;
-  height: clamp(420px, 65vh, 720px);
+  height: clamp(440px, 72vh, 760px);
   object-fit: cover;
   border-radius: var(--radius-img);
   will-change: transform;
