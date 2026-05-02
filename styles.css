@@ -61,15 +61,13 @@ a {
   font-size: 14px;
 }
 
-.nav nav a,
-.nav-cta {
+.nav nav a {
   position: relative;
   text-decoration: none;
   transition: color 250ms ease, transform 250ms ease;
 }
 
-.nav nav a:hover,
-.nav-cta:hover {
+.nav nav a:hover {
   color: #e9783c;
   transform: translateY(-2px);
 }
@@ -89,14 +87,106 @@ a {
   width: 100%;
 }
 
+/* SHARED CTA BUTTON ANIMATION */
+.button,
 .nav-cta {
-  padding: 10px 18px;
-  border: 1px solid #241914;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 15px 26px;
+  border: 1px solid currentColor;
   border-radius: 999px;
+  color: #241914;
+  text-decoration: none;
+  font-weight: 800;
+  overflow: hidden;
+  isolation: isolate;
+  animation: ctaBreath 3.8s ease-in-out infinite;
+  transition:
+    transform 280ms cubic-bezier(.2,.8,.2,1),
+    box-shadow 280ms ease,
+    color 280ms ease,
+    border-color 280ms ease;
 }
 
+.nav-cta {
+  margin-top: 0;
+  padding: 10px 18px;
+}
+
+.button::before,
+.nav-cta::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #e9783c, #f0a35f, #e9783c);
+  transform: translateX(-105%) skewX(-18deg);
+  transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+  z-index: -2;
+}
+
+.button::after,
+.nav-cta::after {
+  content: "→";
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform 280ms cubic-bezier(.2,.8,.2,1);
+}
+
+.button:hover,
 .nav-cta:hover {
+  color: #fff;
   border-color: #e9783c;
+  transform: translateY(-5px) scale(1.025);
+  animation: none;
+  box-shadow:
+    0 18px 38px rgba(233, 120, 60, .32),
+    0 0 0 8px rgba(233, 120, 60, .08);
+}
+
+.button:hover::before,
+.nav-cta:hover::before {
+  transform: translateX(0) skewX(-18deg);
+}
+
+.button:hover::after,
+.nav-cta:hover::after {
+  transform: translateX(6px);
+}
+
+.button:active,
+.nav-cta:active {
+  transform: translateY(-2px) scale(.98);
+}
+
+.button.secondary {
+  margin-left: 10px;
+  background: #241914;
+  color: #fff;
+}
+
+.button.secondary:hover {
+  background: transparent;
+}
+
+.button.light {
+  color: #fff;
+  border-color: #fff;
+}
+
+.button.light::before {
+  background: linear-gradient(135deg, #fff, #f7dcc7, #fff);
+}
+
+.button.light:hover {
+  color: #241914;
+  border-color: #fff;
+  box-shadow:
+    0 18px 38px rgba(255, 255, 255, .22),
+    0 0 0 8px rgba(255, 255, 255, .08);
 }
 
 /* HERO */
@@ -190,65 +280,6 @@ a {
   font-size: 12px;
   font-weight: 800;
   letter-spacing: .16em;
-}
-
-.button {
-  position: relative;
-  display: inline-block;
-  margin-top: 24px;
-  padding: 15px 24px;
-  border: 1px solid #241914;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 700;
-  overflow: hidden;
-  transition: transform 250ms ease, box-shadow 250ms ease, color 250ms ease, border-color 250ms ease;
-}
-
-.button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #e9783c;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 300ms ease;
-  z-index: -1;
-}
-
-.button:hover {
-  transform: translateY(-4px);
-  border-color: #e9783c;
-  color: #fff;
-  box-shadow: 0 16px 34px rgba(233, 120, 60, .28);
-}
-
-.button:hover::before {
-  transform: scaleX(1);
-}
-
-.button.secondary {
-  margin-left: 10px;
-  background: #241914;
-  color: #fff;
-}
-
-.button.secondary::before {
-  background: #e9783c;
-}
-
-.button.light {
-  border-color: #fff;
-  color: #fff;
-}
-
-.button.light::before {
-  background: #fff;
-}
-
-.button.light:hover {
-  color: #241914;
-  border-color: #fff;
 }
 
 /* SECTIONS */
@@ -628,10 +659,6 @@ a {
   max-width: 820px;
 }
 
-.final-copy .button:hover {
-  box-shadow: 0 18px 40px rgba(255,255,255,.22);
-}
-
 /* FOOTER */
 .footer {
   padding: 44px 5vw;
@@ -692,6 +719,15 @@ a {
   50% {
     opacity: .75;
     transform: scale(1.02);
+  }
+}
+
+@keyframes ctaBreath {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(233, 120, 60, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(233, 120, 60, .07);
   }
 }
 
