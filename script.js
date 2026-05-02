@@ -6,7 +6,7 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.12 }
+  { threshold: 0.14 }
 );
 
 document.querySelectorAll(".reveal").forEach(element => {
