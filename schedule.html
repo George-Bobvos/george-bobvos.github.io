@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Schedule — Pipa Yoga · Filipa Mourão Martinho</title>
+  <meta name="description" content="Weekly yoga schedule with Filipa in Poblenou, Barcelona." />
+  <meta name="theme-color" content="#f7f1e8" />
+
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-schedule">
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a href="index.html#home" class="logo">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+      <path d="M12 3c2.5 3 2.5 7 0 10-2.5-3-2.5-7 0-10z"/>
+      <path d="M3 12c3-2.5 7-2.5 10 0-3 2.5-7 2.5-10 0z"/>
+      <path d="M21 12c-3-2.5-7-2.5-10 0 3 2.5 7 2.5 10 0z"/>
+      <path d="M12 21c-2.5-3-2.5-7 0-10 2.5 3 2.5 7 0 10z"/>
+    </svg>
+    <span>Pipa Yoga</span>
+  </a>
+
+  <nav class="nav__links" aria-label="Primary">
+    <a href="index.html#about">About</a>
+    <a href="index.html#practice">Practice</a>
+    <a href="index.html#filipa">Filipa</a>
+    <a href="schedule.html" aria-current="page">Schedule</a>
+    <a href="index.html#sessions">Sessions</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <a class="nav__cta" href="index.html#contact">Book a class</a>
+
+  <button class="nav__menu" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav>
+    <a href="index.html#about">About</a>
+    <a href="index.html#practice">Practice</a>
+    <a href="index.html#filipa">Filipa</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="index.html#sessions">Sessions</a>
+    <a href="index.html#contact">Contact</a>
+    <a class="mobile-menu__cta" href="index.html#contact">Book a class</a>
+  </nav>
+</div>
+
+<main id="main">
+
+  <section class="section section--page">
+    <aside class="section__label">
+      <span class="num">∞</span>
+      <span class="kicker">Schedule</span>
+    </aside>
+
+    <header class="page-head">
+      <p class="eyebrow">A weekly rhythm</p>
+      <h1 class="display display--lg">This <em>week</em> on the mat.</h1>
+      <p class="lead">Small-group classes in Poblenou. Up to six mats per session — write to me to reserve a spot, or book a private slot if nothing here fits your week.</p>
+    </header>
+
+    <div class="schedule">
+      <div class="schedule__row schedule__row--head">
+        <span>Day</span>
+        <span>Morning</span>
+        <span>Midday</span>
+        <span>Evening</span>
+      </div>
+
+      <div class="schedule__row">
+        <span class="schedule__day">Mon</span>
+        <span class="schedule__cell">
+          <strong>Rooted Flow</strong>
+          <em>07:30 — 08:30</em>
+        </span>
+        <span class="schedule__cell schedule__cell--empty">—</span>
+        <span class="schedule__cell">
+          <strong>Strong &amp; Soft</strong>
+          <em>19:30 — 20:45</em>
+        </span>
+      </div>
+
+      <div class="schedule__row">
+        <span class="schedule__day">Tue</span>
+        <span class="schedule__cell schedule__cell--empty">—</span>
+        <span class="schedule__cell">
+          <strong>Lunch Reset</strong>
+          <em>13:15 — 14:00</em>
+        </span>
+        <span class="schedule__cell">
+          <strong>Rooted Flow</strong>
+          <em>19:30 — 20:45</em>
+        </span>
+      </div>
+
+      <div class="schedule__row">
+        <span class="schedule__day">Wed</span>
+        <span class="schedule__cell">
+          <strong>Rooted Flow</strong>
+          <em>07:30 — 08:30</em>
+        </span>
+        <span class="schedule__cell schedule__cell--empty">—</span>
+        <span class="schedule__cell">
+          <strong>Deep Reset</strong>
+          <em>20:00 — 21:15</em>
+        </span>
+      </div>
+
+      <div class="schedule__row">
+        <span class="schedule__day">Thu</span>
+        <span class="schedule__cell schedule__cell--empty">—</span>
+        <span class="schedule__cell schedule__cell--empty">—</span>
+        <span class="schedule__cell">
+          <strong>Strong &amp; Soft</strong>
+          <em>19:30 — 20:45</em>
+        </span>
+      </div>
+
+      <div class="schedule__row">
+        <span class="schedule__day">Fri</span>
+        <span class="schedule__cell">
+          <strong>Rooted Flow</strong>
+          <em>07:30 — 08:30</em>
+        </span>
+        <span class="schedule__cell">
+          <strong>Lunch Reset</strong>
+          <em>13:15 — 14:00</em>
+        </span>
+        <span class="schedule__cell schedule__cell--empty">—</span>
+      </div>
+
+      <div class="schedule__row">
+        <span class="schedule__day">Sat</span>
+        <span class="schedule__cell">
+          <strong>Slow Saturday</strong>
+          <em>10:00 — 11:30</em>
+        </span>
+        <span class="schedule__cell schedule__cell--empty">—</span>
+        <span class="schedule__cell schedule__cell--empty">—</span>
+      </div>
+
+      <div class="schedule__row">
+        <span class="schedule__day">Sun</span>
+        <span class="schedule__cell schedule__cell--empty">— rest —</span>
+        <span class="schedule__cell schedule__cell--empty"></span>
+        <span class="schedule__cell schedule__cell--empty"></span>
+      </div>
+    </div>
+
+    <div class="schedule__foot">
+      <div>
+        <p class="eyebrow">Private sessions</p>
+        <p>Available most days, in your home or at the studio. Write to me with a few times that work and we'll find a slot.</p>
+      </div>
+      <a class="btn btn--primary" href="index.html#contact">
+        Reserve a spot
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <span class="logo logo--footer">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M12 3c2.5 3 2.5 7 0 10-2.5-3-2.5-7 0-10z"/>
+          <path d="M3 12c3-2.5 7-2.5 10 0-3 2.5-7 2.5-10 0z"/>
+          <path d="M21 12c-3-2.5-7-2.5-10 0 3 2.5 7 2.5 10 0z"/>
+          <path d="M12 21c-2.5-3-2.5-7 0-10 2.5 3 2.5 7 0 10z"/>
+        </svg>
+        Pipa Yoga
+      </span>
+      <p>Soft yoga, breathwork, and mindful movement with Filipa Mourão Martinho.</p>
+    </div>
+    <div>
+      <strong>Studio</strong>
+      <p>Rambla del Poblenou 90<br>08005 Barcelona, Spain</p>
+    </div>
+    <div>
+      <strong>Practice</strong>
+      <p><a href="index.html#sessions">Private sessions</a><br>
+      <a href="index.html#sessions">Small-group classes</a><br>
+      <a href="schedule.html">Weekly schedule</a></p>
+    </div>
+    <div>
+      <strong>Reach out</strong>
+      <p><a href="mailto:filipa-martinho94@hotmail.com">filipa-martinho94@hotmail.com</a><br>
+      <a href="https://wa.me/351912135446" target="_blank" rel="noopener">WhatsApp</a></p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© <span id="year">2026</span> Pipa Yoga</span>
+    <span>Made slowly in Poblenou</span>
+  </div>
+</footer>
+
+<a class="whatsapp" href="https://wa.me/351912135446?text=Hi%20Filipa%2C%20I%27d%20like%20to%20book%20a%20class" target="_blank" rel="noopener" aria-label="Message Filipa on WhatsApp">
+  <svg viewBox="0 0 32 32" width="22" height="22" fill="currentColor" aria-hidden="true">
+    <path d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.27.63 4.5 1.83 6.43L4 29l7.7-1.78a12 12 0 0 0 4.34.81h.01c6.64 0 12.04-5.4 12.04-12.04C28.09 8.4 22.69 3 16.04 3zm6.94 16.7c-.3.83-1.74 1.62-2.4 1.7-.61.06-1.38.09-2.23-.14-.51-.16-1.18-.38-2.03-.74-3.57-1.54-5.9-5.13-6.08-5.36-.18-.24-1.45-1.93-1.45-3.68 0-1.74.92-2.6 1.24-2.96.32-.36.7-.45.93-.45.23 0 .47.01.67.01.21.01.5-.08.78.6.3.71 1 2.45 1.09 2.62.09.18.15.39.03.62-.12.24-.18.39-.36.6-.18.21-.39.47-.55.63-.18.18-.37.38-.16.74.21.36.93 1.54 2 2.49 1.37 1.22 2.53 1.6 2.89 1.78.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.81-.18.33.12 2.07.98 2.43 1.16.36.18.6.27.69.42.09.15.09.86-.21 1.69z"/>
+  </svg>
+  <span>WhatsApp</span>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>
