@@ -380,7 +380,7 @@ input, select, textarea { font: inherit; color: inherit; }
 .hero__image-secondary {
   margin: 0;
   position: absolute;
-  left: -56px;
+  right: -56px;
   bottom: -56px;
   width: 56%;
   z-index: 3;
