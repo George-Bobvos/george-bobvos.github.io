@@ -9,7 +9,6 @@ const observer = new IntersectionObserver(
   { threshold: 0.15 }
 );
 
-document.querySelectorAll(".section, .cards article").forEach(el => {
-  el.classList.add("fade-in");
-  observer.observe(el);
+document.querySelectorAll(".fade-in").forEach(element => {
+  observer.observe(element);
 });
