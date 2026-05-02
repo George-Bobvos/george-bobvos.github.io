@@ -108,3 +108,13 @@ body {
     grid-template-columns: 1fr;
   }
 }
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
