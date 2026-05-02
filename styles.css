@@ -36,9 +36,18 @@ body {
   padding: 160px 6vw 80px;
   display: flex;
   align-items: center;
-  background:
-    linear-gradient(rgba(247,241,234,.5), rgba(247,241,234,.9)),
-    url("assets/hero.jpg") center / cover;
+  background-image:
+    linear-gradient(rgba(247, 241, 234, 0.15), rgba(247, 241, 234, 0.35)),
+    url("./assets/hero.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero > div {
+  max-width: 760px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -91,7 +100,7 @@ body {
   padding: 28px;
   border: 1px solid rgba(0,0,0,.15);
   border-radius: 28px;
-  background: rgba(255,255,255,.45);
+  background: rgba(255,255,255,.65);
 }
 
 .footer {
@@ -108,6 +117,8 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Animation */
 .fade-in {
   opacity: 0;
   transform: translateY(24px);
