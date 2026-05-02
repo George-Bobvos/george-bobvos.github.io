@@ -3,237 +3,433 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pipa Yoga | Filipa Mourão Martinho</title>
+  <title>Pipa Yoga — Filipa Mourão Martinho · Soft yoga in Poblenou, Barcelona</title>
+  <meta name="description" content="Soft, grounding yoga in Poblenou, Barcelona. Hatha, Vinyasa and Yin with Filipa Mourão Martinho. Small classes, private sessions, breathwork." />
+  <meta name="theme-color" content="#f7f1e8" />
+ 
+  <meta property="og:title" content="Pipa Yoga — Filipa Mourão Martinho" />
+  <meta property="og:description" content="Soft, grounding yoga in Poblenou, Barcelona." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./assets/hero.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+ 
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-<header class="nav">
-  <a href="#home" class="logo">Pipa Yoga</a>
+ 
+<a class="skip" href="#main">Skip to content</a>
+ 
+<div class="scroll-progress" aria-hidden="true"></div>
+ 
+<header class="nav" id="nav">
+  <a href="#home" class="logo">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+      <path d="M12 3c2.5 3 2.5 7 0 10-2.5-3-2.5-7 0-10z"/>
+      <path d="M3 12c3-2.5 7-2.5 10 0-3 2.5-7 2.5-10 0z"/>
+      <path d="M21 12c-3-2.5-7-2.5-10 0 3 2.5 7 2.5 10 0z"/>
+      <path d="M12 21c-2.5-3-2.5-7 0-10 2.5 3 2.5 7 0 10z"/>
+    </svg>
+    <span>Pipa Yoga</span>
+  </a>
+ 
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#about">About</a>
+    <a href="#practice">Practice</a>
+    <a href="#filipa">Filipa</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="#sessions">Sessions</a>
+    <a href="#contact">Contact</a>
+  </nav>
+ 
+  <a class="nav__cta" href="#contact">Book a class</a>
+ 
+  <button class="nav__menu" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+    <span></span><span></span>
+  </button>
+</header>
+ 
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <nav>
     <a href="#about">About</a>
     <a href="#practice">Practice</a>
     <a href="#filipa">Filipa</a>
+    <a href="schedule.html">Schedule</a>
     <a href="#sessions">Sessions</a>
     <a href="#contact">Contact</a>
+    <a class="mobile-menu__cta" href="#contact">Book a class</a>
   </nav>
-  <a class="nav-cta" href="#contact">Book a class</a>
-</header>
-
-<main>
-
-<section id="home" class="hero">
-  <div class="hero-copy reveal">
-    <p class="eyebrow">Yoga in Poblenou</p>
-    <h1>Come back to your body.</h1>
-    <p>I’m Filipa. I teach soft, grounding yoga in Poblenou for people who want to move better, breathe deeper, and feel more at home in themselves.</p>
-    <div class="hero-actions">
-      <a class="button" href="#practice">Explore practice</a>
-      <a class="button ghost" href="#contact">Book a session</a>
+</div>
+ 
+<main id="main">
+ 
+  <!-- ========================== HERO ========================== -->
+  <section id="home" class="hero">
+    <div class="hero__meta">
+      <span class="label">Pipa Yoga · Poblenou, BCN</span>
+      <span class="label label--right">№ 01 — Practice</span>
     </div>
-  </div>
-
-  <div class="hero-visual reveal">
-    <img src="./assets/hero.jpg" alt="Pipa Yoga practice">
-    <div class="hero-note">
-      <span>Your body.</span>
-      <strong>Your ritual.</strong>
-    </div>
-  </div>
-</section>
-
-<section id="about" class="section intro">
-  <div class="intro-image reveal">
-    <img src="./assets/studio.jpg" alt="Peaceful yoga space">
-  </div>
-
-  <div class="intro-copy reveal">
-    <p class="eyebrow">Pipa Yoga</p>
-    <h2>Yoga, without pressure.</h2>
-    <p>My classes are calm, personal, and easy to enter. We move slowly, breathe deeply, and build strength without forcing the body.</p>
-    <p>No perfect shapes. No rushing. Just space to listen, reset, and build a practice that feels like yours.</p>
-
-    <div class="soft-stats">
-      <div><strong>200h</strong><span>Yoga Teacher Training</span></div>
-      <div><strong>YTT</strong><span>Yoga Alliance path</span></div>
-      <div><strong>BCN</strong><span>Poblenou based</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="practice" class="section practice">
-  <div class="section-heading reveal">
-    <p class="eyebrow">Practice</p>
-    <h2>Choose your pace.</h2>
-  </div>
-
-  <div class="practice-grid">
-    <article class="practice-card reveal">
-      <img src="./assets/class-1.jpg" alt="Gentle yoga">
-      <div>
-        <p>Gentle</p>
-        <h3>Rooted Flow</h3>
-        <span>Slow movement, grounding, mobility, and breath.</span>
+ 
+    <h1 class="display split" data-split>Come back<br>to your <em>body.</em></h1>
+ 
+    <div class="hero__foot">
+      <p class="lede">I'm Filipa. I teach soft, grounding yoga in Poblenou for people who want to move better, breathe deeper, and feel more at home in themselves.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#sessions">
+          Begin practice
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#contact">Reach out</a>
       </div>
-    </article>
-
-    <article class="practice-card reveal">
-      <img src="./assets/class-2.jpg" alt="Strength yoga">
-      <div>
-        <p>Strength</p>
-        <h3>Strong & Soft</h3>
-        <span>Strength, posture, and balance without tension.</span>
-      </div>
-    </article>
-
-    <article class="practice-card reveal">
-      <img src="./assets/class-3.jpg" alt="Restorative yoga">
-      <div>
-        <p>Restore</p>
-        <h3>Deep Reset</h3>
-        <span>Restorative yoga and breathwork for softer days.</span>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section class="section training">
-  <div class="training-copy reveal">
-    <p class="eyebrow">Training</p>
-    <h2>Trained with care.</h2>
-    <p>I completed my 200-hour Yoga Teacher Training with Yogagau, a Yoga Alliance approved school.</p>
-    <p>My foundation includes Hatha, Ashtanga Vinyasa, Yin Yoga, pranayama, meditation, anatomy, alignment, and yoga philosophy.</p>
-  </div>
-
-  <div class="training-list reveal">
-    <span>Hatha</span>
-    <span>Ashtanga Vinyasa</span>
-    <span>Yin Yoga</span>
-    <span>Pranayama</span>
-    <span>Meditation</span>
-    <span>Anatomy</span>
-    <span>Alignment</span>
-    <span>Philosophy</span>
-  </div>
-</section>
-
-<section class="section benefits">
-  <div class="section-heading reveal">
-    <p class="eyebrow">What we practice</p>
-    <h2>Small shifts. Real calm.</h2>
-  </div>
-
-  <div class="benefits-grid">
-    <article class="benefit reveal">
-      <span>01</span>
-      <h3>Move softer</h3>
-      <p>Build strength without rushing.</p>
-    </article>
-
-    <article class="benefit reveal">
-      <span>02</span>
-      <h3>Breathe deeper</h3>
-      <p>Use breath to soften the body.</p>
-    </article>
-
-    <article class="benefit reveal">
-      <span>03</span>
-      <h3>Feel steadier</h3>
-      <p>Create space in your day.</p>
-    </article>
-
-    <article class="benefit reveal">
-      <span>04</span>
-      <h3>Meet gently</h3>
-      <p>Practice in a small, human setting.</p>
-    </article>
-  </div>
-</section>
-
-<section id="filipa" class="section filipa">
-  <div class="filipa-card reveal">
-    <div class="filipa-image">
-      <img src="./assets/instructor-1.jpg" alt="Filipa Mourão Martinho">
     </div>
-
-    <div class="filipa-copy">
-      <p class="eyebrow">Meet your teacher</p>
-      <h2>Hi, I’m Filipa.</h2>
-      <p>I’m Portuguese and I’ve lived in Poblenou for two years. My day-to-day life is corporate, and outside work I’m a yogi.</p>
-      <p>Yoga is how I take care of myself. It is also one of the ways I most enjoy connecting with people.</p>
-      <p>I’ve fallen in love with Poblenou: its rhythm, its mix, and the way people here care about how they live. I’d love to grow a small community around that same feeling.</p>
-      <a class="button" href="#contact">Practice with me</a>
+ 
+    <figure class="hero__image" data-parallax>
+      <img src="./assets/hero.jpg" alt="A quiet yoga practice in Poblenou" loading="eager">
+      <figcaption>
+        <span>A morning practice</span>
+        <span>Poblenou, 2026</span>
+      </figcaption>
+    </figure>
+ 
+    <div class="hero__scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
     </div>
-  </div>
-</section>
-
-<section class="quote">
-  <div class="quote-inner reveal">
-    <p>Breathe. Move. Stay.</p>
-  </div>
-</section>
-
-<section id="sessions" class="section sessions">
-  <div class="section-heading reveal">
-    <p class="eyebrow">Sessions</p>
-    <h2>Ways to begin.</h2>
-  </div>
-
-  <div class="session-grid">
-    <article class="session-card reveal">
-      <p>Single Session</p>
-      <h3>€35</h3>
-      <span>Try one class and see how it feels.</span>
-      <a class="button small" href="#contact">Book once</a>
-    </article>
-
-    <article class="session-card featured reveal">
-      <p>Monthly Practice</p>
-      <h3>€120</h3>
-      <span>Four sessions to build rhythm.</span>
-      <a class="button small light" href="#contact">Start monthly</a>
-    </article>
-
-    <article class="session-card reveal">
-      <p>Deep Reset</p>
-      <h3>€55</h3>
-      <span>A slower session for breath, rest, and release.</span>
-      <a class="button small" href="#contact">Reset now</a>
-    </article>
-  </div>
-</section>
-
-<section id="contact" class="contact">
-  <div class="contact-copy reveal">
-    <p class="eyebrow">Begin in Barcelona</p>
-    <h2>Let’s meet on the mat.</h2>
-    <p>I teach at Rambla del Poblenou 90, 08005, Barcelona.</p>
-    <a class="button light" href="mailto:hello@pipayoga.com">Book your first session</a>
-  </div>
-</section>
-
+  </section>
+ 
+  <!-- ========================== ABOUT ========================== -->
+  <section id="about" class="section section--intro">
+    <aside class="section__label">
+      <span class="num">02</span>
+      <span class="kicker">About</span>
+    </aside>
+ 
+    <div class="intro">
+      <figure class="intro__image">
+        <img src="./assets/studio.jpg" alt="A quiet, light-filled yoga space" loading="lazy">
+        <figcaption>The space where we practice.</figcaption>
+      </figure>
+ 
+      <div class="intro__copy">
+        <p class="eyebrow">A practice, not a performance</p>
+        <h2 class="display display--md">Yoga, <em>without</em> pressure.</h2>
+        <p class="lead drop">My classes are calm, personal, and easy to enter. We move slowly, breathe deeply, and build strength without forcing the body. No perfect shapes. No rushing. Just space to listen, reset, and build a practice that feels like yours.</p>
+ 
+        <dl class="facts">
+          <div><dt>200h</dt><dd>Yoga Teacher Training</dd></div>
+          <div><dt>YTT</dt><dd>Yoga Alliance path</dd></div>
+          <div><dt>BCN</dt><dd>Poblenou based</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ========================== PRACTICE ========================== -->
+  <section id="practice" class="section section--practice">
+    <aside class="section__label">
+      <span class="num">03</span>
+      <span class="kicker">Practice</span>
+    </aside>
+ 
+    <header class="section__head">
+      <p class="eyebrow">Three ways in</p>
+      <h2 class="display display--md">Choose your <em>pace.</em></h2>
+      <p class="lead">Every class is small and adapted to who shows up. Come once, come weekly — no two sessions feel the same.</p>
+    </header>
+ 
+    <div class="cards">
+      <article class="card">
+        <div class="card__image"><img src="./assets/class-1.jpg" alt="A gentle, grounding flow" loading="lazy"></div>
+        <div class="card__body">
+          <span class="card__num">01</span>
+          <p class="card__kicker">Gentle</p>
+          <h3>Rooted Flow</h3>
+          <p>Slow movement, mobility, and breath. A steady opening of the body.</p>
+        </div>
+      </article>
+ 
+      <article class="card">
+        <div class="card__image"><img src="./assets/class-2.jpg" alt="A strong but soft practice" loading="lazy"></div>
+        <div class="card__body">
+          <span class="card__num">02</span>
+          <p class="card__kicker">Strength</p>
+          <h3>Strong &amp; Soft</h3>
+          <p>Strength, posture, and balance built without tension or force.</p>
+        </div>
+      </article>
+ 
+      <article class="card">
+        <div class="card__image"><img src="./assets/class-3.jpg" alt="A restorative practice" loading="lazy"></div>
+        <div class="card__body">
+          <span class="card__num">03</span>
+          <p class="card__kicker">Restore</p>
+          <h3>Deep Reset</h3>
+          <p>Restorative yoga and breathwork for the softer, slower days.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+ 
+  <!-- ========================== TRAINING (marquee) ========================== -->
+  <section class="section section--training">
+    <aside class="section__label section__label--light">
+      <span class="num">04</span>
+      <span class="kicker">Training</span>
+    </aside>
+ 
+    <div class="training">
+      <div class="training__copy">
+        <p class="eyebrow">Trained with care</p>
+        <h2 class="display display--md">A foundation in <em>many</em> traditions.</h2>
+        <p class="lead">Completed my 200-hour Yoga Teacher Training with Yogagau, a Yoga Alliance approved school. The work draws on Hatha, Ashtanga Vinyasa, Yin, pranayama, meditation, anatomy and philosophy.</p>
+      </div>
+    </div>
+ 
+    <div class="marquee" aria-hidden="false">
+      <div class="marquee__track">
+        <span>Hatha</span><span class="dot">·</span>
+        <span>Ashtanga Vinyasa</span><span class="dot">·</span>
+        <span>Yin Yoga</span><span class="dot">·</span>
+        <span>Pranayama</span><span class="dot">·</span>
+        <span>Meditation</span><span class="dot">·</span>
+        <span>Anatomy</span><span class="dot">·</span>
+        <span>Alignment</span><span class="dot">·</span>
+        <span>Philosophy</span><span class="dot">·</span>
+        <span>Hatha</span><span class="dot">·</span>
+        <span>Ashtanga Vinyasa</span><span class="dot">·</span>
+        <span>Yin Yoga</span><span class="dot">·</span>
+        <span>Pranayama</span><span class="dot">·</span>
+        <span>Meditation</span><span class="dot">·</span>
+        <span>Anatomy</span><span class="dot">·</span>
+        <span>Alignment</span><span class="dot">·</span>
+        <span>Philosophy</span><span class="dot">·</span>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ========================== BENEFITS ========================== -->
+  <section class="section section--benefits">
+    <aside class="section__label">
+      <span class="num">05</span>
+      <span class="kicker">What we practice</span>
+    </aside>
+ 
+    <header class="section__head">
+      <p class="eyebrow">Small shifts</p>
+      <h2 class="display display--md">Real <em>calm</em>, slowly built.</h2>
+    </header>
+ 
+    <ol class="benefits">
+      <li>
+        <span class="benefits__num">01</span>
+        <h3>Move softer</h3>
+        <p>Build strength without rushing the body.</p>
+      </li>
+      <li>
+        <span class="benefits__num">02</span>
+        <h3>Breathe deeper</h3>
+        <p>Use breath to soften and steady.</p>
+      </li>
+      <li>
+        <span class="benefits__num">03</span>
+        <h3>Feel steadier</h3>
+        <p>Carve a small clearing in your day.</p>
+      </li>
+      <li>
+        <span class="benefits__num">04</span>
+        <h3>Meet gently</h3>
+        <p>Practice in a small, human setting.</p>
+      </li>
+    </ol>
+  </section>
+ 
+  <!-- ========================== FILIPA ========================== -->
+  <section id="filipa" class="section section--filipa">
+    <aside class="section__label">
+      <span class="num">06</span>
+      <span class="kicker">Your teacher</span>
+    </aside>
+ 
+    <div class="filipa">
+      <figure class="filipa__image">
+        <img src="./assets/instructor-1.jpg" alt="Filipa Mourão Martinho" loading="lazy">
+        <figcaption>Filipa Mourão Martinho · Pipa</figcaption>
+      </figure>
+ 
+      <div class="filipa__copy">
+        <p class="eyebrow">Hi, I'm Filipa</p>
+        <h2 class="display display--md">Portuguese, Poblenou, <em>and a yogi.</em></h2>
+        <p class="lead">I'm Portuguese and I've lived in Poblenou for two years. My day-to-day life is corporate, and outside work I'm a yogi. Yoga is how I take care of myself — and it's one of the ways I most enjoy connecting with people.</p>
+        <p>I've fallen in love with Poblenou: its rhythm, its mix, and the way people here care about how they live. I'd love to grow a small community around that same feeling.</p>
+        <a class="btn btn--primary" href="#contact">
+          Practice with me
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ========================== QUOTE ========================== -->
+  <section class="quote">
+    <div class="quote__inner">
+      <span class="mark" aria-hidden="true">&ldquo;</span>
+      <p class="display split" data-split>Breathe. <em>Move.</em> Stay.</p>
+      <span class="quote__byline">— a small reminder</span>
+    </div>
+  </section>
+ 
+  <!-- ========================== SESSIONS ========================== -->
+  <section id="sessions" class="section section--sessions">
+    <aside class="section__label">
+      <span class="num">07</span>
+      <span class="kicker">Sessions</span>
+    </aside>
+ 
+    <header class="section__head">
+      <p class="eyebrow">Ways to begin</p>
+      <h2 class="display display--md">Start where you <em>are.</em></h2>
+    </header>
+ 
+    <div class="sessions">
+      <article class="session">
+        <div class="session__head">
+          <p class="session__kicker">Single Session</p>
+          <span class="session__num">01</span>
+        </div>
+        <p class="session__price"><span>€</span>35</p>
+        <p class="session__desc">Try one class and see how it feels. No commitment, no pressure.</p>
+        <a class="btn btn--ghost btn--sm" href="#contact">Book once →</a>
+      </article>
+ 
+      <article class="session session--featured">
+        <div class="session__head">
+          <p class="session__kicker">Monthly Practice</p>
+          <span class="session__num">02</span>
+        </div>
+        <p class="session__price"><span>€</span>120</p>
+        <p class="session__desc">Four sessions a month — enough to build rhythm and feel a real shift.</p>
+        <a class="btn btn--light btn--sm" href="#contact">Start monthly →</a>
+        <span class="session__tag">Most chosen</span>
+      </article>
+ 
+      <article class="session">
+        <div class="session__head">
+          <p class="session__kicker">Deep Reset</p>
+          <span class="session__num">03</span>
+        </div>
+        <p class="session__price"><span>€</span>55</p>
+        <p class="session__desc">A slower 75-minute session for breath, rest, and release.</p>
+        <a class="btn btn--ghost btn--sm" href="#contact">Reset now →</a>
+      </article>
+    </div>
+ 
+    <p class="sessions__note">
+      Looking for a regular weekly rhythm? <a href="schedule.html">See the schedule →</a>
+    </p>
+  </section>
+ 
+  <!-- ========================== CONTACT ========================== -->
+  <section id="contact" class="contact">
+    <div class="contact__inner">
+      <aside class="section__label section__label--light">
+        <span class="num">08</span>
+        <span class="kicker">Begin</span>
+      </aside>
+ 
+      <div class="contact__copy">
+        <p class="eyebrow eyebrow--light">Begin in Barcelona</p>
+        <h2 class="display display--md">Let's meet <em>on the mat.</em></h2>
+        <p class="lead lead--light">Tell me a little about what you're looking for and I'll get back to you within a day. I teach at Rambla del Poblenou 90, 08005, Barcelona.</p>
+      </div>
+ 
+      <form class="contact__form" id="contactForm" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
+        </div>
+        <div class="field">
+          <label for="interest">I'm interested in</label>
+          <select id="interest" name="interest">
+            <option>A single session (€35)</option>
+            <option>Monthly practice (€120)</option>
+            <option>Deep Reset (€55)</option>
+            <option>A private session</option>
+            <option>Just saying hi</option>
+          </select>
+        </div>
+        <div class="field field--full">
+          <label for="message">A few words (optional)</label>
+          <textarea id="message" name="message" rows="4" placeholder="Anything you want me to know — pace, injuries, hopes…"></textarea>
+        </div>
+        <div class="field field--full field--actions">
+          <button type="submit" class="btn btn--light">
+            Send to Filipa
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="form__note">Opens your email app · or write to <a href="mailto:filipa-martinho94@hotmail.com">filipa-martinho94@hotmail.com</a></p>
+        </div>
+      </form>
+    </div>
+  </section>
+ 
 </main>
-
+ 
+<!-- ========================== FOOTER ========================== -->
 <footer class="footer">
-  <div>
-    <strong>Pipa Yoga</strong>
-    <p>Soft yoga, breathwork, and mindful movement with Filipa Mourão Martinho.</p>
+  <div class="footer__top">
+    <div class="footer__brand">
+      <span class="logo logo--footer">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <path d="M12 3c2.5 3 2.5 7 0 10-2.5-3-2.5-7 0-10z"/>
+          <path d="M3 12c3-2.5 7-2.5 10 0-3 2.5-7 2.5-10 0z"/>
+          <path d="M21 12c-3-2.5-7-2.5-10 0 3 2.5 7 2.5 10 0z"/>
+          <path d="M12 21c-2.5-3-2.5-7 0-10 2.5 3 2.5 7 0 10z"/>
+        </svg>
+        Pipa Yoga
+      </span>
+      <p>Soft yoga, breathwork, and mindful movement with Filipa Mourão Martinho.</p>
+    </div>
+ 
+    <div>
+      <strong>Studio</strong>
+      <p>Rambla del Poblenou 90<br>08005 Barcelona, Spain</p>
+    </div>
+ 
+    <div>
+      <strong>Practice</strong>
+      <p><a href="#sessions">Private sessions</a><br>
+      <a href="#sessions">Small-group classes</a><br>
+      <a href="schedule.html">Weekly schedule</a></p>
+    </div>
+ 
+    <div>
+      <strong>Reach out</strong>
+      <p><a href="mailto:filipa-martinho94@hotmail.com">filipa-martinho94@hotmail.com</a><br>
+      <a href="https://wa.me/351912135446" target="_blank" rel="noopener">WhatsApp</a></p>
+    </div>
   </div>
-
-  <div>
-    <strong>Studio</strong>
-    <p>Rambla del Poblenou 90</p>
-    <p>08005 Barcelona, Spain</p>
-  </div>
-
-  <div>
-    <strong>Practice</strong>
-    <p>Private sessions</p>
-    <p>Small-group classes</p>
-    <p><a href="mailto:hello@pipayoga.com">hello@pipayoga.com</a></p>
+ 
+  <div class="footer__bottom">
+    <span>© <span id="year">2026</span> Pipa Yoga</span>
+    <span>Made slowly in Poblenou</span>
   </div>
 </footer>
-
+ 
+<!-- WhatsApp floating -->
+<a class="whatsapp" href="https://wa.me/351912135446?text=Hi%20Filipa%2C%20I%27d%20like%20to%20book%20a%20class" target="_blank" rel="noopener" aria-label="Message Filipa on WhatsApp">
+  <svg viewBox="0 0 32 32" width="22" height="22" fill="currentColor" aria-hidden="true">
+    <path d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.27.63 4.5 1.83 6.43L4 29l7.7-1.78a12 12 0 0 0 4.34.81h.01c6.64 0 12.04-5.4 12.04-12.04C28.09 8.4 22.69 3 16.04 3zm6.94 16.7c-.3.83-1.74 1.62-2.4 1.7-.61.06-1.38.09-2.23-.14-.51-.16-1.18-.38-2.03-.74-3.57-1.54-5.9-5.13-6.08-5.36-.18-.24-1.45-1.93-1.45-3.68 0-1.74.92-2.6 1.24-2.96.32-.36.7-.45.93-.45.23 0 .47.01.67.01.21.01.5-.08.78.6.3.71 1 2.45 1.09 2.62.09.18.15.39.03.62-.12.24-.18.39-.36.6-.18.21-.39.47-.55.63-.18.18-.37.38-.16.74.21.36.93 1.54 2 2.49 1.37 1.22 2.53 1.6 2.89 1.78.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.81-.18.33.12 2.07.98 2.43 1.16.36.18.6.27.69.42.09.15.09.86-.21 1.69z"/>
+  </svg>
+  <span>WhatsApp</span>
+</a>
+ 
 <script src="script.js"></script>
 </body>
 </html>
