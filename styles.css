@@ -129,3 +129,32 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+/* IMAGE HANDLING */
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+/* CARD STRUCTURE */
+.card {
+  overflow: hidden;
+}
+
+.card h3 {
+  margin-top: 12px;
+}
+
+/* CTA SECTION */
+.cta {
+  padding: 140px 6vw;
+  text-align: center;
+  background: url("./assets/cta.jpg") center / cover;
+  color: white;
+}
+
+.cta h2 {
+  font-size: clamp(36px, 6vw, 72px);
+  margin-bottom: 24px;
+}
