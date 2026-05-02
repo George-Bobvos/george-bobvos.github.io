@@ -365,7 +365,7 @@ input, select, textarea { font: inherit; color: inherit; }
   border-radius: var(--radius-img);
   overflow: hidden;
   background: var(--paper);
-  transform: rotate(-0.8deg);
+  transform: rotate(0deg);
   transition: transform .6s var(--ease), box-shadow .6s var(--ease);
   box-shadow: 0 24px 60px rgba(26, 20, 17, 0.12);
 }
@@ -413,7 +413,7 @@ input, select, textarea { font: inherit; color: inherit; }
   50%      { transform: translateY(-6px); }
 }
 .hero__image:hover .hero__image-main {
-  transform: rotate(0deg);
+  transform: translateY(-6px) scale(1.01);
   box-shadow: 0 28px 70px rgba(26, 20, 17, 0.16);
 }
 .hero__image:hover .hero__image-secondary {
