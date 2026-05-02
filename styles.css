@@ -13,6 +13,7 @@ body {
   background: #f7f1ea;
 }
 
+/* NAV */
 .nav {
   position: fixed;
   top: 0;
@@ -31,23 +32,13 @@ body {
   text-decoration: none;
 }
 
+/* HERO */
 .hero {
   min-height: 100vh;
   padding: 160px 6vw 80px;
   display: flex;
   align-items: center;
-  background-image:
-    linear-gradient(rgba(247, 241, 234, 0.15), rgba(247, 241, 234, 0.35)),
-    url("./assets/hero.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.hero > div {
-  max-width: 760px;
-  position: relative;
-  z-index: 1;
+  background: url("./assets/hero.jpg") center / cover no-repeat;
 }
 
 .hero h1 {
@@ -57,6 +48,7 @@ body {
   margin: 0 0 24px;
 }
 
+/* TYPO */
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -73,6 +65,7 @@ body {
   text-decoration: none;
 }
 
+/* SECTIONS */
 .section {
   padding: 110px 6vw;
 }
@@ -81,6 +74,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
+  align-items: center;
 }
 
 .section h2 {
@@ -89,24 +83,57 @@ body {
   margin: 0 0 32px;
 }
 
+/* CARDS */
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-.cards article {
+.card {
   min-height: 220px;
-  padding: 28px;
+  padding: 20px;
   border: 1px solid rgba(0,0,0,.15);
   border-radius: 28px;
-  background: rgba(255,255,255,.65);
+  background: rgba(255,255,255,.8);
+  overflow: hidden;
 }
 
+.card img {
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin: 0;
+}
+
+/* IMAGE HANDLING */
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+/* CTA */
+.cta {
+  padding: 140px 6vw;
+  text-align: center;
+  background: url("./assets/cta.jpg") center / cover no-repeat;
+  color: white;
+}
+
+.cta h2 {
+  font-size: clamp(36px, 6vw, 72px);
+  margin-bottom: 24px;
+}
+
+/* FOOTER */
 .footer {
   padding: 40px 6vw;
 }
 
+/* MOBILE */
 @media (max-width: 760px) {
   .nav nav {
     display: none;
@@ -118,7 +145,7 @@ body {
   }
 }
 
-/* Animation */
+/* ANIMATION */
 .fade-in {
   opacity: 0;
   transform: translateY(24px);
@@ -128,33 +155,4 @@ body {
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
-}
-/* IMAGE HANDLING */
-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 20px;
-}
-
-/* CARD STRUCTURE */
-.card {
-  overflow: hidden;
-}
-
-.card h3 {
-  margin-top: 12px;
-}
-
-/* CTA SECTION */
-.cta {
-  padding: 140px 6vw;
-  text-align: center;
-  background: url("./assets/cta.jpg") center / cover;
-  color: white;
-}
-
-.cta h2 {
-  font-size: clamp(36px, 6vw, 72px);
-  margin-bottom: 24px;
 }
