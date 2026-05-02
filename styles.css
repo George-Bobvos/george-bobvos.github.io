@@ -788,3 +788,57 @@ a {
     gap: 12px;
   }
 }
+/* COPY + FOOTER POLISH */
+.hero-copy p:not(.eyebrow),
+.intro-copy p,
+.training-copy p,
+.filipa-copy p,
+.contact-copy p {
+  max-width: 620px;
+  color: rgba(36, 25, 20, .68);
+}
+
+.practice-card span,
+.benefit p,
+.session-card span {
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(36, 25, 20, .66);
+}
+
+.section-heading h2 {
+  max-width: 760px;
+}
+
+.footer {
+  align-items: start;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.footer strong {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 18px;
+  letter-spacing: -.02em;
+}
+
+.footer p {
+  max-width: 300px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.footer a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.button::after,
+.nav-cta::after {
+  content: none;
+}
+
+.button,
+.nav-cta {
+  gap: 0;
+}
