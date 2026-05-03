@@ -473,10 +473,10 @@ section[id], .hero { scroll-margin-top: 84px; }
   font-weight: 400;
 }
 .hero__image:hover .hero__quote {
-  transform: rotate(-1deg) translateY(-4px) scale(1.03);
+  transform: rotate(0deg) translateY(-6px) scale(1.03);
   box-shadow:
     0 1px 2px rgba(26, 20, 17, 0.08),
-    0 32px 70px rgba(26, 20, 17, 0.26);
+    0 36px 80px rgba(26, 20, 17, 0.28);
 }
 
 /* ----- Credential card (polaroid-style, intentional, anchors credibility) ----- */
