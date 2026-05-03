@@ -409,6 +409,69 @@ section[id], .hero { scroll-margin-top: 84px; }
   box-shadow: 0 36px 80px rgba(26, 20, 17, 0.18);
 }
 
+/* ----- Hero pull-quote (paper card, top-left, balances the credential card) ----- */
+.hero__quote {
+  margin: 0;
+  position: absolute;
+  top: -22px;
+  left: -34px;
+  z-index: 4;
+  width: clamp(196px, 26%, 232px);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 6px 12px;
+
+  background: var(--paper);
+  padding: 16px 20px 18px;
+  border-radius: 4px;
+
+  opacity: 0;
+  transform: rotate(0deg) translate(-22px, -22px) scale(.94);
+  transition:
+    opacity 1.2s var(--ease-out) .25s,
+    transform 1.2s var(--ease-out) .25s,
+    box-shadow .5s var(--ease);
+  box-shadow:
+    0 1px 2px rgba(26, 20, 17, 0.08),
+    0 24px 56px rgba(26, 20, 17, 0.20);
+}
+.hero__image.is-visible .hero__quote {
+  opacity: 1;
+  transform: rotate(-2.2deg) translate(0, 0) scale(1);
+}
+.hero__quote-mark {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 56px;
+  line-height: .55;
+  color: var(--clay);
+  margin-top: 10px;
+  user-select: none;
+}
+.hero__quote-text {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(17px, 1.55vw, 20px);
+  line-height: 1.25;
+  letter-spacing: -.012em;
+  color: var(--ink);
+}
+.hero__quote-text em {
+  font-style: italic;
+  color: var(--clay);
+  font-weight: 400;
+}
+.hero__image:hover .hero__quote {
+  transform: rotate(-1deg) translateY(-4px) scale(1.03);
+  box-shadow:
+    0 1px 2px rgba(26, 20, 17, 0.08),
+    0 32px 70px rgba(26, 20, 17, 0.26);
+}
+
 /* ----- Credential card (polaroid-style, intentional, anchors credibility) ----- */
 .hero__credential {
   margin: 0;
@@ -1394,6 +1457,7 @@ section[id], .hero { scroll-margin-top: 84px; }
   .voice .voice__byline,
   .voice .voice__mark { opacity: 1 !important; transform: none !important; }
   .hero__credential { opacity: 1 !important; transform: rotate(2.5deg) !important; }
+  .hero__quote { opacity: 1 !important; transform: rotate(-2.2deg) !important; }
 }
 
 /* ---------- Smooth image loading (About / Practice / Your teacher) ---------- */
@@ -1467,6 +1531,15 @@ section[id], .hero { scroll-margin-top: 84px; }
   .hero h1.display, .hero__foot { grid-column: 1 / -1; }
   .hero__image { grid-column: 1 / -1; grid-row: auto; margin-top: 40px; padding-bottom: 70px; }
   .hero__image-main img { height: 60vh; min-height: 380px; }
+  .hero__quote {
+    top: -16px;
+    left: -16px;
+    width: clamp(174px, 38vw, 214px);
+    padding: 13px 16px 15px;
+    gap: 4px 10px;
+  }
+  .hero__quote-text { font-size: 16px; }
+  .hero__quote-mark { font-size: 46px; margin-top: 9px; }
   .hero__credential {
     right: -20px;
     bottom: -48px;
@@ -1518,6 +1591,16 @@ section[id], .hero { scroll-margin-top: 84px; }
   .voices__arrow { width: 44px; height: 44px; }
   .voices__nav { gap: 10px; }
   .voice__quote { font-size: 18px; }
+  /* Hero pull-quote — keeps presence on phones, sits just inside the photo */
+  .hero__quote {
+    top: -10px;
+    left: -8px;
+    width: 162px;
+    padding: 10px 12px 12px;
+    gap: 2px 9px;
+  }
+  .hero__quote-text { font-size: 14px; line-height: 1.22; }
+  .hero__quote-mark { font-size: 38px; margin-top: 7px; }
   /* Hero credential card scales down further on phones */
   .hero__credential {
     right: -8px;
