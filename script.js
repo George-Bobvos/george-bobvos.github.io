@@ -100,7 +100,8 @@
     '.benefits li', '.filipa', '.sessions .session', '.sessions__note',
     '.contact__copy', '.contact__form', '.hero__foot', '.hero__image',
     '.hero__meta', '.facts', '.intro__image', '.intro__copy',
-    '.page-head', '.schedule', '.schedule__foot'
+    '.page-head', '.schedule', '.schedule__foot',
+    '.voices', '.voices__nav'
   ];
   autoReveal.forEach(sel => {
     document.querySelectorAll(sel).forEach((el, i) => {
@@ -186,6 +187,101 @@ ${email}`;
         setTimeout(() => { btn.innerHTML = original; }, 2400);
       }
     });
+  }
+
+  /* ---------- Voices (testimonials carousel) ---------- */
+  const voicesRoot = document.querySelector('[data-voices]');
+  if (voicesRoot) {
+    const slides = Array.from(voicesRoot.querySelectorAll('.voice'));
+    const dots   = Array.from(voicesRoot.querySelectorAll('.voices__dot'));
+    const prev   = voicesRoot.querySelector('[data-voices-prev]');
+    const next   = voicesRoot.querySelector('[data-voices-next]');
+    const counter = voicesRoot.querySelector('[data-voices-current]');
+    const total  = slides.length;
+    let active   = 0;
+    const pad2 = (n) => String(n).padStart(2, '0');
+
+    const goTo = (i, { user = false } = {}) => {
+      const idx = ((i % total) + total) % total;
+      if (idx === active) return;
+      slides[active].classList.remove('is-active');
+      dots[active].classList.remove('is-active');
+      dots[active].setAttribute('aria-selected', 'false');
+      active = idx;
+      slides[active].classList.add('is-active');
+      dots[active].classList.add('is-active');
+      dots[active].setAttribute('aria-selected', 'true');
+      if (counter) counter.textContent = pad2(active + 1);
+      if (user) restartAuto();
+    };
+
+    if (prev) prev.addEventListener('click', () => goTo(active - 1, { user: true }));
+    if (next) next.addEventListener('click', () => goTo(active + 1, { user: true }));
+    dots.forEach((d) => {
+      d.addEventListener('click', () => {
+        const i = parseInt(d.dataset.go, 10) || 0;
+        goTo(i, { user: true });
+      });
+    });
+
+    /* Keyboard arrows when the section is in view */
+    let inView = false;
+    const sectionEl = voicesRoot.closest('.section--voices') || voicesRoot;
+    const ioVoices = new IntersectionObserver((entries) => {
+      entries.forEach(e => { inView = e.isIntersecting; });
+    }, { threshold: 0.25 });
+    ioVoices.observe(sectionEl);
+    document.addEventListener('keydown', (e) => {
+      if (!inView) return;
+      const t = e.target;
+      if (t && (t.matches('input, textarea, select') || t.isContentEditable)) return;
+      if (e.key === 'ArrowLeft')  { goTo(active - 1, { user: true }); }
+      if (e.key === 'ArrowRight') { goTo(active + 1, { user: true }); }
+    });
+
+    /* Touch / pointer swipe on the stage */
+    const stage = voicesRoot.querySelector('.voices__stage');
+    if (stage) {
+      let startX = 0, startY = 0, tracking = false;
+      const threshold = 50;
+      stage.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        startX = e.clientX; startY = e.clientY; tracking = true;
+      });
+      stage.addEventListener('pointerup', (e) => {
+        if (!tracking) return;
+        tracking = false;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if (Math.abs(dx) > threshold && Math.abs(dx) > Math.abs(dy)) {
+          goTo(active + (dx < 0 ? 1 : -1), { user: true });
+        }
+      });
+      stage.addEventListener('pointercancel', () => { tracking = false; });
+    }
+
+    /* Auto-advance — gentle, pauses on hover/focus or off-screen */
+    let timer = null;
+    let paused = false;
+    const interval = 8500;
+    const tick = () => {
+      if (!paused && inView && !document.hidden) goTo(active + 1);
+    };
+    const startAuto = () => {
+      if (reduceMotion) return;
+      stopAuto();
+      timer = setInterval(tick, interval);
+    };
+    const stopAuto = () => { if (timer) { clearInterval(timer); timer = null; } };
+    const restartAuto = () => { startAuto(); };
+    voicesRoot.addEventListener('mouseenter', () => { paused = true; });
+    voicesRoot.addEventListener('mouseleave', () => { paused = false; });
+    voicesRoot.addEventListener('focusin',   () => { paused = true; });
+    voicesRoot.addEventListener('focusout',  () => { paused = false; });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopAuto(); else startAuto();
+    });
+    startAuto();
   }
 
   /* ---------- Cleanup transform on scroll-end (avoid stuck magnetic) ---------- */
