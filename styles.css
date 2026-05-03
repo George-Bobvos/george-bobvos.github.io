@@ -368,6 +368,13 @@ section[id], .hero { scroll-margin-top: 84px; }
   grid-row: 2 / 3;
   align-self: start;
   margin-top: clamp(8px, 2vw, 24px);
+  /* Slightly tighter than the global .display so two-word lines fit the hero column */
+  font-size: clamp(54px, 9.4vw, 148px);
+}
+/* Each line of the hero headline holds together — never wraps mid-phrase */
+.hero__line {
+  display: inline-block;
+  white-space: nowrap;
 }
 .hero__foot {
   grid-column: 1 / 2;
