@@ -310,8 +310,8 @@ input, select, textarea { font: inherit; color: inherit; }
   text-transform: none;
   color: var(--clay);
 }
-.section__label--light { color: rgba(247,241,232,.7); }
-.section__label--light .num { color: var(--paper); }
+.section__label--light { color: var(--ink-muted); }
+.section__label--light .num { color: var(--clay); }
 
 .section__head {
   max-width: 880px;
