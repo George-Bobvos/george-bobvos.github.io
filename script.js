@@ -218,7 +218,7 @@ ${email}`;
     let active   = 0;
     const pad2 = (n) => String(n).padStart(2, '0');
 
-    const goTo = (i, { user = false } = {}) => {
+    const goTo = (i) => {
       const idx = ((i % total) + total) % total;
       if (idx === active) return;
       slides[active].classList.remove('is-active');
@@ -229,15 +229,14 @@ ${email}`;
       dots[active].classList.add('is-active');
       dots[active].setAttribute('aria-selected', 'true');
       if (counter) counter.textContent = pad2(active + 1);
-      if (user) restartAuto();
     };
 
-    if (prev) prev.addEventListener('click', () => goTo(active - 1, { user: true }));
-    if (next) next.addEventListener('click', () => goTo(active + 1, { user: true }));
+    if (prev) prev.addEventListener('click', () => goTo(active - 1));
+    if (next) next.addEventListener('click', () => goTo(active + 1));
     dots.forEach((d) => {
       d.addEventListener('click', () => {
         const i = parseInt(d.dataset.go, 10) || 0;
-        goTo(i, { user: true });
+        goTo(i);
       });
     });
 
@@ -252,8 +251,8 @@ ${email}`;
       if (!inView) return;
       const t = e.target;
       if (t && (t.matches('input, textarea, select') || t.isContentEditable)) return;
-      if (e.key === 'ArrowLeft')  { goTo(active - 1, { user: true }); }
-      if (e.key === 'ArrowRight') { goTo(active + 1, { user: true }); }
+      if (e.key === 'ArrowLeft')  { goTo(active - 1); }
+      if (e.key === 'ArrowRight') { goTo(active + 1); }
     });
 
     /* Touch / pointer swipe on the stage */
@@ -271,34 +270,34 @@ ${email}`;
         const dx = e.clientX - startX;
         const dy = e.clientY - startY;
         if (Math.abs(dx) > threshold && Math.abs(dx) > Math.abs(dy)) {
-          goTo(active + (dx < 0 ? 1 : -1), { user: true });
+          goTo(active + (dx < 0 ? 1 : -1));
         }
       });
       stage.addEventListener('pointercancel', () => { tracking = false; });
-    }
 
-    /* Auto-advance — gentle, pauses on hover/focus or off-screen */
-    let timer = null;
-    let paused = false;
-    const interval = 8500;
-    const tick = () => {
-      if (!paused && inView && !document.hidden) goTo(active + 1);
-    };
-    const startAuto = () => {
-      if (reduceMotion) return;
-      stopAuto();
-      timer = setInterval(tick, interval);
-    };
-    const stopAuto = () => { if (timer) { clearInterval(timer); timer = null; } };
-    const restartAuto = () => { startAuto(); };
-    voicesRoot.addEventListener('mouseenter', () => { paused = true; });
-    voicesRoot.addEventListener('mouseleave', () => { paused = false; });
-    voicesRoot.addEventListener('focusin',   () => { paused = true; });
-    voicesRoot.addEventListener('focusout',  () => { paused = false; });
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stopAuto(); else startAuto();
-    });
-    startAuto();
+      /* Trackpad / horizontal-wheel navigation
+         Listens to predominantly horizontal scroll gestures and steps the
+         carousel one slide per gesture, with a short cooldown to prevent
+         a single two-finger swipe from skipping multiple slides. */
+      let wheelLock = false;
+      let wheelAccum = 0;
+      const wheelThreshold = 40;
+      const wheelCooldown = 520;
+      stage.addEventListener('wheel', (e) => {
+        // Only react to horizontal-dominant gestures
+        if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) * 1.2) return;
+        // Suppress the browser's back/forward swipe & any horizontal page scroll
+        e.preventDefault();
+        if (wheelLock) return;
+        wheelAccum += e.deltaX;
+        if (Math.abs(wheelAccum) >= wheelThreshold) {
+          goTo(active + (wheelAccum > 0 ? 1 : -1));
+          wheelLock = true;
+          wheelAccum = 0;
+          setTimeout(() => { wheelLock = false; }, wheelCooldown);
+        }
+      }, { passive: false });
+    }
   }
 
   /* ---------- Cleanup transform on scroll-end (avoid stuck magnetic) ---------- */
