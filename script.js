@@ -100,6 +100,7 @@
     '.benefits li', '.filipa', '.sessions .session', '.sessions__note',
     '.contact__copy', '.contact__form', '.hero__foot', '.hero__image',
     '.hero__meta', '.facts', '.intro__image', '.intro__copy',
+    '.filipa__image', '.filipa__copy',
     '.page-head', '.schedule', '.schedule__foot',
     '.voices', '.voices__nav'
   ];
@@ -111,6 +112,22 @@
     });
   });
   document.querySelectorAll('[data-split]').forEach(el => io.observe(el));
+
+  /* ---------- Image blur-up: mark wrappers .is-loaded once each <img> is ready ---------- */
+  const lazyImgs = document.querySelectorAll(
+    '.card__image > img, .intro__image .img-frame > img, .filipa__image .img-frame > img'
+  );
+  lazyImgs.forEach((img) => {
+    const wrap = img.parentElement;
+    if (!wrap) return;
+    const onReady = () => wrap.classList.add('is-loaded');
+    if (img.complete && img.naturalHeight !== 0) {
+      onReady();
+    } else {
+      img.addEventListener('load',  onReady, { once: true });
+      img.addEventListener('error', onReady, { once: true });
+    }
+  });
 
   /* ---------- Hero parallax ---------- */
   const parallaxEls = document.querySelectorAll('[data-parallax]');
@@ -165,7 +182,7 @@
         return;
       }
 
-      const subject = `Pipa Yoga — ${interest || 'a session'} (${name})`;
+      const subject = `PipaYoga — ${interest || 'a session'} (${name})`;
       const body =
 `Hi Filipa,
 
