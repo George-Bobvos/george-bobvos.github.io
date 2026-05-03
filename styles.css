@@ -1449,85 +1449,6 @@ section[id], .hero { scroll-margin-top: 84px; }
 [data-split] em { font-style: italic; }
 [data-split].is-visible .word { opacity: 1; transform: translateY(0); }
 
-/* ---------- Section vine ornament ----------
-   A small hand-drawn vine sprig sits to the left of each section numeral and
-   draws itself when the section enters view. Stem + leaves use stroke-dash
-   draw-on; lotus blossoms (in the favicon's style) fade and bloom in last.
-   Hidden on tablet/mobile, where the section label restructures to a row.
-*/
-.section__label .vine-mark {
-  position: absolute;
-  right: calc(100% + 8px);
-  top: -18px;
-  width: 30px;
-  height: 142px;
-  color: var(--ink-soft);
-  pointer-events: none;
-  overflow: visible;
-  opacity: 0;
-  transition: opacity .8s var(--ease-out);
-}
-.section__label--light .vine-mark { color: var(--paper); }
-.section__label.is-visible .vine-mark { opacity: .55; }
-.section__label--light.is-visible .vine-mark { opacity: .72; }
-
-.vine-mark--flip { transform: scaleX(-1); transform-origin: 50% 50%; }
-
-/* Stem + leaves draw on with stroke-dashoffset */
-.vine-mark .stem,
-.vine-mark .leaf {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: var(--stem-len, 260);
-  stroke-dashoffset: var(--stem-len, 260);
-  transition: stroke-dashoffset 1.8s var(--ease-out);
-}
-.vine-mark .leaf {
-  stroke-width: .85;
-  stroke-dasharray: var(--leaf-len, 30);
-  stroke-dashoffset: var(--leaf-len, 30);
-  transition-delay: .4s;
-  transition-duration: 1.1s;
-}
-.section__label.is-visible .vine-mark .stem,
-.section__label.is-visible .vine-mark .leaf {
-  stroke-dashoffset: 0;
-}
-
-/* Lotus blossoms: positioned via SVG transform on .bloom (translate+scale),
-   animated via CSS transform on inner .bloom-inner (scale around own centre). */
-.vine-mark .bloom { color: var(--clay); }
-.vine-mark .bloom-inner ellipse,
-.vine-mark .bloom-inner circle {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: .85;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-.vine-mark .bloom-inner {
-  opacity: 0;
-  transform: scale(.42);
-  transform-origin: center;
-  transform-box: fill-box;
-  transition:
-    opacity .9s var(--ease-out),
-    transform 1.1s var(--ease-out);
-  transition-delay: 1s;
-}
-.section__label.is-visible .vine-mark .bloom-inner {
-  opacity: .92;
-  transform: scale(1);
-}
-
-@media (max-width: 1100px) {
-  .section__label .vine-mark { display: none; }
-}
-
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -1544,12 +1465,6 @@ section[id], .hero { scroll-margin-top: 84px; }
   .voice .voice__mark { opacity: 1 !important; transform: none !important; }
   .hero__credential { opacity: 1 !important; transform: rotate(2.5deg) !important; }
   .hero__quote { opacity: 1 !important; transform: rotate(-2.2deg) !important; }
-  .section__label .vine-mark { opacity: .55 !important; }
-  .section__label--light .vine-mark { opacity: .72 !important; }
-  .vine-mark .stem,
-  .vine-mark .leaf { stroke-dashoffset: 0 !important; }
-  .vine-mark .bloom-inner { opacity: .92 !important; transform: scale(1) !important; }
-  .vine-mark--flip { transform: scaleX(-1) !important; }
 }
 
 /* ---------- Smooth image loading (About / Practice / Your teacher) ---------- */
