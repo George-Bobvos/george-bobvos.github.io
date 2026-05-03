@@ -335,7 +335,7 @@ section[id], .hero { scroll-margin-top: 84px; }
   color: var(--clay);
 }
 .section__label--light { color: var(--paper); }
-.section__label--light .num { color: var(--paper); }
+.section__label--light .num { color: var(--clay); }
 .section__label--light .kicker { color: var(--paper); opacity: .92; }
 
 .section__head {
