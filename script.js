@@ -300,6 +300,158 @@ ${email}`;
     }
   }
 
+  /* ---------- Section vine ornaments ----------
+     Small hand-drawn vine sprig left of each section numeral. Four variants
+     (cycled), three wobble-filter seeds (cycled), every other one mirrored —
+     subtle variation without ever feeling repetitive. Draws when the label
+     enters view; blossoms bloom in the favicon's lotus style. */
+  (function buildVineMarks() {
+    const labels = document.querySelectorAll('.section__label');
+    if (!labels.length) return;
+
+    /* Inject shared <defs> with three wobble filters once */
+    if (!document.getElementById('vine-defs')) {
+      const defs = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      defs.id = 'vine-defs';
+      defs.setAttribute('aria-hidden', 'true');
+      defs.setAttribute('width', '0');
+      defs.setAttribute('height', '0');
+      defs.style.cssText =
+        'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none';
+      defs.innerHTML = `
+        <defs>
+          <filter id="vw1" x="-20%" y="-10%" width="140%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="3"/>
+            <feDisplacementMap in="SourceGraphic" scale="1.4"/>
+          </filter>
+          <filter id="vw2" x="-20%" y="-10%" width="140%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="11"/>
+            <feDisplacementMap in="SourceGraphic" scale="1.6"/>
+          </filter>
+          <filter id="vw3" x="-20%" y="-10%" width="140%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.026" numOctaves="2" seed="19"/>
+            <feDisplacementMap in="SourceGraphic" scale="1.3"/>
+          </filter>
+        </defs>
+      `;
+      document.body.appendChild(defs);
+    }
+
+    /* Mini lotus, favicon-style, centred at (0,0). 8 petals + a small core. */
+    const lotus = () => `
+      <ellipse cx="0" cy="-5" rx="1.2" ry="3.2"/>
+      <ellipse cx="0" cy="-5" rx="1.2" ry="3.2" transform="rotate(45)"/>
+      <ellipse cx="0" cy="-5" rx="1.2" ry="3.2" transform="rotate(90)"/>
+      <ellipse cx="0" cy="-5" rx="1.2" ry="3.2" transform="rotate(135)"/>
+      <ellipse cx="0" cy="-5" rx="1.2" ry="3.2" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-5" rx="1.2" ry="3.2" transform="rotate(225)"/>
+      <ellipse cx="0" cy="-5" rx="1.2" ry="3.2" transform="rotate(270)"/>
+      <ellipse cx="0" cy="-5" rx="1.2" ry="3.2" transform="rotate(315)"/>
+      <circle cx="0" cy="0" r="1.4"/>
+    `;
+
+    /* Four hand-tuned variants (viewBox 0 0 30 142). Stems start at the bottom
+       and grow up; blooms sit at the upper tip(s). */
+    const variants = [
+      // A — climber, single bloom at top, one leaf mid-left
+      {
+        stem:   'M 21,138 C 14,124 9,112 14,96 C 19,80 23,68 17,54 C 11,40 16,28 13,18 C 12,12 14,8 15,4',
+        leaves: ['M 14,72 Q 6,66 3,72 Q 7,78 14,72 Z'],
+        blooms: [{ x: 15, y: 4, scale: 1 }]
+      },
+      // B — gentle S, small middle bud + larger top bloom, leaf right
+      {
+        stem:   'M 13,138 C 17,122 8,108 14,92 C 20,76 12,60 17,42 C 21,26 14,16 17,4',
+        leaves: ['M 17,92 Q 25,86 27,92 Q 22,98 17,92 Z'],
+        blooms: [
+          { x: 14, y: 92, scale: 0.6 },
+          { x: 17, y: 4,  scale: 1 }
+        ]
+      },
+      // C — flourish with mid bloom and trailing leaves
+      {
+        stem:   'M 15,138 C 10,122 19,108 13,92 C 7,76 19,62 13,46 C 9,32 16,20 13,8',
+        leaves: [
+          'M 14,108 Q 22,104 23,110 Q 18,114 14,108 Z',
+          'M 14,52 Q 7,48 5,54 Q 9,58 14,52 Z'
+        ],
+        blooms: [{ x: 13, y: 8, scale: 0.95 }]
+      },
+      // D — gentle climb, single small top bud, leaves both sides
+      {
+        stem:   'M 17,138 C 12,124 19,108 14,92 C 9,76 19,60 14,44 C 9,28 16,18 14,6',
+        leaves: [
+          'M 16,114 Q 24,110 25,116 Q 20,120 16,114 Z',
+          'M 14,72 Q 6,68 4,74 Q 8,78 14,72 Z'
+        ],
+        blooms: [{ x: 14, y: 6, scale: 0.85 }]
+      }
+    ];
+
+    const filters = ['vw1', 'vw2', 'vw3'];
+
+    labels.forEach((label, i) => {
+      const v = variants[i % variants.length];
+      const filterId = filters[i % filters.length];
+      const flip = (i % 2 === 1);
+
+      const leafPaths = v.leaves
+        .map(d => `<path class="leaf" d="${d}"/>`)
+        .join('');
+
+      const bloomGroups = v.blooms.map(b => `
+        <g class="bloom" transform="translate(${b.x},${b.y}) scale(${b.scale})">
+          <g class="bloom-inner">${lotus()}</g>
+        </g>
+      `).join('');
+
+      const svgMarkup = `
+        <svg class="vine-mark${flip ? ' vine-mark--flip' : ''}"
+             viewBox="0 0 30 142"
+             preserveAspectRatio="xMidYMid meet"
+             aria-hidden="true">
+          <g filter="url(#${filterId})">
+            <path class="stem" d="${v.stem}"/>
+            ${leafPaths}
+          </g>
+          ${bloomGroups}
+        </svg>
+      `;
+
+      label.insertAdjacentHTML('afterbegin', svgMarkup);
+
+      /* Per-element path lengths fed to CSS via custom props so the dasharray
+         exactly matches each path. Avoids over/under-shoot in the draw. */
+      const svg  = label.querySelector('.vine-mark');
+      const stem = svg && svg.querySelector('.stem');
+      if (stem && typeof stem.getTotalLength === 'function') {
+        try {
+          stem.style.setProperty('--stem-len', stem.getTotalLength());
+        } catch (e) { /* no-op */ }
+      }
+      svg && svg.querySelectorAll('.leaf').forEach(leaf => {
+        if (typeof leaf.getTotalLength === 'function') {
+          try {
+            leaf.style.setProperty('--leaf-len', leaf.getTotalLength());
+          } catch (e) { /* no-op */ }
+        }
+      });
+    });
+
+    /* Trigger draw when label enters view. Reuses .is-visible — same idiom
+       as the rest of the reveal system. */
+    const ioVine = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          ioVine.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
+
+    labels.forEach(l => ioVine.observe(l));
+  })();
+
   /* ---------- Cleanup transform on scroll-end (avoid stuck magnetic) ---------- */
   let lastTouch = 0;
   document.addEventListener('mousemove', () => { lastTouch = Date.now(); });
