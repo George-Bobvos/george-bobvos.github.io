@@ -66,7 +66,13 @@
     announceClose.addEventListener('click', () => {
       announce.classList.add('is-leaving');
       setTimeout(() => { announce.hidden = true; }, 360);
-      try { sessionStorage.setItem('pipa-announce-dismissed', '1'); } catch (e) {}
+      try {
+        sessionStorage.setItem('pipa-announce-dismissed', '1');
+      } catch (e) {}
+      /* Also flag <html> so that, on the very next click navigating to
+         another page in the same session, the head-script's pre-paint
+         check fires and the banner is hidden instantly without flash. */
+      document.documentElement.classList.add('announce-dismissed');
     });
   }
 
