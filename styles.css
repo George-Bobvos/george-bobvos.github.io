@@ -396,7 +396,11 @@ section[id], .hero { scroll-margin-top: 84px; }
 .hero {
   position: relative;
   min-height: 100vh;
-  padding: 108px var(--gutter) 70px;
+  /* Reduced top padding to compensate for the announcement banner sitting
+     above the nav. Original was 108px (designed banner-free); 78px lifts
+     the whole left column so the buttons land above the fold on standard
+     desktop heights (1080p / 1440p) without changing typography. */
+  padding: 78px var(--gutter) 70px;
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
@@ -410,13 +414,15 @@ section[id], .hero { scroll-margin-top: 84px; }
   display: flex; justify-content: space-between; align-items: center;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--line);
-  margin-bottom: clamp(28px, 4vw, 48px);
+  /* Tightened from clamp(28px, 4vw, 48px) to claw back ~16px on desktop */
+  margin-bottom: clamp(24px, 3vw, 32px);
 }
 .hero h1.display {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
   align-self: start;
-  margin-top: clamp(8px, 2vw, 24px);
+  /* Was clamp(8px, 2vw, 24px) — tightened to remove a small dead zone */
+  margin-top: clamp(4px, 1vw, 12px);
   /* Slightly tighter than the global .display so two-word lines fit the hero column */
   font-size: clamp(54px, 9.4vw, 148px);
 }
@@ -428,7 +434,8 @@ section[id], .hero { scroll-margin-top: 84px; }
 .hero__foot {
   grid-column: 1 / 2;
   grid-row: 3 / 4;
-  margin-top: clamp(32px, 5vw, 56px);
+  /* Was clamp(32px, 5vw, 56px) — trimmed ~16px on desktop */
+  margin-top: clamp(24px, 3.5vw, 40px);
   display: flex; flex-direction: column; gap: 24px;
   max-width: 580px;
 }
