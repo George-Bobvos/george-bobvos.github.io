@@ -19,6 +19,34 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 
+<!-- ========================== ANNOUNCEMENT BANNER ========================== -->
+<aside class="announce" id="announce" role="region" aria-label="A note from Filipa">
+  <div class="announce__inner">
+    <svg class="announce__bloom" viewBox="0 0 24 24" aria-hidden="true">
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(45 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(90 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(135 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(180 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(225 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(270 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(315 12 12)"/>
+      <circle cx="12" cy="12" r="2.2" fill="currentColor"/>
+    </svg>
+    <p class="announce__text">
+      <span class="announce__eyebrow">A note from Filipa</span>
+      <span class="announce__body">
+        For now, I am taking on <em>private students only</em> while I build my schedule. Group classes &mdash; as listed on the <a href="schedule.html">weekly schedule</a> &mdash; begin shortly. <a href="index.html#contact">Write to me</a> to be among the first.
+      </span>
+    </p>
+    <button class="announce__close" id="announceClose" aria-label="Dismiss announcement" aria-controls="announce">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
+</aside>
+
 <header class="nav" id="nav">
   <a href="index.html#home" class="logo">
     <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -82,8 +110,18 @@
     <header class="page-head">
       <p class="eyebrow">A weekly rhythm</p>
       <h1 class="display display--lg">This <em>week</em> on the mat.</h1>
-      <p class="lead">Small-group classes in Poblenou. Weekday classes happen in the evenings, after work hours; weekends stretch a little longer. Up to six mats per session — write to me to reserve a spot, or book a private slot if nothing here fits your week.</p>
+      <p class="lead">A preview of the weekly rhythm I'm building in Poblenou. Weekday classes happen in the evenings, after work hours; weekends stretch a little longer. Small-group sessions begin shortly &mdash; until then, I'm teaching <a href="index.html#contact" class="page-head__link">private students only</a>. Write to reserve your spot for either.</p>
     </header>
+
+    <div class="schedule-preview" aria-label="Preview status">
+      <span class="schedule-preview__tag">
+        <span class="schedule-preview__dot" aria-hidden="true"></span>
+        Coming shortly
+      </span>
+      <p class="schedule-preview__text">
+        Group classes start once a small waiting list takes shape. <a href="index.html#contact">Add your name</a> and I'll let you know the moment your preferred slot opens.
+      </p>
+    </div>
 
     <div class="schedule">
       <div class="schedule__row schedule__row--head">
@@ -225,6 +263,23 @@
   <span>WhatsApp</span>
 </a>
 
+<script>
+  (function () {
+    var banner = document.getElementById('announce');
+    var btn = document.getElementById('announceClose');
+    if (!banner || !btn) return;
+    try {
+      if (sessionStorage.getItem('pipa-announce-dismissed') === '1') {
+        banner.hidden = true;
+      }
+    } catch (e) {}
+    btn.addEventListener('click', function () {
+      banner.classList.add('is-leaving');
+      setTimeout(function () { banner.hidden = true; }, 360);
+      try { sessionStorage.setItem('pipa-announce-dismissed', '1'); } catch (e) {}
+    });
+  })();
+</script>
 <script src="script.js"></script>
 </body>
 </html>
