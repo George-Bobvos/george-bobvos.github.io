@@ -50,6 +50,26 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
   }
 
+  /* ---------- Announcement banner ----------
+     Soft top-of-page note explaining that group classes are coming
+     but only private sessions are bookable for now. Dismissible —
+     the choice is remembered for the rest of the session via
+     sessionStorage so the visitor isn't nagged across pages. */
+  const announce = document.getElementById('announce');
+  const announceClose = document.getElementById('announceClose');
+  if (announce && announceClose) {
+    try {
+      if (sessionStorage.getItem('pipa-announce-dismissed') === '1') {
+        announce.hidden = true;
+      }
+    } catch (e) { /* sessionStorage unavailable, just continue */ }
+    announceClose.addEventListener('click', () => {
+      announce.classList.add('is-leaving');
+      setTimeout(() => { announce.hidden = true; }, 360);
+      try { sessionStorage.setItem('pipa-announce-dismissed', '1'); } catch (e) {}
+    });
+  }
+
   /* ---------- Split text on display headlines ---------- */
   const splitTargets = document.querySelectorAll('[data-split]');
   splitTargets.forEach(el => {
