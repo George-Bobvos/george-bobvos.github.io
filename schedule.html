@@ -36,7 +36,7 @@
     <p class="announce__text">
       <span class="announce__eyebrow">A note from Filipa</span>
       <span class="announce__body">
-        For now, I am taking on <em>private students only</em> while I build my schedule. Group classes &mdash; as listed on the <a href="schedule.html">weekly schedule</a> &mdash; begin shortly. <a href="index.html#contact">Write to me</a> to be among the first.
+        Private sessions only for now. Group classes begin shortly. <a href="index.html#contact">Join the waiting list</a>.
       </span>
     </p>
     <button class="announce__close" id="announceClose" aria-label="Dismiss announcement" aria-controls="announce">
@@ -67,7 +67,7 @@
     <a href="index.html#about">About</a>
     <a href="index.html#practice">Practice</a>
     <a href="index.html#filipa">Filipa</a>
-    <a href="schedule.html" aria-current="page">Schedule</a>
+    <a href="schedule.html" class="nav__link--soon" aria-current="page">Schedule<span class="nav__soon" aria-label="(group classes coming soon)">soon</span></a>
     <a href="index.html#voices">Voices</a>
     <a href="index.html#contact">Contact</a>
   </nav>
@@ -91,7 +91,7 @@
     <a href="index.html#about">About</a>
     <a href="index.html#practice">Practice</a>
     <a href="index.html#filipa">Filipa</a>
-    <a href="schedule.html">Schedule</a>
+    <a href="schedule.html" class="nav__link--soon">Schedule<span class="nav__soon">soon</span></a>
     <a href="index.html#voices">Voices</a>
     <a href="index.html#contact">Contact</a>
     <a href="https://instagram.com/filipamouraomartinho" target="_blank" rel="noopener">Instagram</a>
@@ -110,7 +110,7 @@
     <header class="page-head">
       <p class="eyebrow">A weekly rhythm</p>
       <h1 class="display display--lg">This <em>week</em> on the mat.</h1>
-      <p class="lead">A preview of the weekly rhythm I'm building in Poblenou. Weekday classes happen in the evenings, after work hours; weekends stretch a little longer. Small-group sessions begin shortly &mdash; until then, I'm teaching <a href="index.html#contact" class="page-head__link">private students only</a>. Write to reserve your spot for either.</p>
+      <p class="lead">A preview of the weekly rhythm I'm building in Poblenou. Weekday classes happen in the evenings, after work hours; weekends stretch a little longer. Small-group sessions begin shortly. Until then, I'm teaching <a href="index.html#contact" class="page-head__link">private students only</a>. Write to reserve your spot for either.</p>
     </header>
 
     <div class="schedule-preview" aria-label="Preview status">
@@ -263,23 +263,6 @@
   <span>WhatsApp</span>
 </a>
 
-<script>
-  (function () {
-    var banner = document.getElementById('announce');
-    var btn = document.getElementById('announceClose');
-    if (!banner || !btn) return;
-    try {
-      if (sessionStorage.getItem('pipa-announce-dismissed') === '1') {
-        banner.hidden = true;
-      }
-    } catch (e) {}
-    btn.addEventListener('click', function () {
-      banner.classList.add('is-leaving');
-      setTimeout(function () { banner.hidden = true; }, 360);
-      try { sessionStorage.setItem('pipa-announce-dismissed', '1'); } catch (e) {}
-    });
-  })();
-</script>
 <script src="script.js"></script>
 </body>
 </html>
