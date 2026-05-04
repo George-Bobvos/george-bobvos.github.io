@@ -1445,6 +1445,10 @@ section[id], .hero { scroll-margin-top: 84px; }
   max-height: 240px;
   opacity: 1;
 }
+/* Anti-flash: an inline <script> in <head> sets this class on <html>
+   before paint when the banner has already been dismissed this session.
+   Skips the transition entirely so there's no flicker. */
+.announce-dismissed .announce { display: none; }
 .announce.is-leaving {
   max-height: 0;
   opacity: 0;
@@ -1467,13 +1471,8 @@ section[id], .hero { scroll-margin-top: 84px; }
   color: var(--clay);
   flex-shrink: 0;
   opacity: .95;
-  /* gentle, slow rotation so the eye notices the badge */
-  animation: announceBloom 14s linear infinite;
 }
 .announce__bloom > * { fill: currentColor; }
-@keyframes announceBloom {
-  to { transform: rotate(360deg); }
-}
 .announce__text {
   margin: 0;
   display: flex;
@@ -2062,33 +2061,46 @@ section[id], .hero { scroll-margin-top: 84px; }
   .hero__credential-eyebrow::after { width: 10px; }
   .hero__credential-meta { font-size: 9px; letter-spacing: .16em; }
 
-  /* ===== Announcement banner — mobile ===== */
+  /* ===== Announcement banner — mobile =====
+     Match desktop layout: bloom on the left, text in the middle,
+     close button on the right. Keeps the banner short and tidy. */
   .announce__inner {
-    grid-template-columns: 1fr auto;
-    gap: 10px 12px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    align-items: start;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    align-items: center;
   }
   .announce__bloom {
-    /* tuck the bloom inline next to the eyebrow */
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     width: 18px; height: 18px;
     align-self: center;
   }
   .announce__text {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    margin-top: -6px;
-  }
-  .announce__body { font-size: 14px; line-height: 1.5; }
-  .announce__close {
     grid-column: 2 / 3;
-    grid-row: 1 / 3;
+    grid-row: 1 / 2;
+    /* Keep the eyebrow and body inline-flowing on small screens — the
+       eyebrow ends with a normal space and reads naturally before the
+       sentence: "A note from Pipa  Private sessions only…". This keeps
+       the banner a single, scannable strip. */
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    margin-top: 0;
+  }
+  .announce__eyebrow {
+    /* On the very narrowest viewports, the eyebrow can hide so the body
+       sentence carries the message alone. The aria-label on the parent
+       <aside> still announces "A note from Pipa" to screen readers. */
+    font-size: 9.5px;
+    letter-spacing: .2em;
+  }
+  .announce__body { font-size: 13.5px; line-height: 1.45; }
+  .announce__close {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
     align-self: center;
     width: 28px; height: 28px;
   }
