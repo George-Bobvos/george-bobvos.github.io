@@ -281,6 +281,20 @@ section[id], .hero { scroll-margin-top: 84px; }
   font-size: 10px;
   padding: 3px 10px 4px;
 }
+/* In the footer the soon pill sits on the dark ink background, so it
+   needs warmer fill + paper text to read clearly without shouting. */
+.footer .nav__soon {
+  background: rgba(184, 106, 82, 0.18);
+  border-color: rgba(184, 106, 82, 0.45);
+  color: var(--paper);
+  /* nudge baseline so it sits in the middle of the text line */
+  transform: translateY(-1px);
+}
+.footer .nav__link--soon:hover .nav__soon {
+  background: var(--clay);
+  color: var(--paper);
+  border-color: var(--clay);
+}
 
 .nav__cta {
   display: inline-flex; align-items: center;
