@@ -1307,11 +1307,21 @@ section[id], .hero { scroll-margin-top: 84px; }
 .footer__bottom {
   max-width: var(--max);
   margin: 30px auto 0;
-  display: flex; justify-content: space-between;
+  display: flex; justify-content: space-between; gap: 16px;
   font-size: 12px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: rgba(247,241,232,.4);
+}
+.footer__sig em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--clay);
+  margin-left: 2px;
 }
 
 /* ---------- WhatsApp floating ---------- */
