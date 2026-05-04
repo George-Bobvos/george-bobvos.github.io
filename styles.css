@@ -1431,11 +1431,14 @@ section[id], .hero { scroll-margin-top: 84px; }
 .training__title    { font-size: clamp(36px, 5.4vw, 64px); }
 .voices__title      { font-size: clamp(34px, 5.2vw, 70px); }
 .quote .display     { font-size: clamp(40px, 6.4vw, 88px); }
+/* Schedule page heading — sized to fit "This week on the mat." on one line at desktop widths */
+.page-head .display--lg { font-size: clamp(44px, 6.4vw, 88px); }
 
 @media (min-width: 1101px) {
   .training__title,
   .voices__title,
-  .quote .display     { white-space: nowrap; }
+  .quote .display,
+  .page-head .display--lg { white-space: nowrap; }
 }
 
 /* ---------- Section bloom ornament ----------
