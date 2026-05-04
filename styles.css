@@ -1356,7 +1356,7 @@ section[id], .hero { scroll-margin-top: 84px; }
 }
 .schedule__row {
   display: grid;
-  grid-template-columns: 90px repeat(3, 1fr);
+  grid-template-columns: 90px repeat(2, 1fr);
   gap: 24px;
   padding: 22px 0;
   border-bottom: 1px solid var(--line);
@@ -1700,20 +1700,63 @@ section[id], .hero { scroll-margin-top: 84px; }
   .footer__top { grid-template-columns: 1fr; }
   .footer__bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
   .contact__form { grid-template-columns: 1fr; }
-  .schedule__row { grid-template-columns: 60px 1fr 1fr 1fr; gap: 14px; padding: 18px 0; }
+
+  /* Schedule on mobile — keep day column tight, two evening columns flex */
+  .schedule__row { grid-template-columns: 56px 1fr 1fr; gap: 14px; padding: 18px 0; }
   .schedule__day { font-size: 22px; }
   .schedule__cell strong { font-size: 16px; }
+
   .hero__scroll { display: none; }
   .whatsapp span { display: none; }
   .whatsapp { padding: 14px; }
   .facts { grid-template-columns: 1fr; gap: 18px; }
-  /* Voices — compact mobile dot strip */
-  .voices__dots { gap: 6px; justify-content: flex-start; }
-  .voices__dot img { width: 38px; height: 48px; }
+
+  /* ===== Voices on mobile — counter + nav redesigned =====
+     1) Counter is moved INSIDE the section flow above the image so it
+        never overlays the photo or the quote text.
+     2) Nav becomes a single row: arrow · centered 3+3 dot grid · arrow.
+        The dots wrap onto two rows of three and stay centered. */
+  .voices__counter {
+    position: static;
+    justify-content: flex-end;
+    margin: 0 0 18px;
+    padding-right: 4px;
+  }
+  .voices__count-current { font-size: 38px; }
+  .voices__count-total   { font-size: 13px; }
+
+  .voices__nav {
+    margin-top: 32px;
+    padding-top: 22px;
+    gap: 12px;
+    /* keep arrows on the sides, dots flex-grow in the middle */
+    align-items: center;
+  }
+  .voices__arrow {
+    width: 44px;
+    height: 44px;
+    /* nudge arrows so they sit centered against the 2-row dot block */
+    align-self: center;
+  }
+  .voices__dots {
+    /* Force a tidy 3-column grid → exactly 3 on top, 3 on bottom, centered */
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 14px 18px;
+    flex-grow: 1;
+    flex-wrap: nowrap;
+  }
+  .voices__dot {
+    padding: 2px 4px 4px;
+  }
+  .voices__dot img { width: 44px; height: 56px; }
   .voices__dot span { display: none; }
-  .voices__arrow { width: 44px; height: 44px; }
-  .voices__nav { gap: 10px; }
+
   .voice__quote { font-size: 18px; }
+
   /* Hero pull-quote — keeps presence on phones, sits just inside the photo */
   .hero__quote {
     top: -10px;
