@@ -715,6 +715,25 @@ section[id], .hero { scroll-margin-top: 84px; }
   line-height: 1.6;
 }
 
+/* A quiet line under the Practice cards pointing at the schedule —
+   mirrors .sessions__note (centered, muted, clay-underline link). */
+.practice__note {
+  margin: clamp(40px, 5vw, 56px) 0 0;
+  font-size: 14px;
+  color: var(--ink-muted);
+  text-align: center;
+}
+.practice__note a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--clay);
+  padding-bottom: 2px;
+  font-weight: 500;
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.practice__note a:hover {
+  color: var(--clay);
+}
+
 /* ---------- TRAINING (with marquee) ---------- */
 .section--training {
   background: var(--paper-warm);
