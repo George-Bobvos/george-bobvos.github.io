@@ -1459,26 +1459,42 @@ section[id], .hero { scroll-margin-top: 84px; }
   transition: transform .55s cubic-bezier(.22, .85, .25, 1) .55s;
   opacity: .92;
 }
-.section__label.is-visible .bloom__petal {
+.is-visible .bloom__petal {
   transform: scaleY(1);
   fill-opacity: .82;
   transition-delay: calc(var(--i, 0) * 75ms);
 }
-.section__label.is-visible .bloom__core {
+.is-visible .bloom__core {
   transform: scale(1);
 }
 .section__label--light .bloom { color: var(--paper); }
 .section__label--light .bloom__petal { fill-opacity: 0; }
 .section__label--light.is-visible .bloom__petal { fill-opacity: .9; }
 
+/* The pull-quote in the hero gets its own small lotus tucked into the
+   bottom-right corner, blooming when the hero image enters view. It
+   piggybacks on the existing .is-visible reveal trigger. */
+.hero__quote-bloom {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  opacity: .9;
+  pointer-events: none;
+}
+
 /* In the responsive layout the section label flips to a horizontal row,
    so the bloom sits inline before the numeral — just nudge its size and
    spacing to keep the visual rhythm balanced. */
 @media (max-width: 1100px) {
   .bloom { width: 32px; height: 32px; margin-bottom: 0; }
+  .hero__quote-bloom { width: 20px; height: 20px; right: 10px; bottom: 9px; margin: 0; }
 }
 @media (max-width: 760px) {
   .bloom { width: 28px; height: 28px; }
+  .hero__quote-bloom { width: 18px; height: 18px; right: 9px; bottom: 8px; margin: 0; }
 }
 
 /* ---------- Reveal animations ---------- */
