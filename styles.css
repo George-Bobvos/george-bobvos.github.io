@@ -34,8 +34,7 @@
 
 /* ---------- Reset / base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-body {
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }body {
   margin: 0;
   font-family: var(--sans);
   font-size: 17px;
@@ -1370,6 +1369,208 @@ section[id], .hero { scroll-margin-top: 84px; }
 .whatsapp:hover { transform: translateY(-3px); background: var(--clay); }
 .whatsapp:hover svg { color: var(--paper); }
 
+/* ---------- Announcement banner ----------
+   A soft, inset note at the very top of every page. Sets honest expectations
+   that group classes are coming but private sessions are the only bookable
+   option for now. Sits above .nav and pushes it down naturally — the nav is
+   position: fixed so we offset its top via a body class when the banner is
+   present, but to keep the implementation simple we let .nav stay where it is
+   and the announcement scrolls away with the page (typical magazine pattern). */
+.announce {
+  position: relative;
+  z-index: 60;
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom: 1px solid rgba(247, 241, 232, 0.08);
+  overflow: hidden;
+  /* leave-animation hook */
+  transition: max-height .35s var(--ease), opacity .3s var(--ease), padding .35s var(--ease);
+  max-height: 240px;
+  opacity: 1;
+}
+.announce.is-leaving {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.announce::before,
+.announce::after {
+  /* faint clay-tinted glow at each end, on-brand but barely there */
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 18%;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(184, 106, 82, 0.18), transparent);
+}
+.announce::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(184, 106, 82, 0.18), transparent);
+}
+.announce__inner {
+  position: relative;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 14px var(--gutter);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+.announce__bloom {
+  width: 22px;
+  height: 22px;
+  color: var(--clay);
+  flex-shrink: 0;
+  opacity: .95;
+  /* gentle, slow rotation so the eye notices the badge */
+  animation: announceBloom 14s linear infinite;
+}
+.announce__bloom > * { fill: currentColor; }
+@keyframes announceBloom {
+  to { transform: rotate(360deg); }
+}
+.announce__text {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  line-height: 1.55;
+}
+.announce__eyebrow {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--clay);
+  flex-shrink: 0;
+}
+.announce__body {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 15px;
+  letter-spacing: -.005em;
+  color: rgba(247, 241, 232, .92);
+}
+.announce__body em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--paper);
+}
+.announce__body a {
+  color: var(--paper);
+  border-bottom: 1px solid rgba(184, 106, 82, .8);
+  padding-bottom: 1px;
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.announce__body a:hover {
+  color: var(--clay);
+  border-bottom-color: var(--clay);
+}
+.announce__close {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(247, 241, 232, .18);
+  color: rgba(247, 241, 232, .7);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .25s var(--ease), color .25s var(--ease),
+              border-color .25s var(--ease), transform .25s var(--ease);
+}
+.announce__close:hover {
+  background: var(--clay);
+  color: var(--paper);
+  border-color: var(--clay);
+  transform: rotate(90deg);
+}
+
+/* ---------- Schedule preview tag ----------
+   A discreet "Coming shortly" label that sits above the weekly grid on the
+   schedule page so visitors immediately understand the rhythm shown is the
+   plan, not yet bookable as group classes. */
+.schedule-preview {
+  margin: 0 0 clamp(28px, 4vw, 44px) clamp(0px, 12vw, 200px);
+  display: flex;
+  align-items: center;
+  gap: 18px 24px;
+  flex-wrap: wrap;
+}
+.schedule-preview__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 12px;
+  background: rgba(184, 106, 82, 0.08);
+  border: 1px solid rgba(184, 106, 82, 0.22);
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--clay-deep);
+  flex-shrink: 0;
+}
+.schedule-preview__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--clay);
+  position: relative;
+  /* gentle pulse so it reads as 'forthcoming' rather than 'inactive' */
+  animation: scheduleDotPulse 2.4s ease-in-out infinite;
+}
+.schedule-preview__dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  border: 1px solid var(--clay);
+  opacity: 0;
+  animation: scheduleDotRing 2.4s ease-out infinite;
+}
+@keyframes scheduleDotPulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(.85); }
+}
+@keyframes scheduleDotRing {
+  0%   { transform: scale(.6); opacity: 0; }
+  40%  { opacity: .8; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+.schedule-preview__text {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+.schedule-preview__text a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--clay);
+  padding-bottom: 1px;
+  font-weight: 500;
+  transition: color .25s var(--ease);
+}
+.schedule-preview__text a:hover { color: var(--clay); }
+
+/* Inline link inside the schedule page lede — same clay underline so the
+   preview note + page-head copy + body all use one consistent link style. */
+.page-head__link {
+  color: var(--ink);
+  border-bottom: 1px solid var(--clay);
+  padding-bottom: 1px;
+  font-weight: 500;
+  transition: color .25s var(--ease);
+}
+.page-head__link:hover { color: var(--clay); }
+
 /* ---------- Schedule page ---------- */
 .section--page { padding-top: clamp(140px, 18vw, 220px); }
 .page-head {
@@ -1610,6 +1811,11 @@ section[id], .hero { scroll-margin-top: 84px; }
     transform: scale(1) !important;
     transition: none !important;
   }
+  /* Keep the announcement banner readable but stop the rotating bloom
+     and pulsing schedule dot for visitors who prefer reduced motion. */
+  .announce__bloom,
+  .schedule-preview__dot,
+  .schedule-preview__dot::after { animation: none !important; }
 }
 
 /* ---------- Smooth image loading (About / Practice / Your teacher) ---------- */
@@ -1718,6 +1924,9 @@ section[id], .hero { scroll-margin-top: 84px; }
   .voice__mark { left: -4px; top: -36px; }
   .voices__nav { margin-left: 0; }
   .voices__counter { top: -64px; }
+
+  /* Schedule preview tag — drop the indented left margin on tablets */
+  .schedule-preview { margin-left: 0; }
 }
 @media (max-width: 760px) {
   .nav__links, .nav__cta, .nav__icon { display: none; }
@@ -1809,4 +2018,40 @@ section[id], .hero { scroll-margin-top: 84px; }
   .hero__credential-eyebrow::before,
   .hero__credential-eyebrow::after { width: 10px; }
   .hero__credential-meta { font-size: 9px; letter-spacing: .16em; }
+
+  /* ===== Announcement banner — mobile ===== */
+  .announce__inner {
+    grid-template-columns: 1fr auto;
+    gap: 10px 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    align-items: start;
+  }
+  .announce__bloom {
+    /* tuck the bloom inline next to the eyebrow */
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    width: 18px; height: 18px;
+    align-self: center;
+  }
+  .announce__text {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-top: -6px;
+  }
+  .announce__body { font-size: 14px; line-height: 1.5; }
+  .announce__close {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    align-self: center;
+    width: 28px; height: 28px;
+  }
+  .announce::before, .announce::after { width: 10%; }
+
+  /* ===== Schedule preview — mobile ===== */
+  .schedule-preview { gap: 12px 16px; }
+  .schedule-preview__text { font-size: 13px; }
 }
