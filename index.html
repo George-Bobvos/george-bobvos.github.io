@@ -21,6 +21,38 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"></div>
+
+<!-- ========================== ANNOUNCEMENT BANNER ==========================
+     Honest, soft note from Filipa: group classes are coming, but for now
+     only private sessions are bookable. Dismissible (sessionStorage-free,
+     just hides for the rest of the session). -->
+<aside class="announce" id="announce" role="region" aria-label="A note from Filipa">
+  <div class="announce__inner">
+    <svg class="announce__bloom" viewBox="0 0 24 24" aria-hidden="true">
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(45 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(90 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(135 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(180 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(225 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(270 12 12)"/>
+      <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(315 12 12)"/>
+      <circle cx="12" cy="12" r="2.2" fill="currentColor"/>
+    </svg>
+    <p class="announce__text">
+      <span class="announce__eyebrow">A note from Filipa</span>
+      <span class="announce__body">
+        For now, I am taking on <em>private students only</em> while I build my schedule. Group classes &mdash; as listed on the <a href="schedule.html">weekly schedule</a> &mdash; begin shortly. <a href="#contact">Write to me</a> to be among the first.
+      </span>
+    </p>
+    <button class="announce__close" id="announceClose" aria-label="Dismiss announcement" aria-controls="announce">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
+</aside>
+
 <header class="nav" id="nav">
   <a href="#home" class="logo">
     <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -589,6 +621,7 @@
           <label for="interest">I am interested in</label>
           <select id="interest" name="interest">
             <option>A private session</option>
+            <option>Joining the group-class waiting list</option>
             <option>Collaborate</option>
             <option>Just saying hi</option>
           </select>
@@ -654,6 +687,26 @@
   </svg>
   <span>WhatsApp</span>
 </a>
+<script>
+  /* Dismiss the announcement banner — hides for the rest of the session.
+     Uses sessionStorage so it doesn't follow the visitor across visits,
+     but stays gone as they move between pages. */
+  (function () {
+    var banner = document.getElementById('announce');
+    var btn = document.getElementById('announceClose');
+    if (!banner || !btn) return;
+    try {
+      if (sessionStorage.getItem('pipa-announce-dismissed') === '1') {
+        banner.hidden = true;
+      }
+    } catch (e) { /* sessionStorage unavailable, just continue */ }
+    btn.addEventListener('click', function () {
+      banner.classList.add('is-leaving');
+      setTimeout(function () { banner.hidden = true; }, 360);
+      try { sessionStorage.setItem('pipa-announce-dismissed', '1'); } catch (e) {}
+    });
+  })();
+</script>
 <script src="script.js"></script>
 </body>
 </html>
