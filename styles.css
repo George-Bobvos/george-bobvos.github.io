@@ -476,7 +476,9 @@ section[id], .hero { scroll-margin-top: 84px; }
 .hero__quote {
   margin: 0;
   position: absolute;
-  top: -22px;
+  /* Was -22px (sat above the image, crowding the .hero__meta line above).
+     Now sits 22px inside the image — gives the meta row room to breathe. */
+  top: 22px;
   left: -34px;
   z-index: 4;
   width: clamp(196px, 26%, 232px);
