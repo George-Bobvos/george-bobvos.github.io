@@ -113,6 +113,12 @@
   });
   document.querySelectorAll('[data-split]').forEach(el => io.observe(el));
 
+  /* Section labels carry the lotus bloom — observe them so the petals
+     can open as each section enters the viewport. We deliberately do NOT
+     add the `.reveal` class here: the label layout should stay put,
+     only the inner SVG petals animate via CSS. */
+  document.querySelectorAll('.section__label').forEach(el => io.observe(el));
+
   /* ---------- Image blur-up: mark wrappers .is-loaded once each <img> is ready ---------- */
   const lazyImgs = document.querySelectorAll(
     '.card__image > img, .intro__image .img-frame > img, .filipa__image .img-frame > img'
