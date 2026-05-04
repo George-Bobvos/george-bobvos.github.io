@@ -477,9 +477,9 @@ section[id], .hero { scroll-margin-top: 84px; }
   margin: 0;
   position: absolute;
   /* Was -22px (sat above the image, crowding the .hero__meta line above).
-     8px tucks it just inside the image top edge — close to the meta line
-     for visual rhythm, but not crowding it. */
-  top: 8px;
+     -2px tucks the slanted card just over the top edge of the image —
+     the bottom-right corner kisses the image rim, the rest sits inside. */
+  top: -2px;
   left: -34px;
   z-index: 4;
   width: clamp(196px, 26%, 232px);
