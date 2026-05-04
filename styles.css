@@ -585,16 +585,23 @@ section[id], .hero { scroll-margin-top: 84px; }
   transform: scale(1.04);
 }
 .hero__scroll {
-  position: absolute;
-  left: var(--gutter);
-  bottom: 30px;
-  display: inline-flex; align-items: center; gap: 10px;
+  /* Sits inline within .hero__actions, next to the buttons.
+     Visible immediately on hero load — no scrolling required. */
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 6px;
+  padding: 16px 4px;
   font-size: 11px;
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--ink-muted);
   animation: bob 2.6s ease-in-out infinite;
+  transition: color .25s var(--ease);
 }
+.hero__scroll:hover { color: var(--ink); }
+.hero__scroll svg { transition: transform .35s var(--ease); }
+.hero__scroll:hover svg { transform: translateY(2px); }
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(4px); }
