@@ -392,6 +392,163 @@ section[id], .hero { scroll-margin-top: 84px; }
   margin: 0 0 clamp(48px, 7vw, 88px) clamp(0px, 12vw, 200px);
 }
 
+/* ---------- OVERTURE ----------
+   A quiet, full-bleed cinematic moment that opens the site before the
+   editorial hero begins. Same palette, same Fraunces italic — just one
+   short line of type centered on a sunset photograph. The page-meta
+   line (originally inside .hero__meta) sits at the top of this section
+   so it frames the image, not the portrait below.
+
+   The overture is intentionally unstyled beyond the photograph: no card,
+   no card shadow, no buttons. Every visual decision elsewhere on the
+   site has a layer of typographic richness; this one is just an image
+   and a sentence. That contrast is the design.
+*/
+.overture {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* Cap so the section never feels disproportionately tall on giant
+     monitors — at the same time, never shorter than 600px on laptops. */
+  min-height: 600px;
+  max-height: 920px;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  isolation: isolate;
+  display: flex;
+  align-items: stretch;
+}
+.overture__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.overture__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
+  /* A very slow, 24-second ken-burns settle. The image breathes once
+     on entry then comes to rest — no infinite loop, nothing flashing. */
+  animation: overtureSettle 24s var(--ease-out) both;
+  will-change: transform;
+}
+@keyframes overtureSettle {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1.00); }
+}
+.overture__veil {
+  /* Warm-ink gradient that darkens only the top (so the meta line stays
+     legible against any sky color) and the bottom (so the type and
+     scroll cue are readable). The middle of the image stays clear. */
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(26, 20, 17, 0.55) 0%,
+      rgba(26, 20, 17, 0.18) 18%,
+      rgba(26, 20, 17, 0.10) 50%,
+      rgba(26, 20, 17, 0.40) 86%,
+      rgba(26, 20, 17, 0.62) 100%
+    );
+  pointer-events: none;
+}
+.overture__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(110px, 13vh, 150px) var(--gutter) clamp(70px, 10vh, 110px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+}
+
+/* Top: meta line, mirrors the original .hero__meta but cream against
+   the photograph. The hairline rule below it ties this section to the
+   editorial system used everywhere else. */
+.overture__meta {
+  align-self: start;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(247, 241, 232, 0.22);
+}
+.overture__meta .label { color: rgba(247, 241, 232, 0.78); }
+
+/* Center: a single, quiet, lower-case Fraunces italic sentence. Smaller
+   than the hero headline — this isn't competing with 'Slow down. Stay
+   long.', it's setting the tone before it. */
+.overture__line {
+  margin: 0;
+  align-self: center;
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(36px, 5.6vw, 78px);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--paper);
+  /* Very subtle text shadow so cream type stays readable on any photo
+     brightness, but never reads as a 'glow effect'. */
+  text-shadow: 0 2px 24px rgba(26, 20, 17, 0.30);
+}
+.overture__line em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--clay);
+}
+
+/* Bottom: scroll cue, same vocabulary as the existing .hero__scroll
+   (Scroll + chevron + bob), centered, cream rather than ink. */
+.overture__scroll {
+  justify-self: center;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(247, 241, 232, 0.7);
+  animation: bob 2.6s ease-in-out infinite;
+  transition: color .25s var(--ease);
+}
+.overture__scroll:hover { color: var(--paper); }
+.overture__scroll svg { transition: transform .35s var(--ease); }
+.overture__scroll:hover svg { transform: translateY(3px); }
+
+/* Mobile — tighten padding and meta letter-spacing so the section
+   feels right on small viewports without changing the composition. */
+@media (max-width: 760px) {
+  .overture {
+    min-height: 520px;
+    max-height: none;
+  }
+  .overture__inner {
+    padding: 96px var(--gutter) 72px;
+  }
+  .overture__meta { padding-bottom: 12px; }
+  .overture__meta .label { font-size: 10px; letter-spacing: .18em; }
+  .overture__line { font-size: clamp(30px, 9vw, 48px); }
+}
+
+/* Reduced-motion: skip the ken-burns settle, freeze the bobbing scroll. */
+@media (prefers-reduced-motion: reduce) {
+  .overture__bg img { animation: none !important; transform: none !important; }
+  .overture__scroll { animation: none !important; }
+}
+
+
 /* ---------- HERO ---------- */
 .hero {
   position: relative;
@@ -405,23 +562,17 @@ section[id], .hero { scroll-margin-top: 84px; }
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.35fr 1fr;
-  grid-template-rows: auto auto 1fr;
+  /* Was 'auto auto 1fr' for [meta][h1][foot]. With the meta line now
+     hosted by the .overture section above, the hero only needs two
+     rows: [h1][foot]. */
+  grid-template-rows: auto 1fr;
   gap: 0 60px;
   align-items: start;
 }
-.hero__meta {
-  grid-column: 1 / -1;
-  display: flex; justify-content: space-between; align-items: center;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
-  /* Tightened from clamp(28px, 4vw, 48px) to claw back ~16px on desktop */
-  margin-bottom: clamp(24px, 3vw, 32px);
-}
 .hero h1.display {
   grid-column: 1 / 2;
-  grid-row: 2 / 3;
+  grid-row: 1 / 2;
   align-self: start;
-  /* Was clamp(8px, 2vw, 24px) — tightened to remove a small dead zone */
   margin-top: clamp(4px, 1vw, 12px);
   /* Slightly tighter than the global .display so two-word lines fit the hero column */
   font-size: clamp(54px, 9.4vw, 148px);
@@ -433,8 +584,7 @@ section[id], .hero { scroll-margin-top: 84px; }
 }
 .hero__foot {
   grid-column: 1 / 2;
-  grid-row: 3 / 4;
-  /* Was clamp(32px, 5vw, 56px) — trimmed ~16px on desktop */
+  grid-row: 2 / 3;
   margin-top: clamp(24px, 3.5vw, 40px);
   display: flex; flex-direction: column; gap: 24px;
   max-width: 580px;
@@ -442,7 +592,7 @@ section[id], .hero { scroll-margin-top: 84px; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero__image {
   grid-column: 2 / 3;
-  grid-row: 2 / 4;
+  grid-row: 1 / 3;
   margin: 0;
   position: relative;
   align-self: start;
