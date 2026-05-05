@@ -9,7 +9,7 @@
   <meta property="og:title" content="PipaYoga — Filipa Mourão Martinho" />
   <meta property="og:description" content="Grounding yoga in Poblenou, Barcelona." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="./assets/hero-sunset.jpg" />
+  <meta property="og:image" content="./assets/hero-pipa.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
   <link rel="apple-touch-icon" href="./favicon.svg" />
@@ -30,7 +30,7 @@
     })();
   </script>
 </head>
-<body class="has-hero">
+<body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 
@@ -115,30 +115,56 @@
 <main id="main">
   <!-- ========================== HERO ========================== -->
   <section id="home" class="hero">
-    <div class="hero__bg">
-      <img src="./assets/hero-sunset.jpg" alt="" loading="eager" aria-hidden="true">
-      <div class="hero__veil" aria-hidden="true"></div>
+    <div class="hero__meta">
+      <span class="label">PipaYoga · Poblenou, BCN</span>
+      <span class="label label--right">№ 01 — Practice</span>
     </div>
-    <div class="hero__content">
-      <div class="hero__meta">
-        <span class="label">PipaYoga · Poblenou, BCN</span>
-        <span class="label label--right">№ 01 — Practice</span>
-      </div>
-      <h1 class="display split hero__headline" data-split>
-        <span class="hero__line">Slow down.</span><br>
-        <span class="hero__line">Stay <em>long.</em></span>
-      </h1>
-      <p class="hero__lede">A small yoga practice in Poblenou. Hatha, Vinyasa, Yin. Private sessions for now.</p>
+    <h1 class="display split" data-split><span class="hero__line">Slow down.</span><br><span class="hero__line">Stay <em>long.</em></span></h1>
+    <div class="hero__foot">
+      <p class="lede">I am Filipa, <em>Pipa</em> to friends. Yoga has shaped my life for the past five years; it is no longer a choice, it is a commitment. I am here to grow a small community of people who want to move better, breathe deeper, and feel more at home in themselves. Just as I do.</p>
       <div class="hero__actions">
-        <a class="btn btn--primary btn--hero" href="#contact">
+        <a class="btn btn--primary" href="#contact">
           Begin practice
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
+        <a class="btn btn--ghost" href="#contact">Reach out</a>
+        <a class="hero__scroll" href="#about" aria-label="Scroll to about section">
+          <span>Scroll</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </a>
       </div>
-      <a class="hero__scroll" href="#about" aria-label="Scroll to about section">
-        <span>Scroll</span>
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-      </a>
+    </div>
+    <div class="hero__image" data-parallax>
+      <aside class="hero__quote" aria-label="Pull quote">
+        <span class="hero__quote-mark" aria-hidden="true">&ldquo;</span>
+        <p class="hero__quote-text">Your body,<br>your <em>ritual.</em></p>
+        <svg class="bloom hero__quote-bloom" viewBox="0 0 24 24" aria-hidden="true">
+          <g class="bloom__petals">
+            <g transform="rotate(0 12 12)"><ellipse class="bloom__petal" style="--i:0" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+            <g transform="rotate(45 12 12)"><ellipse class="bloom__petal" style="--i:1" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+            <g transform="rotate(90 12 12)"><ellipse class="bloom__petal" style="--i:2" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+            <g transform="rotate(135 12 12)"><ellipse class="bloom__petal" style="--i:3" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+            <g transform="rotate(180 12 12)"><ellipse class="bloom__petal" style="--i:4" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+            <g transform="rotate(225 12 12)"><ellipse class="bloom__petal" style="--i:5" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+            <g transform="rotate(270 12 12)"><ellipse class="bloom__petal" style="--i:6" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+            <g transform="rotate(315 12 12)"><ellipse class="bloom__petal" style="--i:7" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+          </g>
+          <circle class="bloom__core" cx="12" cy="12" r="2.2"/>
+        </svg>
+      </aside>
+      <figure class="hero__image-main">
+        <img src="./assets/hero-pipa.jpg" alt="Filipa Mourão Martinho" loading="eager">
+      </figure>
+      <figure class="hero__credential" aria-label="Credentials">
+        <div class="hero__credential-photo">
+          <img src="./assets/instructor-pipa.jpg" alt="Filipa during her yoga teacher training in India" loading="eager">
+        </div>
+        <figcaption class="hero__credential-cap">
+          <span class="hero__credential-eyebrow">200H · YTT</span>
+          <span class="hero__credential-title">Trained in <em>India</em></span>
+          <span class="hero__credential-meta">March 2026 · Yoga Alliance</span>
+        </figcaption>
+      </figure>
     </div>
   </section>
   <!-- ========================== ABOUT ========================== -->
@@ -349,34 +375,17 @@
       <span class="kicker">Your teacher</span>
     </aside>
     <div class="filipa">
-      <div class="filipa__gallery">
-        <figure class="filipa__image filipa__image--main">
-          <div class="img-frame">
-            <img src="./assets/hero-pipa-2.jpg" alt="Filipa Mourão Martinho on the Costa Brava" loading="lazy">
-          </div>
-          <figcaption>Rise and shine · Costa Brava</figcaption>
-        </figure>
-        <figure class="filipa__image filipa__image--secondary">
-          <div class="img-frame">
-            <img src="./assets/hero-pipa.jpg" alt="Filipa Mourão Martinho" loading="lazy">
-          </div>
-        </figure>
-        <figure class="filipa__credential" aria-label="Credentials">
-          <div class="filipa__credential-photo">
-            <img src="./assets/instructor-pipa.jpg" alt="Filipa during her yoga teacher training in India" loading="lazy">
-          </div>
-          <figcaption class="filipa__credential-cap">
-            <span class="filipa__credential-eyebrow">200H · YTT</span>
-            <span class="filipa__credential-title">Trained in <em>India</em></span>
-            <span class="filipa__credential-meta">March 2026 · Yoga Alliance</span>
-          </figcaption>
-        </figure>
-      </div>
+      <figure class="filipa__image">
+        <div class="img-frame">
+          <img src="./assets/hero-pipa-2.jpg" alt="Filipa Mourão Martinho" loading="lazy">
+        </div>
+        <figcaption>Rise and shine · Costa Brava</figcaption>
+      </figure>
       <div class="filipa__copy">
         <p class="eyebrow">Hi, I am Filipa</p>
         <h2 class="display display--md">A little <em>more</em> about myself.</h2>
         <p class="lead drop">I am 31, born in Lisbon, Portugal. I have lived in Croatia, Belgium, and the Netherlands, and each place shaped me in its own way. Now happily in Barcelona, I have fallen in love with the small neighbourhood of Poblenou: its rhythm, its beach vibe, and the way people here care about how they live.</p>
-        <p>Yoga has shaped my life for the past five years; it is no longer a choice, it is a commitment. My day-to-day life is corporate, and outside of work I am a yogi. Yoga is how I take care of myself, and one of the ways I most love connecting with others.</p>
+        <p>My day-to-day life is corporate, and outside of work I am a yogi. Yoga is how I take care of myself, and one of the ways I most love connecting with others.</p>
         <a class="btn btn--primary" href="#contact">
           Practice with me
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
