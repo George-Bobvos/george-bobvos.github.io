@@ -525,7 +525,8 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   grid-row: 3 / 4;
   align-self: end;
   justify-self: start;
-  max-width: 720px;
+  /* Was max-width: 720px — removed so the tagline can stretch to one
+     line at full hero size. Mobile rule below resets if needed. */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -542,6 +543,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   line-height: .92;
   letter-spacing: -.035em;
   color: var(--paper);
+  /* Single-line composition on desktop — the phrase never wraps mid-air.
+     On phones the @media rule below releases this so the line can break
+     between 'room' and 'for' on narrow viewports rather than overflowing. */
+  white-space: nowrap;
   /* Very subtle text shadow so cream type stays readable on any photo
      brightness, but never reads as a 'glow effect'. */
   text-shadow: 0 2px 30px rgba(26, 20, 17, 0.35);
@@ -607,7 +612,13 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .overture__inner { padding: 96px var(--gutter) 72px; }
   .overture__meta { padding-bottom: 12px; }
   .overture__meta .label { font-size: 10px; letter-spacing: .18em; }
-  .overture__line { font-size: clamp(44px, 12vw, 74px); }
+  .overture__line {
+    font-size: clamp(44px, 12vw, 74px);
+    /* Phones don't have the horizontal room for a single-line tagline at
+       hero scale. Let it wrap naturally between 'room' and 'for yourself'. */
+    white-space: normal;
+    line-height: .98;
+  }
   .overture__bottom { gap: 18px; }
   .overture__actions { gap: 12px; }
   .btn--overture { padding: 14px 24px; font-size: 13px; }
