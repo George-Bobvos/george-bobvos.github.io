@@ -200,12 +200,47 @@ section[id], .hero { scroll-margin-top: 84px; }
   backdrop-filter: saturate(140%) blur(14px);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
   border-bottom: 1px solid transparent;
-  transition: height .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease);
+  transition: height .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
 }
 .nav.is-scrolled {
   height: 64px;
   border-color: var(--line-soft);
   background: rgba(247, 241, 232, .94);
+}
+/* When the page has the overture full-bleed photograph at the top
+   (index.html only, via body.has-overture) and we're at the very top
+   of the page, the nav becomes transparent with cream text so it
+   floats on the sunset image. As soon as the user scrolls past 40px,
+   the .is-scrolled class is added by JS and the nav reverts to its
+   standard paper-on-ink appearance. */
+body.has-overture .nav:not(.is-scrolled) {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+body.has-overture .nav:not(.is-scrolled) .logo { color: var(--paper); }
+body.has-overture .nav:not(.is-scrolled) .logo svg { color: var(--clay); }
+body.has-overture .nav:not(.is-scrolled) .nav__links a { color: rgba(247, 241, 232, 0.78); }
+body.has-overture .nav:not(.is-scrolled) .nav__links a:hover,
+body.has-overture .nav:not(.is-scrolled) .nav__links a[aria-current="page"] { color: var(--paper); }
+body.has-overture .nav:not(.is-scrolled) .nav__links a::after { background: var(--paper); }
+body.has-overture .nav:not(.is-scrolled) .nav__cta {
+  border-color: rgba(247, 241, 232, 0.55);
+  color: var(--paper);
+}
+body.has-overture .nav:not(.is-scrolled) .nav__cta:hover {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+body.has-overture .nav:not(.is-scrolled) .nav__icon { color: rgba(247, 241, 232, 0.78); }
+body.has-overture .nav:not(.is-scrolled) .nav__icon:hover { color: var(--paper); background: rgba(247, 241, 232, 0.10); }
+body.has-overture .nav:not(.is-scrolled) .nav__menu span { background: var(--paper); }
+body.has-overture .nav:not(.is-scrolled) .nav__soon {
+  background: rgba(247, 241, 232, 0.12);
+  border-color: rgba(247, 241, 232, 0.4);
+  color: var(--paper);
 }
 .logo {
   display: inline-flex; align-items: center; gap: 9px;
@@ -395,14 +430,13 @@ section[id], .hero { scroll-margin-top: 84px; }
 /* ---------- OVERTURE ----------
    A quiet, full-bleed cinematic moment that opens the site before the
    editorial hero begins. Same palette, same Fraunces italic — just one
-   short line of type centered on a sunset photograph. The page-meta
-   line (originally inside .hero__meta) sits at the top of this section
-   so it frames the image, not the portrait below.
+   short tagline and a button anchored to the bottom-left of the photo,
+   with the page-meta line floating at the top.
 
-   The overture is intentionally unstyled beyond the photograph: no card,
-   no card shadow, no buttons. Every visual decision elsewhere on the
-   site has a layer of typographic richness; this one is just an image
-   and a sentence. That contrast is the design.
+   No scroll cue here: the .hero section immediately below has its own,
+   and stacking two would feel restless rather than inviting. The
+   overture and the hero are designed to read as a sequence, not two
+   competing entrances.
 */
 .overture {
   position: relative;
@@ -429,8 +463,8 @@ section[id], .hero { scroll-margin-top: 84px; }
   height: 100%;
   object-fit: cover;
   object-position: center 50%;
-  /* A very slow, 24-second ken-burns settle. The image breathes once
-     on entry then comes to rest — no infinite loop, nothing flashing. */
+  /* A slow, 24-second ken-burns settle. The image breathes once on
+     entry then comes to rest — no infinite loop, nothing flashing. */
   animation: overtureSettle 24s var(--ease-out) both;
   will-change: transform;
 }
@@ -439,9 +473,10 @@ section[id], .hero { scroll-margin-top: 84px; }
   to   { transform: scale(1.00); }
 }
 .overture__veil {
-  /* Warm-ink gradient that darkens only the top (so the meta line stays
-     legible against any sky color) and the bottom (so the type and
-     scroll cue are readable). The middle of the image stays clear. */
+  /* Warm-ink gradient that darkens the top (so the meta line + nav
+     stay legible against any sky color) and the bottom-left (so the
+     tagline and button are readable). The middle stays clean so the
+     photograph itself can breathe. */
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -449,10 +484,10 @@ section[id], .hero { scroll-margin-top: 84px; }
     linear-gradient(
       180deg,
       rgba(26, 20, 17, 0.55) 0%,
-      rgba(26, 20, 17, 0.18) 18%,
+      rgba(26, 20, 17, 0.25) 18%,
       rgba(26, 20, 17, 0.10) 50%,
-      rgba(26, 20, 17, 0.40) 86%,
-      rgba(26, 20, 17, 0.62) 100%
+      rgba(26, 20, 17, 0.45) 88%,
+      rgba(26, 20, 17, 0.65) 100%
     );
   pointer-events: none;
 }
@@ -465,12 +500,13 @@ section[id], .hero { scroll-margin-top: 84px; }
   padding: clamp(110px, 13vh, 150px) var(--gutter) clamp(70px, 10vh, 110px);
   display: grid;
   grid-template-rows: auto 1fr auto;
-  align-items: center;
+  /* The middle row is empty filler so the bottom block hugs the lower
+     portion of the section regardless of viewport height. */
 }
 
 /* Top: meta line, mirrors the original .hero__meta but cream against
    the photograph. The hairline rule below it ties this section to the
-   editorial system used everywhere else. */
+   editorial system used everywhere else on the site. */
 .overture__meta {
   align-self: start;
   display: flex;
@@ -481,23 +517,32 @@ section[id], .hero { scroll-margin-top: 84px; }
 }
 .overture__meta .label { color: rgba(247, 241, 232, 0.78); }
 
-/* Center: a single, quiet, lower-case Fraunces italic sentence. Smaller
-   than the hero headline — this isn't competing with 'Slow down. Stay
-   long.', it's setting the tone before it. */
+/* Bottom-left: tagline + button stacked, anchored to the lower-left of
+   the photograph. The tagline is one short Fraunces italic line; the
+   button is the same primary pill shape as the rest of the site,
+   inverted to cream on the dark image. */
+.overture__bottom {
+  grid-row: 3 / 4;
+  align-self: end;
+  justify-self: start;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(20px, 3vh, 32px);
+}
 .overture__line {
   margin: 0;
-  align-self: center;
-  text-align: center;
   font-family: var(--serif);
   font-weight: 300;
   font-style: italic;
-  font-size: clamp(36px, 5.6vw, 78px);
-  line-height: 1.05;
-  letter-spacing: -.02em;
+  font-size: clamp(38px, 6.4vw, 88px);
+  line-height: 1.02;
+  letter-spacing: -.025em;
   color: var(--paper);
   /* Very subtle text shadow so cream type stays readable on any photo
      brightness, but never reads as a 'glow effect'. */
-  text-shadow: 0 2px 24px rgba(26, 20, 17, 0.30);
+  text-shadow: 0 2px 30px rgba(26, 20, 17, 0.35);
 }
 .overture__line em {
   font-style: italic;
@@ -505,47 +550,37 @@ section[id], .hero { scroll-margin-top: 84px; }
   color: var(--clay);
 }
 
-/* Bottom: scroll cue, same vocabulary as the existing .hero__scroll
-   (Scroll + chevron + bob), centered, cream rather than ink. */
-.overture__scroll {
-  justify-self: center;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
-  font-family: var(--sans);
-  font-size: 10.5px;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: rgba(247, 241, 232, 0.7);
-  animation: bob 2.6s ease-in-out infinite;
-  transition: color .25s var(--ease);
+/* Overture-context button: cream pill, flips to clay on hover.
+   Same proportions as .btn--primary so muscle memory carries through. */
+.btn--overture {
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --bd: var(--paper);
+  padding: 17px 30px;
+  font-size: 14px;
+  letter-spacing: .05em;
 }
-.overture__scroll:hover { color: var(--paper); }
-.overture__scroll svg { transition: transform .35s var(--ease); }
-.overture__scroll:hover svg { transform: translateY(3px); }
+.btn--overture:hover { --bg: var(--clay); --fg: var(--paper); --bd: var(--clay); }
 
-/* Mobile — tighten padding and meta letter-spacing so the section
-   feels right on small viewports without changing the composition. */
+/* Mobile — same composition, tighter padding & type. The bottom block
+   stays anchored bottom-left; on very narrow screens the button wraps
+   under the tagline naturally because the wrapper is a flex column. */
 @media (max-width: 760px) {
   .overture {
     min-height: 520px;
     max-height: none;
   }
-  .overture__inner {
-    padding: 96px var(--gutter) 72px;
-  }
+  .overture__inner { padding: 96px var(--gutter) 72px; }
   .overture__meta { padding-bottom: 12px; }
   .overture__meta .label { font-size: 10px; letter-spacing: .18em; }
-  .overture__line { font-size: clamp(30px, 9vw, 48px); }
+  .overture__line { font-size: clamp(32px, 9.5vw, 52px); }
+  .overture__bottom { gap: 18px; }
+  .btn--overture { padding: 14px 24px; font-size: 13px; }
 }
 
-/* Reduced-motion: skip the ken-burns settle, freeze the bobbing scroll. */
+/* Reduced-motion: skip the ken-burns settle. */
 @media (prefers-reduced-motion: reduce) {
   .overture__bg img { animation: none !important; transform: none !important; }
-  .overture__scroll { animation: none !important; }
 }
 
 
