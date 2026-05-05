@@ -30,7 +30,7 @@
     })();
   </script>
 </head>
-<body>
+<body class="has-overture">
 <a class="skip" href="#main">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 
@@ -114,11 +114,10 @@
 </div>
 <main id="main">
   <!-- ========================== OVERTURE (sunset) ==========================
-       A quiet, full-bleed cinematic moment that opens the site. The
-       existing hero (portrait, pull-quote, credential) follows immediately
-       after this section. The page-meta line ('PipaYoga · Poblenou, BCN
-       № 01 — Practice') lives here at the top, framing the sunset rather
-       than the portrait; it is removed from .hero__meta below in lockstep. -->
+       Quiet full-bleed cinematic moment. The page-meta line lives at the
+       top-right (editorial credit on the photograph), and a short serif
+       italic tagline + primary button anchor the bottom-left. No scroll
+       cue here — the hero immediately below has its own. -->
   <section class="overture" aria-label="Welcome">
     <div class="overture__bg">
       <img src="./assets/hero-sunset.jpg" alt="" loading="eager" aria-hidden="true">
@@ -129,11 +128,13 @@
         <span class="label">PipaYoga · Poblenou, BCN</span>
         <span class="label label--right">№ 01 — Practice</span>
       </div>
-      <p class="overture__line">A practice in <em>Poblenou.</em></p>
-      <a class="overture__scroll" href="#home" aria-label="Scroll into the site">
-        <span>Scroll</span>
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-      </a>
+      <div class="overture__bottom">
+        <p class="overture__line">Make room <em>for yourself.</em></p>
+        <a class="btn btn--overture" href="#contact">
+          Begin practice
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
