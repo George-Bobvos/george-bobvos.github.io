@@ -474,10 +474,9 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .overture__veil {
   /* Warm-ink gradient that darkens the top (so the meta line + nav
-     stay legible against any sky color) and broadens through the
-     middle-to-lower portion (where the centered tagline + button
-     now sit). The very middle stays a touch clearer so the
-     photograph itself can still breathe through the type. */
+     + the tagline beneath it stay legible against any sky color)
+     and tapers gently through the rest of the photograph, with a
+     soft re-darkening at the very bottom for visual weight. */
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -485,10 +484,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
     linear-gradient(
       180deg,
       rgba(26, 20, 17, 0.55) 0%,
-      rgba(26, 20, 17, 0.28) 18%,
-      rgba(26, 20, 17, 0.18) 38%,
-      rgba(26, 20, 17, 0.40) 70%,
-      rgba(26, 20, 17, 0.55) 100%
+      rgba(26, 20, 17, 0.42) 22%,
+      rgba(26, 20, 17, 0.32) 45%,
+      rgba(26, 20, 17, 0.20) 70%,
+      rgba(26, 20, 17, 0.45) 100%
     );
   pointer-events: none;
 }
@@ -522,17 +521,16 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
    the photograph. The tagline is one short Fraunces italic line; the
    button is the same primary pill shape as the rest of the site,
    inverted to cream on the dark image. */
-/* Bottom-left → now centered-left: tagline + button stacked, anchored
-   to the lower-left of the photograph but lifted to the vertical
-   middle so they don't crowd the bottom edge. The block remains
-   left-aligned (justify-self: start) — only its vertical position
-   changed from align-self: end to align-self: center. */
+/* Bottom-left → moved up: tagline + button stacked, anchored to the
+   upper-left of the photograph just below the meta line. The block
+   remains left-aligned (justify-self: start). Vertical position is
+   set with margin-top on the middle grid row so the block sits in
+   the upper third of the section, well above the photograph centre. */
 .overture__bottom {
   grid-row: 2 / 3;
-  align-self: center;
+  align-self: start;
   justify-self: start;
-  /* Was max-width: 720px — removed so the tagline can stretch to one
-     line at full hero size. Mobile rule below resets if needed. */
+  margin-top: clamp(40px, 6vh, 80px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
