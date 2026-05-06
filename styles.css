@@ -474,9 +474,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .overture__veil {
   /* Warm-ink gradient that darkens the top (so the meta line + nav
-     stay legible against any sky color) and the bottom-left (so the
-     tagline and button are readable). The middle stays clean so the
-     photograph itself can breathe. */
+     stay legible against any sky color) and broadens through the
+     middle-to-lower portion (where the centered tagline + button
+     now sit). The very middle stays a touch clearer so the
+     photograph itself can still breathe through the type. */
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -484,10 +485,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
     linear-gradient(
       180deg,
       rgba(26, 20, 17, 0.55) 0%,
-      rgba(26, 20, 17, 0.25) 18%,
-      rgba(26, 20, 17, 0.10) 50%,
-      rgba(26, 20, 17, 0.45) 88%,
-      rgba(26, 20, 17, 0.65) 100%
+      rgba(26, 20, 17, 0.28) 18%,
+      rgba(26, 20, 17, 0.18) 38%,
+      rgba(26, 20, 17, 0.40) 70%,
+      rgba(26, 20, 17, 0.55) 100%
     );
   pointer-events: none;
 }
@@ -521,9 +522,14 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
    the photograph. The tagline is one short Fraunces italic line; the
    button is the same primary pill shape as the rest of the site,
    inverted to cream on the dark image. */
+/* Bottom-left → now centered-left: tagline + button stacked, anchored
+   to the lower-left of the photograph but lifted to the vertical
+   middle so they don't crowd the bottom edge. The block remains
+   left-aligned (justify-self: start) — only its vertical position
+   changed from align-self: end to align-self: center. */
 .overture__bottom {
-  grid-row: 3 / 4;
-  align-self: end;
+  grid-row: 2 / 3;
+  align-self: center;
   justify-self: start;
   /* Was max-width: 720px — removed so the tagline can stretch to one
      line at full hero size. Mobile rule below resets if needed. */
