@@ -1494,23 +1494,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
-  /* Brand column gets a bit more width since it carries more text; link
-     columns are equal and narrower. Reads as a balanced editorial trio. */
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: clamp(40px, 6vw, 80px);
-  padding-bottom: 70px;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 50px;
   border-bottom: 1px solid rgba(247,241,232,.1);
-}
-/* The Reach out column wraps its heading + links in .footer__col-inner.
-   That inner block sizes to the email line's natural width and floats
-   to the right edge of the cell as a single unit — so "Reach out" and
-   "filipa-martinho94@hotmail.com" share the same left edge, and the
-   email ends roughly aligned with "Crafted by GB" below. */
-.footer__col-inner {
-  display: block;
-  width: max-content;
-  margin-left: auto;
-  text-align: left;
 }
 .footer__brand p {
   margin: 16px 0 0;
@@ -1559,19 +1546,12 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .footer__bottom {
   max-width: var(--max);
   margin: 30px auto 0;
-  /* Mirror the top row's column proportions so each meta item sits
-     directly under its column. The third item right-aligns inside its
-     cell so it reaches the same right edge as the divider line above. */
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: clamp(40px, 6vw, 80px);
+  display: flex; justify-content: space-between; gap: 16px;
   font-size: 12px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: rgba(247,241,232,.4);
 }
-.footer__bottom > span { display: block; text-align: left; }
-.footer__bottom > span:last-child { text-align: right; }
 
 /* ---------- WhatsApp floating ---------- */
 .whatsapp {
@@ -2066,7 +2046,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .benefits li { border-right: 0; border-bottom: 1px solid var(--line); padding: 28px 0; }
   .benefits li:nth-child(2n) { padding-left: 24px; border-left: 1px solid var(--line); }
   .footer__top { grid-template-columns: 1fr; }
-  .footer__bottom { grid-template-columns: 1fr; gap: 12px; }
+  .footer__bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
   .contact__form { grid-template-columns: 1fr; }
   .schedule__row { grid-template-columns: 56px 1fr 1fr; gap: 14px; padding: 18px 0; }
   .schedule__day { font-size: 22px; }
