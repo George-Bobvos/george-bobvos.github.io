@@ -1499,12 +1499,15 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   padding-bottom: 70px;
   border-bottom: 1px solid rgba(247,241,232,.1);
 }
-/* Match each column's text-alignment to the corresponding bottom-row
-   item below it: brand → left, Practice → center, Reach out → right.
-   This makes the whole footer span the full divider-line width on
-   both rows so the layout reads as one cohesive block. */
-.footer__top > div:nth-child(2) { text-align: center; }
-.footer__top > div:nth-child(3) { text-align: right; }
+/* Mirror the bottom row's alignment by positioning each column's
+   inner content block to its respective edge — but keep the text
+   itself left-aligned so the link lists read as normal stacked items
+   (not centered or right-justified within their lines). */
+.footer__top > div { display: flex; flex-direction: column; }
+.footer__top > div:nth-child(1) { align-items: flex-start; }
+.footer__top > div:nth-child(2) { align-items: center; }
+.footer__top > div:nth-child(3) { align-items: flex-end; }
+.footer__top > div > * { text-align: left; }
 .footer__brand p {
   margin: 16px 0 0;
   max-width: 38ch;
