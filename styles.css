@@ -398,20 +398,25 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   margin: 0 auto;
 }
 .section__label {
-  position: absolute;
-  left: var(--gutter);
-  top: clamp(96px, 14vw, 180px);
-  display: flex; flex-direction: column; gap: 6px;
+  /* Sits above each section's content as a horizontal row:
+     [favicon bloom]  №  KICKER
+     Replaces the original absolute-positioned gutter label so every
+     section reads with the same editorial header rhythm. */
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
   font-size: 11px;
   letter-spacing: .22em;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--ink-muted);
-  /* sticky on tall screens */
 }
 .section__label .num {
   font-family: var(--serif);
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 300;
   font-style: italic;
   letter-spacing: 0;
@@ -424,7 +429,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 
 .section__head {
   max-width: 880px;
-  margin: 0 0 clamp(48px, 7vw, 88px) clamp(0px, 12vw, 200px);
+  margin: 0 0 clamp(48px, 7vw, 88px);
 }
 
 /* ---------- OVERTURE (sunset) ---------- */
@@ -627,7 +632,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   grid-template-columns: 1fr 1.1fr;
   gap: clamp(40px, 6vw, 84px);
   align-items: center;
-  margin-left: clamp(0px, 12vw, 200px);
 }
 .intro__image { margin: 0; position: relative; }
 .intro__image img {
@@ -695,14 +699,13 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   max-width: var(--max);
   margin: 0 auto;
 }
-/* The header (eyebrow + headline) reuses .section__head's indent and
-   max-width, so "A practice, not a performance" matches "Three ways in"
-   and "Trained with care" exactly. The 28px bottom-margin matches the
-   default spacing the .lead class uses inside other section heads. */
-.about__head {
-  margin-bottom: 28px;
+/* The eyebrow + headline now sit at the top of the copy column,
+   directly next to the image. The headline gets its own spacing so
+   the lede follows at the same rhythm as Practice / Training. */
+.about__heading {
+  margin: 6px 0 28px;
+  max-width: 14ch;
 }
-.about__head .display { max-width: 14ch; }
 
 /* Two-column body block — copy on the left, portrait on the right.
    Indented to clear the section label column. align-items: stretch
@@ -713,7 +716,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   grid-template-columns: 1fr 1fr;
   gap: clamp(48px, 7vw, 96px);
   align-items: stretch;
-  margin-left: clamp(0px, 12vw, 200px);
 }
 .about__copy {
   /* Paragraphs sit on a comfortable, generous measure. Slightly under
@@ -786,12 +788,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 /* Tablet & mobile — collapse to one column. Image goes first (above the
    text) so the visual lands first, then copy + buttons read below. */
 @media (max-width: 1100px) {
-  .about__head { margin-left: 0; }
-  .about__head .display { max-width: none; }
+  .about__heading { max-width: none; }
   .about__media {
     grid-template-columns: 1fr;
     gap: 48px;
-    margin-left: 0;
     align-items: stretch;
   }
   .about__visual { order: -1; }
@@ -898,7 +898,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   padding-right: var(--gutter);
 }
 .training__copy {
-  margin-left: clamp(0px, 12vw, 200px);
   max-width: 720px;
 }
 .marquee {
@@ -968,7 +967,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   grid-template-columns: 1fr 1.2fr;
   gap: clamp(40px, 6vw, 84px);
   align-items: center;
-  margin-left: clamp(0px, 12vw, 200px);
 }
 .filipa__image { margin: 0; position: relative; }
 .filipa__image img {
@@ -1047,7 +1045,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .voices__stage {
   position: relative;
-  margin-left: clamp(0px, 12vw, 200px);
   min-height: clamp(540px, 62vh, 660px);
 }
 .voice {
@@ -1160,7 +1157,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   font-weight: 600;
 }
 .voices__nav {
-  margin: clamp(48px, 6vw, 80px) 0 0 clamp(0px, 12vw, 200px);
+  margin: clamp(48px, 6vw, 80px) 0 0;
   padding-top: 28px;
   border-top: 1px solid var(--line);
   display: flex; align-items: center; gap: clamp(14px, 2.4vw, 28px);
@@ -1244,7 +1241,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   align-items: start;
   position: relative;
 }
-.contact__copy { margin-left: clamp(0px, 12vw, 200px); }
+.contact__copy { /* indent removed — section label now sits inline above */ }
 .contact__copy .display em { color: var(--clay); }
 .contact__form {
   display: grid;
@@ -1457,7 +1454,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 
 /* ---------- Schedule preview tag ---------- */
 .schedule-preview {
-  margin: 0 0 clamp(28px, 4vw, 44px) clamp(0px, 12vw, 200px);
+  margin: 0 0 clamp(28px, 4vw, 44px);
   display: flex; align-items: center; gap: 18px 24px; flex-wrap: wrap;
 }
 .schedule-preview__tag {
@@ -1525,10 +1522,9 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .section--page { padding-top: clamp(140px, 18vw, 220px); }
 .page-head {
   max-width: 880px;
-  margin: 0 0 clamp(48px, 7vw, 88px) clamp(0px, 12vw, 200px);
+  margin: 0 0 clamp(48px, 7vw, 88px);
 }
 .schedule {
-  margin-left: clamp(0px, 12vw, 200px);
   border-top: 1px solid var(--ink);
 }
 .schedule__row {
@@ -1571,7 +1567,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .schedule__cell--empty { color: var(--ink-muted); font-size: 13px; letter-spacing: .12em; }
 .schedule__foot {
-  margin: 56px 0 0 clamp(0px, 12vw, 200px);
+  margin: 56px 0 0;
   padding: 36px 0 0;
   border-top: 1px solid var(--line);
   display: flex; justify-content: space-between; align-items: center;
@@ -1600,10 +1596,11 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 /* ---------- Bloom ornament ---------- */
 .bloom {
   display: block;
-  width: 38px; height: 38px;
-  margin-bottom: 6px;
+  width: 24px; height: 24px;
+  margin: 0;
   color: var(--clay);
   overflow: visible;
+  flex-shrink: 0;
 }
 .bloom__petal {
   fill: currentColor;
@@ -1632,11 +1629,8 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .section__label--light .bloom { color: var(--paper); }
 .section__label--light .bloom__petal { fill-opacity: 0; }
 .section__label--light.is-visible .bloom__petal { fill-opacity: .9; }
-@media (max-width: 1100px) {
-  .bloom { width: 32px; height: 32px; margin-bottom: 0; }
-}
 @media (max-width: 760px) {
-  .bloom { width: 28px; height: 28px; }
+  .bloom { width: 22px; height: 22px; }
 }
 
 /* ---------- Reveal animations ---------- */
