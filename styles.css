@@ -398,15 +398,15 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   margin: 0 auto;
 }
 .section__label {
-  /* Sits above each section's content as a horizontal row:
-     [favicon bloom]  №  KICKER
-     Replaces the original absolute-positioned gutter label so every
-     section reads with the same editorial header rhythm. */
+  /* Sits ABOVE each section's eyebrow as its own line. display: flex
+     (not inline-flex) is critical — eyebrows are inline elements, so
+     without this they'd sit on the same line as the label. */
   position: relative;
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   gap: 14px;
+  width: fit-content;
   margin-bottom: 14px;
   font-size: 11px;
   letter-spacing: .22em;
