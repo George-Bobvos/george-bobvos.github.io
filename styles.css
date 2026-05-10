@@ -522,7 +522,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   white-space: nowrap;
   text-shadow: 0 2px 24px rgba(26, 20, 17, 0.35);
 }
-.overture__line em { font-style: italic; font-weight: 400; color: var(--clay); }
+.overture__line em { font-style: italic; font-weight: 400; color: var(--paper); }
 .btn--overture {
   --bg: var(--paper); --fg: var(--ink); --bd: var(--paper);
   padding: 17px 30px; font-size: 14px; letter-spacing: .05em;
