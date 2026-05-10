@@ -24,18 +24,21 @@
        (body paragraph + facts grid) into the left column. */
     .hero--about {
       grid-template-rows: auto auto 1fr;
-      /* extra top padding so the section label has room above the eyebrow */
-      padding-top: clamp(120px, 14vw, 180px);
+      /* Generous top padding so the absolutely-positioned section label
+         clears the eyebrow and headline below it. */
+      padding-top: clamp(160px, 18vw, 240px);
     }
     .hero--about .hero__section-label {
       position: absolute;
       left: var(--gutter);
-      top: clamp(72px, 11vw, 130px);
+      /* Sit the label well above the eyebrow line — 78px nav + announce
+         banner + breathing room. */
+      top: clamp(108px, 13vw, 160px);
     }
     .hero--about .hero__eyebrow {
       grid-column: 1 / 2;
       grid-row: 1 / 2;
-      margin: 0 0 14px;
+      margin: 0 0 18px;
     }
     .hero--about .hero__heading {
       grid-column: 1 / 2;
@@ -51,15 +54,28 @@
       grid-column: 2 / 3;
       grid-row: 1 / 4;
     }
+    /* Body paragraph — match the lede's size/weight, and bring back the
+       Fraunces italic drop-cap on the first letter (the original "M"
+       effect from the About section). */
     .hero--about .hero__body {
       margin: 0;
-      max-width: 56ch;
-      font-size: 16px;
-      line-height: 1.7;
+      max-width: 52ch;
+      font-size: clamp(17px, 1.5vw, 21px);
+      line-height: 1.55;
       color: var(--ink-soft);
     }
+    .hero--about .hero__body::first-letter {
+      font-family: var(--serif);
+      font-size: 4.4em;
+      font-weight: 400;
+      font-style: italic;
+      float: left;
+      line-height: .85;
+      padding: 8px 14px 0 0;
+      color: var(--clay);
+    }
     .hero--about .hero__facts {
-      margin: 8px 0 4px;
+      margin: 12px 0 4px;
       max-width: 580px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -90,10 +106,13 @@
 
     /* Tablet / mobile — collapse to one column, label flips inline */
     @media (max-width: 1100px) {
-      .hero--about { grid-template-rows: auto auto auto auto; padding-top: clamp(100px, 12vw, 140px); }
+      .hero--about {
+        grid-template-rows: auto auto auto auto;
+        padding-top: clamp(100px, 12vw, 140px);
+      }
       .hero--about .hero__section-label {
         position: static;
-        margin: 0 0 24px;
+        margin: 0 0 28px;
         flex-direction: row;
         gap: 14px;
         align-items: center;
@@ -110,6 +129,10 @@
     }
     @media (max-width: 760px) {
       .hero--about .hero__facts { grid-template-columns: 1fr; gap: 18px; }
+      .hero--about .hero__body::first-letter {
+        font-size: 3.8em;
+        padding: 6px 10px 0 0;
+      }
     }
   </style>
   <script>
