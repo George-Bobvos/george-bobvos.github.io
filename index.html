@@ -18,138 +18,29 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* ========== Merged About / Hero section ==========
-       Mirrors the layout of .section sections (Practice, Filipa, etc):
-       — Section label sits in a fixed left gutter column
-       — Content (eyebrow + headline + copy + facts + buttons) is
-         indented to clear the label, same as section__head/.intro/.filipa
-       — Right column holds the image + credential card */
-    .hero--about {
-      grid-template-columns: 1.35fr 1fr;
-      grid-template-rows: auto auto auto 1fr;
-      gap: 0 60px;
-      /* Match other sections' top padding so the section label sits at
-         the same vertical position visitors see in Practice / Filipa. */
-      padding-top: clamp(96px, 14vw, 180px);
-    }
-    /* Section label — absolute, anchored to the page gutter, exactly
-       like every other .section__label on the site. */
-    .hero--about .hero__section-label {
+    /* ========== Merged About section ==========
+       Reuses the .section--filipa pattern (proven on this site):
+       absolute section label in left gutter, two-column .filipa
+       grid for image + copy. The only addition is positioning the
+       credential card over the bottom-right of the image, which
+       relies on a position:relative wrapper. */
+    .about-merged .filipa__image { position: relative; }
+    .about-merged .hero__credential {
       position: absolute;
-      left: var(--gutter);
-      top: clamp(96px, 14vw, 180px);
-      flex-direction: column;
-      gap: 6px;
+      right: -34px;
+      bottom: -56px;
+      z-index: 3;
     }
-    /* Content stack — eyebrow, headline, foot — all indented to clear
-       the section label, matching how .section__head / .intro / .filipa
-       are pushed right by clamp(0px, 12vw, 200px). */
-    .hero--about .hero__eyebrow {
-      grid-column: 1 / 2;
-      grid-row: 1 / 2;
-      margin: 0 0 18px;
-      margin-left: clamp(0px, 12vw, 200px);
-    }
-    .hero--about .hero__heading {
-      grid-column: 1 / 2;
-      grid-row: 2 / 3;
-      align-self: start;
-      margin-top: 0;
-      margin-left: clamp(0px, 12vw, 200px);
-      max-width: 12ch;
-    }
-    .hero--about .hero__foot {
-      grid-column: 1 / 2;
-      grid-row: 3 / 5;
-      margin-left: clamp(0px, 12vw, 200px);
-      margin-top: clamp(20px, 2.5vw, 32px);
-    }
-    .hero--about .hero__image {
-      grid-column: 2 / 3;
-      grid-row: 1 / 5;
-    }
-    /* Body paragraph — match the lede's size/weight, with the original
-       Fraunces italic drop-cap "M" effect from the About section. */
-    .hero--about .hero__body {
-      margin: 0;
-      max-width: 52ch;
-      font-size: clamp(17px, 1.5vw, 21px);
-      line-height: 1.55;
-      color: var(--ink-soft);
-    }
-    .hero--about .hero__body::first-letter {
-      font-family: var(--serif);
-      font-size: 4.4em;
-      font-weight: 400;
-      font-style: italic;
-      float: left;
-      line-height: .85;
-      padding: 8px 14px 0 0;
-      color: var(--clay);
-    }
-    .hero--about .hero__facts {
-      margin: 12px 0 4px;
-      max-width: 580px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      border-top: 1px solid var(--line);
-      padding-top: 24px;
-    }
-    .hero--about .hero__facts div {
-      display: flex; flex-direction: column; gap: 6px;
-    }
-    .hero--about .hero__facts dt {
-      font-family: var(--serif);
-      font-size: clamp(32px, 3.6vw, 46px);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ink);
-      line-height: 1;
-      letter-spacing: -.02em;
-    }
-    .hero--about .hero__facts dd {
-      margin: 0;
-      font-size: 11px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      font-weight: 500;
-    }
-
-    /* Tablet / mobile — collapse to one column, label flips inline above content */
     @media (max-width: 1100px) {
-      .hero--about {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto auto auto;
-        padding-top: clamp(100px, 12vw, 140px);
-      }
-      .hero--about .hero__section-label {
-        position: static;
-        margin: 0 0 28px;
-        flex-direction: row;
-        gap: 14px;
-        align-items: center;
-      }
-      .hero--about .hero__eyebrow,
-      .hero--about .hero__heading,
-      .hero--about .hero__foot {
-        grid-column: 1 / -1;
-        margin-left: 0;
-      }
-      .hero--about .hero__heading { max-width: none; }
-      .hero--about .hero__image {
-        grid-column: 1 / -1;
-        grid-row: auto;
-        margin-top: 40px;
-        padding-bottom: 70px;
+      .about-merged .hero__credential {
+        right: -20px;
+        bottom: -48px;
       }
     }
     @media (max-width: 760px) {
-      .hero--about .hero__facts { grid-template-columns: 1fr; gap: 18px; }
-      .hero--about .hero__body::first-letter {
-        font-size: 3.8em;
-        padding: 6px 10px 0 0;
+      .about-merged .hero__credential {
+        right: -8px;
+        bottom: -42px;
       }
     }
   </style>
@@ -281,8 +172,8 @@
   </section>
 
   <!-- ========================== ABOUT (merged with former hero) ========================== -->
-  <section id="about" class="hero hero--about">
-    <aside class="section__label hero__section-label">
+  <section id="about" class="section section--filipa about-merged">
+    <aside class="section__label">
       <svg class="bloom" viewBox="0 0 24 24" aria-hidden="true">
         <g class="bloom__petals">
           <g transform="rotate(0 12 12)"><ellipse class="bloom__petal" style="--i:0" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
@@ -299,37 +190,39 @@
       <span class="num">02</span>
       <span class="kicker">About</span>
     </aside>
-    <p class="eyebrow hero__eyebrow">A practice, not a performance</p>
-    <h1 class="display display--md split hero__heading" data-split>Yoga, <em>without</em> pressure.</h1>
-    <div class="hero__foot">
-      <p class="lede">I am Filipa, <em>Pipa</em> to friends. Yoga has shaped my life for the past five years; it is no longer a choice, it is a commitment. I am here to grow a small community of people who want to move better, breathe deeper, and feel more at home in themselves. Just as I do.</p>
-      <p class="hero__body">My classes centre on Vinyasa, where each movement is guided by the breath. We move slowly, breathe deeply, and build strength. No perfect shapes. No rushing. Just space to listen, to reset, and to build a practice that feels like your own.</p>
-      <dl class="facts hero__facts">
-        <div><dt>200h</dt><dd>Yoga Teacher Training</dd></div>
-        <div><dt>India</dt><dd>Yoga Alliance Certified</dd></div>
-        <div><dt>BCN</dt><dd>Poblenou based</dd></div>
-      </dl>
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="#contact">
-          Begin practice
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a class="btn btn--ghost" href="#contact">Reach out</a>
-      </div>
-    </div>
-    <div class="hero__image" data-parallax>
-      <figure class="hero__image-main">
-        <img src="./assets/namaste-pipa-final.jpeg" alt="Filipa Mourão Martinho" loading="eager">
-      </figure>
-      <figure class="hero__credential" aria-label="Credentials">
-        <div class="hero__credential-photo">
-          <img src="./assets/hero-pipa.jpg" alt="Filipa Mourão Martinho" loading="eager">
+    <div class="filipa">
+      <div class="filipa__copy">
+        <p class="eyebrow">A practice, not a performance</p>
+        <h2 class="display display--md">Yoga, <em>without</em> pressure.</h2>
+        <p class="lead">I am Filipa, <em>Pipa</em> to friends. Yoga has shaped my life for the past five years; it is no longer a choice, it is a commitment. I am here to grow a small community of people who want to move better, breathe deeper, and feel more at home in themselves. Just as I do.</p>
+        <p class="lead drop">My classes centre on Vinyasa, where each movement is guided by the breath. We move slowly, breathe deeply, and build strength. No perfect shapes. No rushing. Just space to listen, to reset, and to build a practice that feels like your own.</p>
+        <dl class="facts">
+          <div><dt>200h</dt><dd>Yoga Teacher Training</dd></div>
+          <div><dt>India</dt><dd>Yoga Alliance Certified</dd></div>
+          <div><dt>BCN</dt><dd>Poblenou based</dd></div>
+        </dl>
+        <div class="hero__actions" style="margin-top: 32px;">
+          <a class="btn btn--primary" href="#contact">
+            Begin practice
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="#contact">Reach out</a>
         </div>
-        <figcaption class="hero__credential-cap">
-          <span class="hero__credential-eyebrow">200H · YTT</span>
-          <span class="hero__credential-title">Trained in <em>India</em></span>
-          <span class="hero__credential-meta">Yoga Alliance · Certified</span>
-        </figcaption>
+      </div>
+      <figure class="filipa__image">
+        <div class="img-frame">
+          <img src="./assets/namaste-pipa-final.jpeg" alt="Filipa Mourão Martinho" loading="eager">
+        </div>
+        <figure class="hero__credential" aria-label="Credentials">
+          <div class="hero__credential-photo">
+            <img src="./assets/hero-pipa.jpg" alt="Filipa Mourão Martinho" loading="eager">
+          </div>
+          <figcaption class="hero__credential-cap">
+            <span class="hero__credential-eyebrow">200H · YTT</span>
+            <span class="hero__credential-title">Trained in <em>India</em></span>
+            <span class="hero__credential-meta">Yoga Alliance · Certified</span>
+          </figcaption>
+        </figure>
       </figure>
     </div>
   </section>
