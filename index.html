@@ -114,18 +114,46 @@
 </div>
 <main id="main">
 
+  <!-- Reusable bloom symbol for the section-nav (avoids repeating
+       the 8-petal markup six times) -->
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <symbol id="bloomSymbol" viewBox="0 0 24 24">
+      <g class="bloom__petals">
+        <g transform="rotate(0 12 12)"><ellipse class="bloom__petal" style="--i:0" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+        <g transform="rotate(45 12 12)"><ellipse class="bloom__petal" style="--i:1" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+        <g transform="rotate(90 12 12)"><ellipse class="bloom__petal" style="--i:2" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+        <g transform="rotate(135 12 12)"><ellipse class="bloom__petal" style="--i:3" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+        <g transform="rotate(180 12 12)"><ellipse class="bloom__petal" style="--i:4" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+        <g transform="rotate(225 12 12)"><ellipse class="bloom__petal" style="--i:5" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+        <g transform="rotate(270 12 12)"><ellipse class="bloom__petal" style="--i:6" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+        <g transform="rotate(315 12 12)"><ellipse class="bloom__petal" style="--i:7" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+      </g>
+      <circle class="bloom__core" cx="12" cy="12" r="2.2"/>
+    </symbol>
+  </svg>
+
   <!-- ========================== AMBIENT SECTION NAV ==========================
-       Tiny vertical strip of dots on the right edge that highlights the
-       current section as you scroll. Subtle but anchors position on a
-       long page. Hidden on mobile (the page is short enough on phones
-       that the cue is unnecessary). -->
+       Six tiny blooms on the right edge that mark scroll position.
+       The active section's bloom opens its petals, ties to the brand. -->
   <nav class="section-nav" aria-label="Section navigation" aria-hidden="true">
-    <a class="section-nav__dot" href="#about" data-target="about" aria-label="About"><span></span></a>
-    <a class="section-nav__dot" href="#practice" data-target="practice" aria-label="Practice"><span></span></a>
-    <a class="section-nav__dot" href="#training" data-target="training" aria-label="Training"><span></span></a>
-    <a class="section-nav__dot" href="#filipa" data-target="filipa" aria-label="Filipa"><span></span></a>
-    <a class="section-nav__dot" href="#voices" data-target="voices" aria-label="Voices"><span></span></a>
-    <a class="section-nav__dot" href="#contact" data-target="contact" aria-label="Contact"><span></span></a>
+    <a class="section-nav__dot" href="#about" data-target="about" aria-label="About">
+      <svg class="section-nav__bloom" viewBox="0 0 24 24"><use href="#bloomSymbol"/></svg>
+    </a>
+    <a class="section-nav__dot" href="#practice" data-target="practice" aria-label="Practice">
+      <svg class="section-nav__bloom" viewBox="0 0 24 24"><use href="#bloomSymbol"/></svg>
+    </a>
+    <a class="section-nav__dot" href="#training" data-target="training" aria-label="Training">
+      <svg class="section-nav__bloom" viewBox="0 0 24 24"><use href="#bloomSymbol"/></svg>
+    </a>
+    <a class="section-nav__dot" href="#filipa" data-target="filipa" aria-label="Filipa">
+      <svg class="section-nav__bloom" viewBox="0 0 24 24"><use href="#bloomSymbol"/></svg>
+    </a>
+    <a class="section-nav__dot" href="#voices" data-target="voices" aria-label="Voices">
+      <svg class="section-nav__bloom" viewBox="0 0 24 24"><use href="#bloomSymbol"/></svg>
+    </a>
+    <a class="section-nav__dot" href="#contact" data-target="contact" aria-label="Contact">
+      <svg class="section-nav__bloom" viewBox="0 0 24 24"><use href="#bloomSymbol"/></svg>
+    </a>
   </nav>
   <!-- ========================== OVERTURE (sunset) ==========================
        Quiet full-bleed cinematic moment. The page-meta line lives at the
