@@ -754,17 +754,21 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 
 /* Right column — image stretches to match the copy column's natural
-   height, no more, no less. */
+   height, no more, no less. Capped so on tall copy columns the image
+   doesn't become disproportionately large. */
 .about__visual {
   display: flex;
   flex-direction: column;
+  align-self: stretch;
 }
 .about__figure {
   position: relative;
   margin: 0;
-  /* height: 100% lets the figure expand to fill the grid cell, which
-     in turn is sized by .about__media's align-items: stretch — i.e.
-     the height of the (taller) sibling .about__copy column. */
+  /* Image height ranges between a comfortable minimum (so it doesn't
+     squish on short copy) and a sensible cap (so on tall copy, it
+     stays photograph-sized rather than wall-sized). */
+  min-height: 480px;
+  max-height: 640px;
   height: 100%;
 }
 .about__figure .img-frame {
@@ -1240,6 +1244,11 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   gap: clamp(40px, 6vw, 84px);
   align-items: start;
   position: relative;
+}
+/* The inline section label spans the full width above the copy + form,
+   matching the other section labels' header rhythm. */
+.contact__inner > .section__label {
+  grid-column: 1 / -1;
 }
 .contact__copy { /* indent removed — section label now sits inline above */ }
 .contact__copy .display em { color: var(--clay); }
