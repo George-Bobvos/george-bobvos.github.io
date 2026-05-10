@@ -1501,16 +1501,15 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   padding-bottom: 70px;
   border-bottom: 1px solid rgba(247,241,232,.1);
 }
-/* Push the third column's content block (Reach out + links) toward
-   the right edge of its cell — so the longest line (the email) ends
-   roughly under "Crafted by GB" below. The text inside the block
-   stays left-aligned, so links read naturally top-to-bottom. */
-.footer__top > div:nth-child(3) {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-.footer__top > div:nth-child(3) > * {
+/* The Reach out column wraps its heading + links in .footer__col-inner.
+   That inner block sizes to the email line's natural width and floats
+   to the right edge of the cell as a single unit — so "Reach out" and
+   "filipa-martinho94@hotmail.com" share the same left edge, and the
+   email ends roughly aligned with "Crafted by GB" below. */
+.footer__col-inner {
+  display: block;
+  width: max-content;
+  margin-left: auto;
   text-align: left;
 }
 .footer__brand p {
