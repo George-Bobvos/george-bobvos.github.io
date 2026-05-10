@@ -549,7 +549,15 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .overture__meta { padding-bottom: 12px; }
   .overture__meta .label { font-size: 10px; letter-spacing: .18em; }
   .overture__line { font-size: clamp(30px, 7.5vw, 44px); line-height: 1; }
-  .overture__bottom { gap: 14px; }
+  /* Mobile: move the tagline + button up to the top of the section so it
+     lands above the fold on entry. Visually anchored just under the meta
+     line rather than way down at the bottom of the photograph. */
+  .overture__bottom {
+    grid-row: 2 / 3;
+    align-self: start;
+    margin-top: clamp(28px, 5vh, 48px);
+    gap: 14px;
+  }
   .overture__actions { gap: 12px; }
   .btn--overture { padding: 14px 24px; font-size: 13px; }
 }
