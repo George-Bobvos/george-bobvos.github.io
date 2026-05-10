@@ -50,11 +50,7 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
   }
 
-  /* ---------- Announcement banner ----------
-     Soft top-of-page note explaining that group classes are coming
-     but only private sessions are bookable for now. Dismissible —
-     the choice is remembered for the rest of the session via
-     sessionStorage so the visitor isn't nagged across pages. */
+  /* ---------- Announcement banner ---------- */
   const announce = document.getElementById('announce');
   const announceClose = document.getElementById('announceClose');
   if (announce && announceClose) {
@@ -69,9 +65,6 @@
       try {
         sessionStorage.setItem('pipa-announce-dismissed', '1');
       } catch (e) {}
-      /* Also flag <html> so that, on the very next click navigating to
-         another page in the same session, the head-script's pre-paint
-         check fires and the banner is hidden instantly without flash. */
       document.documentElement.classList.add('announce-dismissed');
     });
   }
@@ -79,7 +72,6 @@
   /* ---------- Split text on display headlines ---------- */
   const splitTargets = document.querySelectorAll('[data-split]');
   splitTargets.forEach(el => {
-    // Walk children, wrap text-node words in spans, preserve <em>, <br>, etc.
     const wrapTextNode = (node) => {
       const frag = document.createDocumentFragment();
       const parts = node.textContent.split(/(\s+)/);
@@ -103,7 +95,6 @@
       });
     };
     walk(el);
-    // assign per-word delays
     const words = el.querySelectorAll('.word');
     words.forEach((w, i) => {
       w.style.transitionDelay = (i * 0.06) + 's';
@@ -120,7 +111,6 @@
     });
   }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
 
-  // Auto-add .reveal to common blocks for a soft default
   const autoReveal = [
     '.section__head', '.intro', '.cards .card', '.training__copy',
     '.benefits li', '.filipa', '.sessions .session', '.sessions__note',
@@ -138,11 +128,6 @@
     });
   });
   document.querySelectorAll('[data-split]').forEach(el => io.observe(el));
-
-  /* Section labels carry the lotus bloom — observe them so the petals
-     can open as each section enters the viewport. We deliberately do NOT
-     add the `.reveal` class here: the label layout should stay put,
-     only the inner SVG petals animate via CSS. */
   document.querySelectorAll('.section__label').forEach(el => io.observe(el));
 
   /* ---------- Image blur-up: mark wrappers .is-loaded once each <img> is ready ---------- */
@@ -228,7 +213,6 @@ ${email}`;
       const href = `mailto:filipa-martinho94@hotmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.location.href = href;
 
-      // Visual feedback
       const btn = form.querySelector('button[type="submit"]');
       if (btn) {
         const original = btn.innerHTML;
@@ -272,7 +256,6 @@ ${email}`;
       });
     });
 
-    /* Keyboard arrows when the section is in view */
     let inView = false;
     const sectionEl = voicesRoot.closest('.section--voices') || voicesRoot;
     const ioVoices = new IntersectionObserver((entries) => {
@@ -287,7 +270,6 @@ ${email}`;
       if (e.key === 'ArrowRight') { goTo(active + 1); }
     });
 
-    /* Touch / pointer swipe on the stage */
     const stage = voicesRoot.querySelector('.voices__stage');
     if (stage) {
       let startX = 0, startY = 0, tracking = false;
@@ -307,18 +289,12 @@ ${email}`;
       });
       stage.addEventListener('pointercancel', () => { tracking = false; });
 
-      /* Trackpad / horizontal-wheel navigation
-         Listens to predominantly horizontal scroll gestures and steps the
-         carousel one slide per gesture, with a short cooldown to prevent
-         a single two-finger swipe from skipping multiple slides. */
       let wheelLock = false;
       let wheelAccum = 0;
       const wheelThreshold = 40;
       const wheelCooldown = 520;
       stage.addEventListener('wheel', (e) => {
-        // Only react to horizontal-dominant gestures
         if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) * 1.2) return;
-        // Suppress the browser's back/forward swipe & any horizontal page scroll
         e.preventDefault();
         if (wheelLock) return;
         wheelAccum += e.deltaX;
@@ -330,6 +306,50 @@ ${email}`;
         }
       }, { passive: false });
     }
+  }
+
+  /* ---------- Section navigation dots (right edge) ----------
+     Reveal the dot strip once the user has scrolled past the overture.
+     Track which section is currently most in view via IntersectionObserver
+     and toggle .is-active on the matching dot. */
+  const sectionNav = document.querySelector('.section-nav');
+  if (sectionNav) {
+    const dots = Array.from(sectionNav.querySelectorAll('.section-nav__dot'));
+    const targets = dots.map(d => document.getElementById(d.dataset.target)).filter(Boolean);
+
+    // Reveal/hide based on scroll past overture
+    const overture = document.querySelector('.overture');
+    const updateNavVisibility = () => {
+      if (!overture) {
+        sectionNav.classList.add('is-visible');
+        return;
+      }
+      const overtureBottom = overture.getBoundingClientRect().bottom;
+      // Show once the overture is mostly off-screen
+      sectionNav.classList.toggle('is-visible', overtureBottom < 100);
+    };
+    window.addEventListener('scroll', updateNavVisibility, { passive: true });
+    updateNavVisibility();
+
+    // Track which section is active using IntersectionObserver. Use a
+    // tall rootMargin to trigger when sections cross the viewport center.
+    let activeSection = null;
+    const setActive = (id) => {
+      if (id === activeSection) return;
+      activeSection = id;
+      dots.forEach(d => d.classList.toggle('is-active', d.dataset.target === id));
+    };
+    const navIo = new IntersectionObserver((entries) => {
+      // Pick the entry with the highest intersection ratio that's intersecting
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]) setActive(visible[0].target.id);
+    }, {
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: [0, 0.25, 0.5, 0.75, 1]
+    });
+    targets.forEach(t => navIo.observe(t));
   }
 
   /* ---------- Cleanup transform on scroll-end (avoid stuck magnetic) ---------- */
