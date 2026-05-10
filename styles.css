@@ -427,23 +427,11 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   margin: 0 0 clamp(48px, 7vw, 88px) clamp(0px, 12vw, 200px);
 }
 
-/* ---------- OVERTURE ----------
-   A quiet, full-bleed cinematic moment that opens the site before the
-   editorial hero begins. Same palette, same Fraunces italic — just one
-   short tagline and a button anchored to the bottom-left of the photo,
-   with the page-meta line floating at the top.
-
-   No scroll cue here: the .hero section immediately below has its own,
-   and stacking two would feel restless rather than inviting. The
-   overture and the hero are designed to read as a sequence, not two
-   competing entrances.
-*/
+/* ---------- OVERTURE (sunset) ---------- */
 .overture {
   position: relative;
   width: 100%;
   height: 100vh;
-  /* Cap so the section never feels disproportionately tall on giant
-     monitors — at the same time, never shorter than 600px on laptops. */
   min-height: 600px;
   max-height: 920px;
   overflow: hidden;
@@ -453,18 +441,11 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   display: flex;
   align-items: stretch;
 }
-.overture__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
+.overture__bg { position: absolute; inset: 0; z-index: 0; }
 .overture__bg img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 50%;
-  /* A slow, 24-second ken-burns settle. The image breathes once on
-     entry then comes to rest — no infinite loop, nothing flashing. */
   animation: overtureSettle 24s var(--ease-out) both;
   will-change: transform;
 }
@@ -473,13 +454,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   to   { transform: scale(1.00); }
 }
 .overture__veil {
-  /* Warm-ink gradient that darkens the top (so the meta line + nav
-     + the tagline beneath it stay legible against any sky color)
-     and tapers gently through the rest of the photograph, with a
-     soft re-darkening at the very bottom for visual weight. */
-  position: absolute;
-  inset: 0;
-  z-index: 1;
+  position: absolute; inset: 0; z-index: 1;
   background:
     linear-gradient(
       180deg,
@@ -492,48 +467,26 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   pointer-events: none;
 }
 .overture__inner {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: var(--max);
+  position: relative; z-index: 2;
+  width: 100%; max-width: var(--max);
   margin: 0 auto;
   padding: clamp(110px, 13vh, 150px) var(--gutter) clamp(70px, 10vh, 110px);
   display: grid;
   grid-template-rows: auto 1fr auto;
-  /* The middle row is empty filler so the bottom block hugs the lower
-     portion of the section regardless of viewport height. */
 }
-
-/* Top: meta line, mirrors the original .hero__meta but cream against
-   the photograph. The hairline rule below it ties this section to the
-   editorial system used everywhere else on the site. */
 .overture__meta {
   align-self: start;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; justify-content: space-between; align-items: center;
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(247, 241, 232, 0.22);
 }
 .overture__meta .label { color: rgba(247, 241, 232, 0.78); }
-
-/* Bottom-left: tagline + button stacked, anchored to the lower-left of
-   the photograph. The tagline is one short Fraunces italic line; the
-   button is the same primary pill shape as the rest of the site,
-   inverted to cream on the dark image. */
-/* Bottom-left → moved up: tagline + button stacked, anchored to the
-   upper-left of the photograph just below the meta line. The block
-   remains left-aligned (justify-self: start). Vertical position is
-   set with margin-top on the middle grid row so the block sits in
-   the upper third of the section, well above the photograph centre. */
 .overture__bottom {
   grid-row: 2 / 3;
   align-self: start;
   justify-self: start;
   margin-top: clamp(40px, 6vh, 80px);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: flex; flex-direction: column; align-items: flex-start;
   gap: clamp(20px, 3vh, 32px);
 }
 .overture__line {
@@ -541,61 +494,26 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   font-family: var(--serif);
   font-weight: 300;
   font-style: italic;
-  /* Sized to match the original hero headline: confidently large,
-     anchors the bottom-left of the photograph. */
   font-size: clamp(54px, 9.4vw, 148px);
   line-height: .92;
   letter-spacing: -.035em;
   color: var(--paper);
-  /* Single-line composition on desktop — the phrase never wraps mid-air.
-     On phones the @media rule below releases this so the line can break
-     between 'room' and 'for' on narrow viewports rather than overflowing. */
   white-space: nowrap;
-  /* Very subtle text shadow so cream type stays readable on any photo
-     brightness, but never reads as a 'glow effect'. */
   text-shadow: 0 2px 30px rgba(26, 20, 17, 0.35);
 }
-.overture__line em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--clay);
-}
-
-/* Overture-context button: cream pill, flips to clay on hover.
-   Same proportions as .btn--primary so muscle memory carries through. */
+.overture__line em { font-style: italic; font-weight: 400; color: var(--clay); }
 .btn--overture {
-  --bg: var(--paper);
-  --fg: var(--ink);
-  --bd: var(--paper);
-  padding: 17px 30px;
-  font-size: 14px;
-  letter-spacing: .05em;
+  --bg: var(--paper); --fg: var(--ink); --bd: var(--paper);
+  padding: 17px 30px; font-size: 14px; letter-spacing: .05em;
 }
 .btn--overture:hover { --bg: var(--clay); --fg: var(--paper); --bd: var(--clay); }
-
-/* Inline button + scroll cue row: button on the left, scroll cue
-   sitting next to it horizontally. Same spirit as .hero__actions
-   but tuned for the cream-on-photograph context. */
-.overture__actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 18px;
-}
-
-/* Inline scroll cue used inside the overture (next to the button).
-   Cream version of the standard hero scroll cue — same chevron, same
-   bobbing animation, just lighter for the dark-image context. */
+.overture__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
 .overture__scroll {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: inline-flex; align-items: center; gap: 10px;
   margin-left: 6px;
   padding: 16px 4px;
   font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
   font-weight: 500;
   color: rgba(247, 241, 232, 0.7);
   animation: bob 2.6s ease-in-out infinite;
@@ -604,198 +522,30 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .overture__scroll:hover { color: var(--paper); }
 .overture__scroll svg { transition: transform .35s var(--ease); }
 .overture__scroll:hover svg { transform: translateY(2px); }
-
-/* Mobile — same composition, tighter padding & type. The bottom block
-   stays anchored bottom-left; on very narrow screens the button wraps
-   under the tagline naturally because the wrapper is a flex column. */
 @media (max-width: 760px) {
-  .overture {
-    min-height: 520px;
-    max-height: none;
-  }
+  .overture { min-height: 520px; max-height: none; }
   .overture__inner { padding: 96px var(--gutter) 72px; }
   .overture__meta { padding-bottom: 12px; }
   .overture__meta .label { font-size: 10px; letter-spacing: .18em; }
-  .overture__line {
-    font-size: clamp(44px, 12vw, 74px);
-    /* Phones don't have the horizontal room for a single-line tagline at
-       hero scale. Let it wrap naturally between 'room' and 'for yourself'. */
-    white-space: normal;
-    line-height: .98;
-  }
+  .overture__line { font-size: clamp(44px, 12vw, 74px); white-space: normal; line-height: .98; }
   .overture__bottom { gap: 18px; }
   .overture__actions { gap: 12px; }
   .btn--overture { padding: 14px 24px; font-size: 13px; }
 }
-
-/* Reduced-motion: skip the ken-burns settle, freeze the bobbing scroll. */
 @media (prefers-reduced-motion: reduce) {
   .overture__bg img { animation: none !important; transform: none !important; }
   .overture__scroll { animation: none !important; }
 }
 
-
-/* ---------- HERO ---------- */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  /* Reduced top padding to compensate for the announcement banner sitting
-     above the nav. Original was 108px (designed banner-free); 78px lifts
-     the whole left column so the buttons land above the fold on standard
-     desktop heights (1080p / 1440p) without changing typography. */
-  padding: 78px var(--gutter) 70px;
-  max-width: var(--max);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  /* Was 'auto auto 1fr' for [meta][h1][foot]. With the meta line now
-     hosted by the .overture section above, the hero only needs two
-     rows: [h1][foot]. */
-  grid-template-rows: auto 1fr;
-  gap: 0 60px;
-  align-items: start;
-}
-.hero h1.display {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  align-self: start;
-  margin-top: clamp(4px, 1vw, 12px);
-  /* Was clamp(54px, 9.4vw, 148px) — sized down to match the rest of
-     the site's section h2 (display--md): clamp(40px, 6.6vw, 92px).
-     Now the overture's tagline is the dominant first headline, and
-     the hero headline reads as the next editorial beat rather than
-     competing for the same loudness. */
-  font-size: clamp(40px, 6.6vw, 92px);
-  letter-spacing: -.025em;
-}
-/* Each line of the hero headline holds together — never wraps mid-phrase */
-.hero__line {
-  display: inline-block;
-  white-space: nowrap;
-}
-.hero__foot {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-  margin-top: clamp(24px, 3.5vw, 40px);
-  display: flex; flex-direction: column; gap: 24px;
-  max-width: 580px;
-}
-.hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.hero__image {
-  grid-column: 2 / 3;
-  grid-row: 1 / 3;
-  margin: 0;
-  position: relative;
-  align-self: start;
-}
-.hero__image-main {
-  margin: 0;
-  position: relative;
-  border-radius: var(--radius-img);
-  overflow: hidden;
-  /* Safari fix: isolation + radial mask forces overflow:hidden to clip transformed children */
-  isolation: isolate;
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
-          mask-image: radial-gradient(white, black);
-  background: var(--paper);
-  transition: box-shadow .6s var(--ease);
-  box-shadow: 0 28px 64px rgba(26, 20, 17, 0.14);
-}
-.hero__image-main img {
-  display: block;
-  width: 100%;
-  height: clamp(440px, 72vh, 760px);
-  object-fit: cover;
-  border-radius: var(--radius-img);
-  will-change: transform;
-}
-.hero__image:hover .hero__image-main {
-  box-shadow: 0 36px 80px rgba(26, 20, 17, 0.18);
-}
-
-/* ----- Hero pull-quote (paper card, top-left, balances the credential card) ----- */
-.hero__quote {
-  margin: 0;
-  position: absolute;
-  /* Was -22px (sat above the image, crowding the .hero__meta line above).
-     -2px tucks the slanted card just over the top edge of the image —
-     the bottom-right corner kisses the image rim, the rest sits inside. */
-  top: -2px;
-  left: -34px;
-  z-index: 4;
-  width: clamp(196px, 26%, 232px);
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: start;
-  gap: 6px 12px;
-
-  background: var(--paper);
-  padding: 16px 20px 18px;
-  border-radius: 4px;
-
-  opacity: 0;
-  transform: rotate(0deg) translate(-22px, -22px) scale(.94);
-  transition:
-    opacity 1.2s var(--ease-out) .25s,
-    transform 1.2s var(--ease-out) .25s,
-    box-shadow .5s var(--ease);
-  box-shadow:
-    0 1px 2px rgba(26, 20, 17, 0.08),
-    0 24px 56px rgba(26, 20, 17, 0.20);
-}
-.hero__image.is-visible .hero__quote {
-  opacity: 1;
-  transform: rotate(-2.2deg) translate(0, 0) scale(1);
-}
-.hero__quote-mark {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-style: italic;
-  font-size: 56px;
-  line-height: .55;
-  color: var(--clay);
-  margin-top: 10px;
-  user-select: none;
-}
-.hero__quote-text {
-  margin: 0;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-style: italic;
-  font-size: clamp(17px, 1.55vw, 20px);
-  line-height: 1.25;
-  letter-spacing: -.012em;
-  color: var(--ink);
-}
-.hero__quote-text em {
-  font-style: italic;
-  color: var(--clay);
-  font-weight: 400;
-}
-.hero__image:hover .hero__quote {
-  transform: rotate(0deg) translateY(-6px) scale(1.03);
-  box-shadow:
-    0 1px 2px rgba(26, 20, 17, 0.08),
-    0 36px 80px rgba(26, 20, 17, 0.28);
-}
-
-/* ----- Credential card (polaroid-style, intentional, anchors credibility) ----- */
+/* ---------- HERO (legacy — still used for credential card structure
+   inside the merged About section) ---------- */
 .hero__credential {
   margin: 0;
-  position: absolute;
-  right: -34px;
-  bottom: -56px;
-  z-index: 3;
   width: clamp(196px, 28%, 248px);
-
   background: var(--paper);
   padding: 12px 12px 18px;
   border-radius: 4px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-
+  display: flex; flex-direction: column; gap: 14px;
   opacity: 0;
   transform: rotate(0deg) translate(28px, 40px) scale(.94);
   transition:
@@ -806,7 +556,11 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
     0 1px 2px rgba(26, 20, 17, 0.08),
     0 26px 60px rgba(26, 20, 17, 0.22);
 }
-.hero__image.is-visible .hero__credential {
+/* The IntersectionObserver toggles .is-visible on parent images that get
+   the .reveal class. Inside the About section we attach .reveal to the
+   .about__figure so the credential card animates in along with the image. */
+.is-visible .hero__credential,
+.about__figure.is-visible .hero__credential {
   opacity: 1;
   transform: rotate(2.5deg) translate(0, 0) scale(1);
 }
@@ -819,16 +573,12 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   position: relative;
 }
 .hero__credential-photo img {
-  display: block;
-  width: 100%;
-  height: 100%;
+  display: block; width: 100%; height: 100%;
   object-fit: cover;
   transition: transform 1.2s var(--ease-out);
 }
 .hero__credential-cap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex; flex-direction: column; align-items: center;
   gap: 6px;
   padding: 0 6px 2px;
   text-align: center;
@@ -840,32 +590,23 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   text-transform: uppercase;
   font-weight: 700;
   color: var(--clay);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-flex; align-items: center; gap: 8px;
 }
 .hero__credential-eyebrow::before,
 .hero__credential-eyebrow::after {
-  content: "";
-  display: inline-block;
-  width: 16px;
-  height: 1px;
-  background: var(--clay);
-  opacity: .55;
+  content: ""; display: inline-block;
+  width: 16px; height: 1px;
+  background: var(--clay); opacity: .55;
 }
 .hero__credential-title {
   font-family: var(--serif);
   font-weight: 400;
-  font-style: normal;
   font-size: clamp(17px, 1.6vw, 20px);
   letter-spacing: -.012em;
   color: var(--ink);
   line-height: 1.1;
 }
-.hero__credential-title em {
-  font-style: italic;
-  color: var(--clay);
-}
+.hero__credential-title em { font-style: italic; color: var(--clay); }
 .hero__credential-meta {
   font-family: var(--sans);
   font-size: 9.5px;
@@ -875,21 +616,12 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   color: var(--ink-muted);
   line-height: 1.5;
 }
-.hero__image:hover .hero__credential {
-  transform: rotate(0deg) translateY(-6px) scale(1.03);
-  box-shadow:
-    0 1px 2px rgba(26, 20, 17, 0.08),
-    0 36px 80px rgba(26, 20, 17, 0.28);
-}
-.hero__image:hover .hero__credential-photo img {
-  transform: scale(1.04);
-}
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(4px); }
 }
 
-/* ---------- INTRO ---------- */
+/* ---------- INTRO (legacy About — kept for backward compat, unused now) ---------- */
 .intro {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
@@ -919,9 +651,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   border-top: 1px solid var(--line);
   padding-top: 28px;
 }
-.facts div {
-  display: flex; flex-direction: column; gap: 6px;
-}
+.facts div { display: flex; flex-direction: column; gap: 6px; }
 .facts dt {
   font-family: var(--serif);
   font-size: clamp(36px, 4vw, 52px);
@@ -938,6 +668,187 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   text-transform: uppercase;
   color: var(--ink-muted);
   font-weight: 500;
+}
+
+/* ============================================================
+   ABOUT — centerpiece section (merged with former hero)
+
+   Uses the section--training pattern: full-bleed container so we
+   have generous horizontal room to breathe.
+
+   Composition:
+     row 1 — section label in left gutter (handled by .section__label)
+     row 2 — section head (eyebrow + headline) indented to clear the label
+     row 3 — two-column .about__media:
+              left: body copy paragraphs + buttons
+              right: portrait + credential card + facts band UNDER the image
+   ============================================================ */
+.section--about {
+  /* Full-bleed like .section--training so the section can use the whole
+     viewport width inside its left/right gutters. */
+  max-width: none;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  overflow: hidden;
+}
+.about {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+/* The header (eyebrow + headline) reuses .section__head's indent and
+   max-width, so "A practice, not a performance" matches "Three ways in"
+   and "Trained with care" exactly. */
+.about__head {
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+.about__head .display { max-width: 14ch; }
+
+/* Two-column body block — copy on the left, portrait + facts on the right.
+   Indented to clear the section label column. */
+.about__media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 7vw, 96px);
+  align-items: start;
+  margin-left: clamp(0px, 12vw, 200px);
+}
+.about__copy {
+  /* Paragraphs sit on a comfortable, generous measure. Slightly under
+     the column width so the longest line never feels stretched. */
+  max-width: 56ch;
+}
+/* Both paragraphs share the lede's typography — that's the size you
+   liked for the "My classes centre on Vinyasa" paragraph. */
+.about__lede,
+.about__body {
+  margin: 0 0 28px;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.about__body { margin-bottom: 36px; }
+.about__lede em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--clay);
+  font-size: 1.06em;
+  letter-spacing: -.005em;
+}
+.about__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Right column — the visual stack: image, then facts band underneath. */
+.about__visual {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.about__figure {
+  position: relative;
+  margin: 0 0 clamp(64px, 8vw, 96px); /* room for the overlapping credential card */
+}
+.about__figure .img-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-img);
+  background: var(--paper-warm);
+}
+.about__figure .img-frame img {
+  display: block;
+  width: 100%;
+  height: clamp(480px, 64vh, 700px);
+  object-fit: cover;
+  border-radius: var(--radius-img);
+  transition: transform 1.4s var(--ease-out);
+}
+.about__figure:hover .img-frame img { transform: scale(1.02); }
+
+/* Credential card — inherits the .hero__credential look, anchored to the
+   image's bottom-right corner. */
+.about__figure .hero__credential {
+  position: absolute;
+  right: -28px;
+  bottom: -52px;
+  z-index: 3;
+}
+
+/* Facts band — sits underneath the image only, not the whole section.
+   Framed by hairline rules above and below for editorial weight. */
+.about__facts {
+  margin: 0;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.about__facts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.about__facts dt {
+  font-family: var(--serif);
+  font-size: clamp(34px, 3.4vw, 48px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.about__facts dd {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Tablet & mobile — collapse to one column. Image goes first (above the
+   text) so the visual lands first, then copy + buttons read below. */
+@media (max-width: 1100px) {
+  .about__head { margin-left: 0; }
+  .about__head .display { max-width: none; }
+  .about__media {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    margin-left: 0;
+  }
+  .about__visual { order: -1; }
+  .about__figure { margin-bottom: clamp(56px, 8vw, 80px); }
+  .about__figure .img-frame img { height: clamp(420px, 60vh, 560px); }
+  .about__figure .hero__credential {
+    right: -16px;
+    bottom: -44px;
+  }
+  .about__copy { max-width: none; }
+}
+@media (max-width: 760px) {
+  .about__figure .img-frame img { height: clamp(360px, 56vh, 460px); }
+  .about__figure .hero__credential {
+    right: -8px;
+    bottom: -38px;
+    width: 168px;
+    padding: 10px 10px 14px;
+  }
+  .about__figure .hero__credential-photo { height: 140px; }
+  .about__figure .hero__credential-title { font-size: 16px; }
+  .about__facts {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 22px 0;
+  }
+  .about__lede,
+  .about__body {
+    font-size: 17px;
+  }
 }
 
 /* ---------- PRACTICE cards ---------- */
@@ -996,9 +907,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   font-size: 15px;
   line-height: 1.6;
 }
-
-/* A quiet line under the Practice cards pointing at the schedule —
-   mirrors .sessions__note (centered, muted, clay-underline link). */
 .practice__note {
   margin: clamp(40px, 5vw, 56px) 0 0;
   font-size: 14px;
@@ -1012,9 +920,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   font-weight: 500;
   transition: color .25s var(--ease), border-color .25s var(--ease);
 }
-.practice__note a:hover {
-  color: var(--clay);
-}
+.practice__note a:hover { color: var(--clay); }
 
 /* ---------- TRAINING (with marquee) ---------- */
 .section--training {
@@ -1127,11 +1033,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   text-align: center;
   position: relative;
 }
-.quote__inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
-}
+.quote__inner { max-width: 1100px; margin: 0 auto; position: relative; }
 .quote .mark {
   display: block;
   font-family: var(--serif);
@@ -1160,27 +1062,13 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   padding-right: var(--gutter);
   overflow: hidden;
 }
-.section--voices > .section__label {
-  /* keep label aligned to outer gutter */
-}
-.section--voices .section__head {
-  max-width: 880px;
-}
-.voices {
-  position: relative;
-  max-width: var(--max);
-  margin: 0 auto;
-}
+.section--voices .section__head { max-width: 880px; }
+.voices { position: relative; max-width: var(--max); margin: 0 auto; }
 .voices__counter {
   position: absolute;
-  top: -88px;
-  right: 0;
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
+  top: -88px; right: 0;
+  display: flex; align-items: baseline; gap: 6px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
   pointer-events: none;
 }
 .voices__count-current {
@@ -1213,9 +1101,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   transition: opacity .7s var(--ease-out), visibility 0s linear .7s;
 }
 .voice.is-active {
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
+  opacity: 1; pointer-events: auto; visibility: visible;
   transition: opacity .8s var(--ease-out), visibility 0s linear 0s;
 }
 .voice__image {
@@ -1230,21 +1116,16 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   box-shadow: 0 26px 60px rgba(26, 20, 17, 0.16);
 }
 .voice.is-active .voice__image {
-  transform: scale(1);
-  opacity: 1;
-  transition-delay: .12s;
+  transform: scale(1); opacity: 1; transition-delay: .12s;
 }
 .voice__image::after {
-  /* subtle paper border */
-  content: "";
-  position: absolute; inset: 0;
+  content: ""; position: absolute; inset: 0;
   border-radius: var(--radius-img);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
   pointer-events: none;
 }
 .voice__image img {
-  display: block;
-  width: 100%;
+  display: block; width: 100%;
   height: clamp(440px, 60vh, 600px);
   object-fit: cover;
   border-radius: var(--radius-img);
@@ -1271,10 +1152,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   transform: translateY(8px);
   transition: opacity .9s var(--ease), transform .9s var(--ease);
 }
-.voice.is-active .voice__mark {
-  transform: translateY(0);
-  transition-delay: .05s;
-}
+.voice.is-active .voice__mark { transform: translateY(0); transition-delay: .05s; }
 .voice__quote {
   margin: 0;
   position: relative;
@@ -1289,28 +1167,17 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   transform: translateY(14px);
   transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
 }
-.voice.is-active .voice__quote {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: .22s;
-}
+.voice.is-active .voice__quote { opacity: 1; transform: translateY(0); transition-delay: .22s; }
 .voice__byline {
   margin: clamp(28px, 3.5vw, 44px) 0 0;
   border-top: 1px solid var(--line);
   padding-top: 22px;
-  display: flex;
-  align-items: baseline;
-  gap: 18px;
-  flex-wrap: wrap;
+  display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
   opacity: 0;
   transform: translateY(14px);
   transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
 }
-.voice.is-active .voice__byline {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: .35s;
-}
+.voice.is-active .voice__byline { opacity: 1; transform: translateY(0); transition-delay: .35s; }
 .voice__name {
   margin: 0;
   font-family: var(--serif);
@@ -1330,34 +1197,25 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   color: var(--ink-muted);
   font-weight: 600;
 }
-
-/* ----- Voices nav (arrows + dot strip) ----- */
 .voices__nav {
   margin: clamp(48px, 6vw, 80px) 0 0 clamp(0px, 12vw, 200px);
   padding-top: 28px;
   border-top: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  gap: clamp(14px, 2.4vw, 28px);
+  display: flex; align-items: center; gap: clamp(14px, 2.4vw, 28px);
 }
 .voices__arrow {
-  width: 52px;
-  height: 52px;
+  width: 52px; height: 52px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: var(--paper);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ink);
-  flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink); flex-shrink: 0;
   transition: background .35s var(--ease), color .35s var(--ease),
               border-color .35s var(--ease), transform .35s var(--ease),
               box-shadow .35s var(--ease);
 }
 .voices__arrow:hover {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--ink); color: var(--paper);
   border-color: var(--ink);
   transform: translateY(-2px);
   box-shadow: 0 14px 30px rgba(26,20,17,.14);
@@ -1367,17 +1225,12 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .voices__arrow--prev:hover svg { transform: translateX(-3px); }
 .voices__arrow--next:hover svg { transform: translateX(3px); }
 .voices__dots {
-  display: flex;
-  gap: clamp(8px, 1.2vw, 16px);
-  flex-grow: 1;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: flex; gap: clamp(8px, 1.2vw, 16px);
+  flex-grow: 1; flex-wrap: wrap; justify-content: center;
 }
 .voices__dot {
   position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
+  display: inline-flex; flex-direction: column; align-items: center;
   gap: 8px;
   padding: 4px 6px 6px;
   border-radius: 12px;
@@ -1385,8 +1238,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   transition: transform .35s var(--ease);
 }
 .voices__dot img {
-  width: 48px;
-  height: 60px;
+  width: 48px; height: 60px;
   object-fit: cover;
   border-radius: 6px;
   filter: grayscale(.55) contrast(.94);
@@ -1418,104 +1270,8 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .voices__dot.is-active span { color: var(--clay); }
 
-/* ---------- SESSIONS ---------- */
-.sessions {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.session {
-  position: relative;
-  padding: 36px 32px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-img);
-  background: var(--paper-warm);
-  display: flex; flex-direction: column;
-  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
-}
-.session:hover { transform: translateY(-4px); box-shadow: 0 22px 50px rgba(26,20,17,.08); }
-.session__head {
-  display: flex; justify-content: space-between; align-items: baseline;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 18px;
-}
-.session__kicker {
-  margin: 0;
-  font-size: 11px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  font-weight: 600;
-}
-.session__num {
-  font-family: var(--serif);
-  font-size: 16px;
-  font-style: italic;
-  color: var(--clay);
-}
-.session__price {
-  margin: 0;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(64px, 7vw, 96px);
-  line-height: .9;
-  letter-spacing: -.04em;
-}
-.session__price span {
-  font-style: italic;
-  font-size: .55em;
-  color: var(--clay);
-  vertical-align: top;
-  margin-right: 4px;
-}
-.session__desc {
-  margin: 18px 0 28px;
-  color: var(--ink-soft);
-  font-size: 15px;
-  line-height: 1.6;
-  flex-grow: 1;
-}
-.session--featured {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.session--featured .session__kicker { color: rgba(247,241,232,.65); }
-.session--featured .session__head { border-color: rgba(247,241,232,.18); }
-.session--featured .session__desc { color: rgba(247,241,232,.78); }
-.session--featured .session__num { color: var(--clay); }
-.session__tag {
-  position: absolute;
-  top: -12px;
-  right: 28px;
-  background: var(--clay);
-  color: var(--paper);
-  font-size: 11px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 999px;
-}
-.sessions__note {
-  margin: 40px 0 0;
-  font-size: 14px;
-  color: var(--ink-muted);
-  text-align: center;
-}
-.sessions__note a {
-  color: var(--ink);
-  border-bottom: 1px solid var(--clay);
-  padding-bottom: 2px;
-  font-weight: 500;
-}
-
 /* ---------- CONTACT ---------- */
-.contact {
-  background: var(--ink);
-  color: var(--paper);
-}
+.contact { background: var(--ink); color: var(--paper); }
 .contact__inner {
   max-width: var(--max);
   margin: 0 auto;
@@ -1526,9 +1282,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   align-items: start;
   position: relative;
 }
-.contact__copy {
-  margin-left: clamp(0px, 12vw, 200px);
-}
+.contact__copy { margin-left: clamp(0px, 12vw, 200px); }
 .contact__copy .display em { color: var(--clay); }
 .contact__form {
   display: grid;
@@ -1557,10 +1311,14 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   font-family: var(--sans);
 }
 .field input::placeholder, .field textarea::placeholder { color: rgba(247,241,232,.32); }
-.field input:focus, .field select:focus, .field textarea:focus {
-  border-color: var(--clay);
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--clay); }
+.field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f7f1e8' stroke-width='1.6'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  padding-right: 24px;
 }
-.field select { appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f7f1e8' stroke-width='1.6'><path d='M6 9l6 6 6-6'/></svg>"); background-repeat: no-repeat; background-position: right 0 center; padding-right: 24px; }
 .field select option { color: var(--ink); background: var(--paper); }
 .field textarea { resize: vertical; min-height: 90px; line-height: 1.55; }
 .field--actions {
@@ -1652,30 +1410,17 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .whatsapp:hover { transform: translateY(-3px); background: var(--clay); }
 .whatsapp:hover svg { color: var(--paper); }
 
-/* ---------- Announcement banner ----------
-   A soft, inset note at the very top of every page. Sets honest expectations
-   that group classes are coming but private sessions are the only bookable
-   option for now. Sits above .nav and pushes it down naturally — the nav is
-   position: fixed so we offset its top via a body class when the banner is
-   present, but to keep the implementation simple we let .nav stay where it is
-   and the announcement scrolls away with the page (typical magazine pattern). */
+/* ---------- Announcement banner ---------- */
 .announce {
   position: relative;
   z-index: 60;
   background: var(--ink);
   color: var(--paper);
-  /* No border-bottom: the banner needs to abut the overture sunset
-     cleanly. A cream-tinted hairline (even at 8% opacity) reads as a
-     faint white strip against the darker top of the photograph. */
   overflow: hidden;
-  /* leave-animation hook */
   transition: max-height .35s var(--ease), opacity .3s var(--ease), padding .35s var(--ease);
   max-height: 240px;
   opacity: 1;
 }
-/* Anti-flash: an inline <script> in <head> sets this class on <html>
-   before paint when the banner has already been dismissed this session.
-   Skips the transition entirely so there's no flicker. */
 .announce-dismissed .announce { display: none; }
 .announce.is-leaving {
   max-height: 0;
@@ -1694,8 +1439,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   align-items: center;
 }
 .announce__bloom {
-  width: 22px;
-  height: 22px;
+  width: 22px; height: 22px;
   color: var(--clay);
   flex-shrink: 0;
   opacity: .95;
@@ -1725,56 +1469,37 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   letter-spacing: -.005em;
   color: rgba(247, 241, 232, .92);
 }
-.announce__body em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--paper);
-}
+.announce__body em { font-style: italic; font-weight: 400; color: var(--paper); }
 .announce__body a {
   color: var(--paper);
   border-bottom: 1px solid rgba(184, 106, 82, .8);
   padding-bottom: 1px;
   transition: color .25s var(--ease), border-color .25s var(--ease);
 }
-.announce__body a:hover {
-  color: var(--clay);
-  border-bottom-color: var(--clay);
-}
+.announce__body a:hover { color: var(--clay); border-bottom-color: var(--clay); }
 .announce__close {
-  width: 32px;
-  height: 32px;
+  width: 32px; height: 32px;
   border-radius: 999px;
   border: 1px solid rgba(247, 241, 232, .18);
   color: rgba(247, 241, 232, .7);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   transition: background .25s var(--ease), color .25s var(--ease),
               border-color .25s var(--ease), transform .25s var(--ease);
 }
 .announce__close:hover {
-  background: var(--clay);
-  color: var(--paper);
+  background: var(--clay); color: var(--paper);
   border-color: var(--clay);
   transform: rotate(90deg);
 }
 
-/* ---------- Schedule preview tag ----------
-   A discreet "Coming shortly" label that sits above the weekly grid on the
-   schedule page so visitors immediately understand the rhythm shown is the
-   plan, not yet bookable as group classes. */
+/* ---------- Schedule preview tag ---------- */
 .schedule-preview {
   margin: 0 0 clamp(28px, 4vw, 44px) clamp(0px, 12vw, 200px);
-  display: flex;
-  align-items: center;
-  gap: 18px 24px;
-  flex-wrap: wrap;
+  display: flex; align-items: center; gap: 18px 24px; flex-wrap: wrap;
 }
 .schedule-preview__tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-flex; align-items: center; gap: 8px;
   padding: 8px 16px 8px 12px;
   background: rgba(184, 106, 82, 0.08);
   border: 1px solid rgba(184, 106, 82, 0.22);
@@ -1788,18 +1513,14 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   flex-shrink: 0;
 }
 .schedule-preview__dot {
-  width: 8px;
-  height: 8px;
+  width: 8px; height: 8px;
   border-radius: 999px;
   background: var(--clay);
   position: relative;
-  /* gentle pulse so it reads as 'forthcoming' rather than 'inactive' */
   animation: scheduleDotPulse 2.4s ease-in-out infinite;
 }
 .schedule-preview__dot::after {
-  content: "";
-  position: absolute;
-  inset: -3px;
+  content: ""; position: absolute; inset: -3px;
   border-radius: 999px;
   border: 1px solid var(--clay);
   opacity: 0;
@@ -1829,9 +1550,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   transition: color .25s var(--ease);
 }
 .schedule-preview__text a:hover { color: var(--clay); }
-
-/* Inline link inside the schedule page lede — same clay underline so the
-   preview note + page-head copy + body all use one consistent link style. */
 .page-head__link {
   color: var(--ink);
   border-bottom: 1px solid var(--clay);
@@ -1874,13 +1592,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   color: var(--clay);
   font-weight: 300;
 }
-.schedule__cell {
-  display: flex; flex-direction: column; gap: 4px;
-}
+.schedule__cell { display: flex; flex-direction: column; gap: 4px; }
 .schedule__cell strong {
   font-family: var(--serif);
   font-weight: 400;
-  font-style: normal;
   font-size: 22px;
   letter-spacing: -.01em;
   color: var(--ink);
@@ -1908,29 +1623,11 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   line-height: 1.6;
 }
 
-/* ---------- Pull-quote-style emphasis inside the hero lede ----------
-   Mirrors .hero__quote-text em — Fraunces italic, clay color — so words
-   like "Pipa" feel like the same hand wrote both. */
-.lede em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--clay);
-  font-size: 1.06em;
-  letter-spacing: -.005em;
-}
-
-/* ---------- One-line display titles (desktop) ----------
-   Three headings the design calls for as single lines on desktop:
-   "Rooted in ancient yoga." · "Breathe. Move. Stay." · "Voices from the mat."
-   We trim their max font-size enough to fit their column at 92px-base,
-   then nail a no-wrap on wide screens. Mobile keeps the natural wrap. */
+/* ---------- Display headings — single-line emphasis ---------- */
 .training__title    { font-size: clamp(36px, 5.4vw, 64px); }
 .voices__title      { font-size: clamp(34px, 5.2vw, 70px); }
 .quote .display     { font-size: clamp(40px, 6.4vw, 88px); }
-/* Schedule page heading — sized to fit "This week on the mat." on one line at desktop widths */
 .page-head .display--lg { font-size: clamp(44px, 6.4vw, 88px); }
-
 @media (min-width: 1101px) {
   .training__title,
   .voices__title,
@@ -1938,15 +1635,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .page-head .display--lg { white-space: nowrap; }
 }
 
-/* ---------- Section bloom ornament ----------
-   A small filled lotus (favicon geometry) sits beside each section label
-   and 'opens' on scroll. Each petal grows outward from the centre with a
-   staggered delay; the core lands last. Color follows --clay (paper on
-   the dark Begin section). Unobtrusive, on-brand, and easy to remove. */
+/* ---------- Bloom ornament ---------- */
 .bloom {
   display: block;
-  width: 38px;
-  height: 38px;
+  width: 38px; height: 38px;
   margin-bottom: 6px;
   color: var(--clay);
   overflow: visible;
@@ -1974,37 +1666,15 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   fill-opacity: .82;
   transition-delay: calc(var(--i, 0) * 75ms);
 }
-.is-visible .bloom__core {
-  transform: scale(1);
-}
+.is-visible .bloom__core { transform: scale(1); }
 .section__label--light .bloom { color: var(--paper); }
 .section__label--light .bloom__petal { fill-opacity: 0; }
 .section__label--light.is-visible .bloom__petal { fill-opacity: .9; }
-
-/* The pull-quote in the hero gets its own small lotus tucked into the
-   bottom-right corner, blooming when the hero image enters view. It
-   piggybacks on the existing .is-visible reveal trigger. */
-.hero__quote-bloom {
-  position: absolute;
-  right: 12px;
-  bottom: 10px;
-  width: 22px;
-  height: 22px;
-  margin: 0;
-  opacity: .9;
-  pointer-events: none;
-}
-
-/* In the responsive layout the section label flips to a horizontal row,
-   so the bloom sits inline before the numeral — just nudge its size and
-   spacing to keep the visual rhythm balanced. */
 @media (max-width: 1100px) {
   .bloom { width: 32px; height: 32px; margin-bottom: 0; }
-  .hero__quote-bloom { width: 20px; height: 20px; right: 10px; bottom: 9px; margin: 0; }
 }
 @media (max-width: 760px) {
   .bloom { width: 28px; height: 28px; }
-  .hero__quote-bloom { width: 18px; height: 18px; right: 9px; bottom: 8px; margin: 0; }
 }
 
 /* ---------- Reveal animations ---------- */
@@ -2015,11 +1685,9 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
 }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
-
-/* === Picture-frame reveal — slow, stylised, yoga-soft === */
-/* Framed images (About + Your teacher): soft top-edge wipe + slow scale-in */
 .intro__image.reveal,
-.filipa__image.reveal {
+.filipa__image.reveal,
+.about__figure.reveal {
   opacity: 0;
   transform: translateY(44px) scale(.965);
   clip-path: inset(8% 0 0 0);
@@ -2030,12 +1698,12 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   will-change: transform, opacity, clip-path;
 }
 .intro__image.reveal.is-visible,
-.filipa__image.reveal.is-visible {
+.filipa__image.reveal.is-visible,
+.about__figure.reveal.is-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
   clip-path: inset(0 0 0 0);
 }
-/* Practice cards — group reveal, no clip so body text stays clean */
 .cards .card.reveal {
   opacity: 0;
   transform: translateY(48px) scale(.97);
@@ -2047,10 +1715,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
-
-[data-split] .word {
-  display: inline-block;
-}
+[data-split] .word { display: inline-block; }
 [data-split] em .word { color: var(--clay); }
 [data-split] em { font-style: italic; }
 [data-split].is-visible .word { opacity: 1; transform: translateY(0); }
@@ -2070,8 +1735,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .voice .voice__byline,
   .voice .voice__mark { opacity: 1 !important; transform: none !important; }
   .hero__credential { opacity: 1 !important; transform: rotate(2.5deg) !important; }
-  .hero__quote { opacity: 1 !important; transform: rotate(-2.2deg) !important; }
-  /* Bloom: skip the open animation, just show the final flower */
   .bloom__petal {
     transform: scaleY(1) !important;
     fill-opacity: .82 !important;
@@ -2081,30 +1744,28 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
     transform: scale(1) !important;
     transition: none !important;
   }
-  /* Keep the announcement banner readable but stop the rotating bloom
-     and pulsing schedule dot for visitors who prefer reduced motion. */
   .announce__bloom,
   .schedule-preview__dot,
   .schedule-preview__dot::after { animation: none !important; }
 }
 
-/* ---------- Smooth image loading (About / Practice / Your teacher) ---------- */
+/* ---------- Smooth image loading ---------- */
 .card__image,
 .intro__image .img-frame,
-.filipa__image .img-frame {
+.filipa__image .img-frame,
+.about__figure .img-frame {
   position: relative;
   overflow: hidden;
   background-color: var(--paper-warm);
   border-radius: var(--radius-img);
-  /* Safari fix: ensure rounded corners are honoured even with inner transforms */
   isolation: isolate;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
           mask-image: radial-gradient(white, black);
 }
-/* Soft, breathing placeholder while the image is downloading */
 .card__image::before,
 .intro__image .img-frame::before,
-.filipa__image .img-frame::before {
+.filipa__image .img-frame::before,
+.about__figure .img-frame::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -2121,7 +1782,8 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .card__image.is-loaded::before,
 .intro__image .img-frame.is-loaded::before,
-.filipa__image .img-frame.is-loaded::before {
+.filipa__image .img-frame.is-loaded::before,
+.about__figure .img-frame.is-loaded::before {
   opacity: 0;
   animation: none;
 }
@@ -2129,10 +1791,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   0%, 100% { opacity: 1; }
   50%      { opacity: .82; }
 }
-/* Image fades up from a soft blur and gentle scale */
 .card__image > img,
 .intro__image .img-frame > img,
-.filipa__image .img-frame > img {
+.filipa__image .img-frame > img,
+.about__figure .img-frame > img {
   position: relative;
   z-index: 2;
   opacity: 0;
@@ -2146,40 +1808,58 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .card__image.is-loaded > img,
 .intro__image .img-frame.is-loaded > img,
-.filipa__image .img-frame.is-loaded > img {
+.filipa__image .img-frame.is-loaded > img,
+.about__figure .img-frame.is-loaded > img {
   opacity: 1;
   transform: scale(1);
   filter: blur(0);
 }
-/* Card hover scale still works naturally after load (overrides scale on hover) */
+
+/* ---------- Lede emphasis (matches hero pull-quote em) ---------- */
+.lede em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--clay);
+  font-size: 1.06em;
+  letter-spacing: -.005em;
+}
+
+/* ---------- Sessions (kept for backward compat) ---------- */
+.sessions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.session {
+  position: relative;
+  padding: 36px 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-img);
+  background: var(--paper-warm);
+  display: flex; flex-direction: column;
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.sessions__note {
+  margin: 40px 0 0;
+  font-size: 14px;
+  color: var(--ink-muted);
+  text-align: center;
+}
+.sessions__note a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--clay);
+  padding-bottom: 2px;
+  font-weight: 500;
+}
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero h1.display, .hero__foot { grid-column: 1 / -1; }
-  .hero__image { grid-column: 1 / -1; grid-row: auto; margin-top: 40px; padding-bottom: 70px; }
-  .hero__image-main img { height: 60vh; min-height: 380px; }
-  .hero__quote {
-    top: -16px;
-    left: -16px;
-    width: clamp(174px, 38vw, 214px);
-    padding: 13px 16px 15px;
-    gap: 4px 10px;
-  }
-  .hero__quote-text { font-size: 16px; }
-  .hero__quote-mark { font-size: 46px; margin-top: 9px; }
-  .hero__credential {
-    right: -20px;
-    bottom: -48px;
-    width: clamp(180px, 36vw, 220px);
-  }
-  .hero__credential-photo { height: 170px; }
   .section__label { position: static; margin-bottom: 24px; flex-direction: row; gap: 14px; align-items: center; }
   .section__head, .filipa, .intro, .training__copy, .contact__copy, .schedule, .schedule__foot, .page-head { margin-left: 0; }
   .contact__inner { grid-template-columns: 1fr; }
   .filipa, .intro { grid-template-columns: 1fr; gap: 36px; }
   .footer__top { grid-template-columns: 1fr 1fr; gap: 30px; }
-  /* Voices — stack image above quote */
   .voices__stage { margin-left: 0; min-height: 0; }
   .voice {
     position: relative;
@@ -2194,8 +1874,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .voice__mark { left: -4px; top: -36px; }
   .voices__nav { margin-left: 0; }
   .voices__counter { top: -64px; }
-
-  /* Schedule preview tag — drop the indented left margin on tablets */
   .schedule-preview { margin-left: 0; }
 }
 @media (max-width: 760px) {
@@ -2208,21 +1886,12 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .footer__top { grid-template-columns: 1fr; }
   .footer__bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
   .contact__form { grid-template-columns: 1fr; }
-
-  /* Schedule on mobile — keep day column tight, two evening columns flex */
   .schedule__row { grid-template-columns: 56px 1fr 1fr; gap: 14px; padding: 18px 0; }
   .schedule__day { font-size: 22px; }
   .schedule__cell strong { font-size: 16px; }
-
   .whatsapp span { display: none; }
   .whatsapp { padding: 14px; }
   .facts { grid-template-columns: 1fr; gap: 18px; }
-
-  /* ===== Voices on mobile — counter + nav redesigned =====
-     1) Counter is moved INSIDE the section flow above the image so it
-        never overlays the photo or the quote text.
-     2) Nav becomes a single row: arrow · centered 3+3 dot grid · arrow.
-        The dots wrap onto two rows of three and stay centered. */
   .voices__counter {
     position: static;
     justify-content: flex-end;
@@ -2231,22 +1900,14 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   }
   .voices__count-current { font-size: 38px; }
   .voices__count-total   { font-size: 13px; }
-
   .voices__nav {
     margin-top: 32px;
     padding-top: 22px;
     gap: 12px;
-    /* keep arrows on the sides, dots flex-grow in the middle */
     align-items: center;
   }
-  .voices__arrow {
-    width: 44px;
-    height: 44px;
-    /* nudge arrows so they sit centered against the 2-row dot block */
-    align-self: center;
-  }
+  .voices__arrow { width: 44px; height: 44px; align-self: center; }
   .voices__dots {
-    /* Force a tidy 3-column grid → exactly 3 on top, 3 on bottom, centered */
     display: grid;
     grid-template-columns: repeat(3, auto);
     justify-content: center;
@@ -2256,41 +1917,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
     flex-grow: 1;
     flex-wrap: nowrap;
   }
-  .voices__dot {
-    padding: 2px 4px 4px;
-  }
+  .voices__dot { padding: 2px 4px 4px; }
   .voices__dot img { width: 44px; height: 56px; }
   .voices__dot span { display: none; }
-
   .voice__quote { font-size: 18px; }
-
-  /* Hero pull-quote — keeps presence on phones, sits just inside the photo */
-  .hero__quote {
-    top: -10px;
-    left: -8px;
-    width: 162px;
-    padding: 10px 12px 12px;
-    gap: 2px 9px;
-  }
-  .hero__quote-text { font-size: 14px; line-height: 1.22; }
-  .hero__quote-mark { font-size: 38px; margin-top: 7px; }
-  /* Hero credential card scales down further on phones */
-  .hero__credential {
-    right: -8px;
-    bottom: -42px;
-    width: 168px;
-    padding: 10px 10px 14px;
-  }
-  .hero__credential-photo { height: 140px; }
-  .hero__credential-title { font-size: 16px; }
-  .hero__credential-eyebrow { font-size: 8.5px; letter-spacing: .26em; }
-  .hero__credential-eyebrow::before,
-  .hero__credential-eyebrow::after { width: 10px; }
-  .hero__credential-meta { font-size: 9px; letter-spacing: .16em; }
-
-  /* ===== Announcement banner — mobile =====
-     Match desktop layout: bloom on the left, text in the middle,
-     close button on the right. Keeps the banner short and tidy. */
   .announce__inner {
     grid-template-columns: auto 1fr auto;
     gap: 12px;
@@ -2298,41 +1928,16 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
     padding-bottom: 11px;
     align-items: center;
   }
-  .announce__bloom {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    width: 18px; height: 18px;
-    align-self: center;
-  }
+  .announce__bloom { width: 18px; height: 18px; align-self: center; }
   .announce__text {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    /* Keep the eyebrow and body inline-flowing on small screens — the
-       eyebrow ends with a normal space and reads naturally before the
-       sentence: "A note from Pipa  Private sessions only…". This keeps
-       the banner a single, scannable strip. */
     flex-direction: row;
     align-items: baseline;
     flex-wrap: wrap;
     gap: 4px 10px;
-    margin-top: 0;
   }
-  .announce__eyebrow {
-    /* On the very narrowest viewports, the eyebrow can hide so the body
-       sentence carries the message alone. The aria-label on the parent
-       <aside> still announces "A note from Pipa" to screen readers. */
-    font-size: 9.5px;
-    letter-spacing: .2em;
-  }
+  .announce__eyebrow { font-size: 9.5px; letter-spacing: .2em; }
   .announce__body { font-size: 13.5px; line-height: 1.45; }
-  .announce__close {
-    grid-column: 3 / 4;
-    grid-row: 1 / 2;
-    align-self: center;
-    width: 28px; height: 28px;
-  }
-
-  /* ===== Schedule preview — mobile ===== */
+  .announce__close { width: 28px; height: 28px; }
   .schedule-preview { gap: 12px 16px; }
   .schedule-preview__text { font-size: 13px; }
 }
