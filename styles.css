@@ -1499,6 +1499,12 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   padding-bottom: 70px;
   border-bottom: 1px solid rgba(247,241,232,.1);
 }
+/* Match each column's text-alignment to the corresponding bottom-row
+   item below it: brand → left, Practice → center, Reach out → right.
+   This makes the whole footer span the full divider-line width on
+   both rows so the layout reads as one cohesive block. */
+.footer__top > div:nth-child(2) { text-align: center; }
+.footer__top > div:nth-child(3) { text-align: right; }
 .footer__brand p {
   margin: 16px 0 0;
   max-width: 38ch;
