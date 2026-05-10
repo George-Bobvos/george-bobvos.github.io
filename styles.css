@@ -685,6 +685,25 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   }
   .overture__actions { gap: 12px; }
   .btn--overture { padding: 14px 24px; font-size: 13px; }
+  /* Slightly more breathing room on the left/right of every section
+     (gutter is normally 5vw; on phones that's tight). Bump for tap-edge
+     comfort. */
+  :root { --gutter: 24px; }
+  /* Card images are a bit shorter on single-column mobile so the cards
+     don't feel wall-tall before you reach the body text. */
+  .card__image img { height: clamp(280px, 70vw, 380px); }
+  /* Training image stacks below copy on mobile — cap height so it
+     doesn't dwarf the section. */
+  .training__figure { min-height: 0; max-height: none; height: auto; }
+  .training__figure .img-frame img { height: clamp(320px, 60vw, 460px); }
+  /* Section labels (the bloom + 01 ABOUT) — slightly tighter on mobile */
+  .section__label { gap: 10px; margin-bottom: 12px; }
+  .section__label .num { font-size: 20px; }
+  /* Practice & sessions notes — tighter on narrow screens */
+  .practice__note { font-size: 13px; }
+  /* Form fields get a touch more vertical room on mobile so the typing
+     experience is more comfortable. */
+  .field input, .field select, .field textarea { padding: 12px 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .overture__bg img { animation: none !important; transform: none !important; }
@@ -2095,6 +2114,24 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .voices__dot img { width: 44px; height: 56px; }
   .voices__dot span { display: none; }
   .voice__quote { font-size: 18px; }
+  /* On mobile, the image sits above the copy in a single column. The
+     giant " mark used to push UP into the image area (overlapping it),
+     which looked broken. Reposition it to sit at the top-left of the
+     copy block, slightly behind the quote text, where it acts as a
+     decorative anchor rather than fighting the image. Smaller too,
+     since at desktop sizes it dominates a narrow viewport. */
+  .voice__mark {
+    top: -18px;
+    left: -4px;
+    font-size: clamp(96px, 30vw, 140px);
+    line-height: .55;
+    opacity: .14;
+  }
+  .voice__copy {
+    /* Padding above the quote text so it sits beneath the mark
+       without colliding. */
+    padding-top: 14px;
+  }
   .announce__inner {
     grid-template-columns: auto 1fr auto;
     gap: 12px;
