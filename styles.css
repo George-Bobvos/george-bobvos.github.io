@@ -1501,6 +1501,18 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   padding-bottom: 70px;
   border-bottom: 1px solid rgba(247,241,232,.1);
 }
+/* Push the third column's content block (Reach out + links) toward
+   the right edge of its cell — so the longest line (the email) ends
+   roughly under "Crafted by GB" below. The text inside the block
+   stays left-aligned, so links read naturally top-to-bottom. */
+.footer__top > div:nth-child(3) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.footer__top > div:nth-child(3) > * {
+  text-align: left;
+}
 .footer__brand p {
   margin: 16px 0 0;
   max-width: 38ch;
