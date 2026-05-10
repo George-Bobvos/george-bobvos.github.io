@@ -1494,7 +1494,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   padding-bottom: 50px;
   border-bottom: 1px solid rgba(247,241,232,.1);
@@ -1536,10 +1536,11 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .footer__bottom {
   max-width: var(--max);
   margin: 30px auto 0;
-  /* Same column layout as .footer__top so each bottom-row line sits
-     directly beneath its matching column above. */
+  /* Same equal three-column grid as .footer__top so each item sits
+     directly beneath its matching column above and the rightmost line
+     reaches the same right edge as the horizontal divider above. */
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   font-size: 12px;
   letter-spacing: .14em;
