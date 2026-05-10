@@ -84,11 +84,13 @@ section[id], .hero { scroll-margin-top: 84px; }
   z-index: 60; transition: transform .15s linear;
 }
 
-/* ---------- Ambient section nav (right-edge dot strip) ----------
-   Quiet position indicator. Six small clay dots pinned to the right
-   edge, vertically centered. The active section's dot expands and
-   solidifies. Hidden on mobile (the page is short enough that this
-   is more clutter than help on a phone). */
+/* ---------- Ambient section nav (right-edge bloom strip) ----------
+   Six tiny PipaYoga blooms pinned to the right edge. Inactive blooms
+   sit small + faint with closed petals (just the core dot visible).
+   The active section's bloom expands and opens its petals — uses the
+   same petal-scaleY animation as the lotus favicons in section labels.
+   Hidden on mobile (the page is short enough on phones that this would
+   add clutter without helping). */
 .section-nav {
   position: fixed;
   right: clamp(14px, 2vw, 26px);
@@ -97,7 +99,7 @@ section[id], .hero { scroll-margin-top: 84px; }
   z-index: 40;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   padding: 12px 6px;
   /* Initially hidden — JS reveals it once the user has scrolled past
      the overture so it doesn't compete with the hero photograph. */
@@ -110,38 +112,65 @@ section[id], .hero { scroll-margin-top: 84px; }
   pointer-events: auto;
 }
 .section-nav__dot {
-  display: block;
-  width: 22px;
-  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   position: relative;
-  /* Larger hit target than the visible dot */
+  /* Larger hit target than the visible bloom */
 }
-.section-nav__dot span {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ink-faint);
-  transform: translate(-50%, -50%);
-  transition: width .35s var(--ease), height .35s var(--ease),
-              background .35s var(--ease);
+.section-nav__bloom {
+  width: 14px;
+  height: 14px;
+  color: var(--ink-faint);
+  overflow: visible;
+  transition: width .4s var(--ease), height .4s var(--ease),
+              color .4s var(--ease);
 }
-.section-nav__dot:hover span {
-  background: var(--ink-muted);
-  width: 8px;
-  height: 8px;
+.section-nav__bloom .bloom__petal {
+  fill: currentColor;
+  fill-opacity: 0;
+  /* Petals start closed (collapsed scaleY: 0). They bloom open only
+     when the dot becomes active. */
+  transform: scaleY(0);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition: transform .55s cubic-bezier(.22, .85, .25, 1),
+              fill-opacity .4s ease;
 }
-.section-nav__dot.is-active span {
-  width: 10px;
-  height: 10px;
-  background: var(--clay);
+.section-nav__bloom .bloom__core {
+  fill: currentColor;
+  /* Core is always visible — it's the dot you see when inactive. */
+  transition: transform .35s var(--ease);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.section-nav__dot:hover .section-nav__bloom {
+  color: var(--ink-muted);
+  width: 16px;
+  height: 16px;
+}
+.section-nav__dot.is-active .section-nav__bloom {
+  width: 22px;
+  height: 22px;
+  color: var(--clay);
+}
+.section-nav__dot.is-active .section-nav__bloom .bloom__petal {
+  transform: scaleY(1);
+  fill-opacity: .82;
+  transition-delay: calc(var(--i, 0) * 60ms);
 }
 @media (max-width: 1100px) {
   .section-nav { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-nav__bloom,
+  .section-nav__bloom .bloom__petal,
+  .section-nav__bloom .bloom__core {
+    transition: none !important;
+  }
 }
 
 /* ---------- Type ---------- */
