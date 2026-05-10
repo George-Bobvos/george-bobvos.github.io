@@ -84,6 +84,66 @@ section[id], .hero { scroll-margin-top: 84px; }
   z-index: 60; transition: transform .15s linear;
 }
 
+/* ---------- Ambient section nav (right-edge dot strip) ----------
+   Quiet position indicator. Six small clay dots pinned to the right
+   edge, vertically centered. The active section's dot expands and
+   solidifies. Hidden on mobile (the page is short enough that this
+   is more clutter than help on a phone). */
+.section-nav {
+  position: fixed;
+  right: clamp(14px, 2vw, 26px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 12px 6px;
+  /* Initially hidden — JS reveals it once the user has scrolled past
+     the overture so it doesn't compete with the hero photograph. */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s var(--ease);
+}
+.section-nav.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.section-nav__dot {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  position: relative;
+  /* Larger hit target than the visible dot */
+}
+.section-nav__dot span {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  transform: translate(-50%, -50%);
+  transition: width .35s var(--ease), height .35s var(--ease),
+              background .35s var(--ease);
+}
+.section-nav__dot:hover span {
+  background: var(--ink-muted);
+  width: 8px;
+  height: 8px;
+}
+.section-nav__dot.is-active span {
+  width: 10px;
+  height: 10px;
+  background: var(--clay);
+}
+@media (max-width: 1100px) {
+  .section-nav { display: none; }
+}
+
 /* ---------- Type ---------- */
 .eyebrow {
   margin: 0 0 18px;
@@ -93,10 +153,15 @@ section[id], .hero { scroll-margin-top: 84px; }
   text-transform: uppercase;
   font-weight: 600;
   color: var(--clay);
-  display: inline-flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 10px;
+  width: fit-content;
 }
 .eyebrow::before {
-  content: ""; width: 26px; height: 1px; background: var(--clay);
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--clay);
+  flex-shrink: 0;
 }
 .eyebrow--light { color: rgba(247,241,232,.86); }
 .eyebrow--light::before { background: rgba(247,241,232,.6); }
@@ -448,6 +513,25 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .section__head {
   max-width: 880px;
   margin: 0 0 clamp(36px, 5vw, 64px);
+}
+
+/* ---------- Section dividers ----------
+   A subtle clay dot at the top center of certain sections, just enough
+   to give the eye a beat between cream-on-cream transitions. Not on
+   sections with their own background (Training, Quote, Voices, Contact)
+   since those already have visual breaks. */
+.section--practice::before,
+.section--filipa::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--clay);
+  opacity: .4;
+  transform: translate(-50%, -50%);
 }
 
 /* ---------- OVERTURE (sunset) ---------- */
@@ -805,7 +889,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   border-radius: var(--radius-img);
   transition: transform 1.4s var(--ease-out);
 }
-.about__figure:hover .img-frame img { transform: scale(1.02); }
+.about__figure:hover .img-frame img { transform: scale(1.04); }
 
 /* Tablet & mobile — collapse to one column. Image goes first (above the
    text) so the visual lands first, then copy + buttons read below. */
@@ -874,6 +958,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   text-transform: uppercase;
   color: var(--ink-muted);
   font-weight: 600;
+  transition: color .35s var(--ease);
 }
 .card h3 {
   margin: 8px 0 10px;
@@ -882,7 +967,24 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   font-size: clamp(28px, 2.6vw, 38px);
   letter-spacing: -.02em;
   line-height: 1.05;
+  position: relative;
+  display: inline-block;
 }
+/* A thin clay underline grows in under the title on hover. The kicker
+   ("Gentle" / "Restore") also brightens to clay — small but rewarding. */
+.card h3::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: var(--clay);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform .5s var(--ease);
+}
+.card:hover h3::after { transform: scaleX(1); }
+.card:hover .card__kicker { color: var(--clay); }
 .card p {
   margin: 0;
   color: var(--ink-soft);
@@ -950,7 +1052,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   border-radius: var(--radius-img);
   transition: transform 1.4s var(--ease-out);
 }
-.training__figure:hover .img-frame img { transform: scale(1.02); }
+.training__figure:hover .img-frame img { transform: scale(1.04); }
 .marquee {
   margin-top: clamp(48px, 6vw, 80px);
   overflow: hidden;
@@ -972,6 +1074,9 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   color: var(--ink);
   animation: marquee 40s linear infinite;
 }
+/* Slow the marquee dramatically on hover so people can actually read
+   each discipline as it scrolls past — feels like a respectful pause. */
+.marquee:hover .marquee__track { animation-duration: 200s; }
 .marquee__track .dot { color: var(--clay); }
 @keyframes marquee {
   to { transform: translateX(-50%); }
@@ -1030,7 +1135,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
    reacting consistently when hovered. Targets the loaded state so the
    blur-up transition is already complete. */
 .filipa__image:hover .img-frame.is-loaded > img,
-.filipa__image:hover .img-frame > img { transform: scale(1.02); }
+.filipa__image:hover .img-frame > img { transform: scale(1.04); }
 .filipa__image figcaption {
   margin-top: 12px;
   font-size: 11px;
@@ -1369,6 +1474,15 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   color: rgba(247,241,232,.7);
   font-size: 14px;
   line-height: 1.6;
+}
+.footer__quote {
+  margin-top: 18px !important;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px !important;
+  color: var(--clay) !important;
+  line-height: 1.4;
 }
 .footer strong {
   display: block;
@@ -1910,13 +2024,18 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .whatsapp { padding: 14px; }
   .facts { grid-template-columns: 1fr; gap: 18px; }
   .voices__counter {
+    /* Sit the counter inline with the section's start, just above the
+       active testimonial — gives it a clear relationship to the card
+       below rather than floating in dead space. */
     position: static;
-    justify-content: flex-end;
-    margin: 0 0 18px;
-    padding-right: 4px;
+    justify-content: flex-start;
+    margin: 0 0 14px;
+    padding-right: 0;
+    align-items: center;
+    gap: 8px;
   }
-  .voices__count-current { font-size: 38px; }
-  .voices__count-total   { font-size: 13px; }
+  .voices__count-current { font-size: 32px; line-height: 1; }
+  .voices__count-total   { font-size: 12px; }
   .voices__nav {
     margin-top: 32px;
     padding-top: 22px;
