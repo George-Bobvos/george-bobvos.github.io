@@ -2114,24 +2114,11 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .voices__dot img { width: 44px; height: 56px; }
   .voices__dot span { display: none; }
   .voice__quote { font-size: 18px; }
-  /* On mobile, the image sits above the copy in a single column. The
-     giant " mark used to push UP into the image area (overlapping it),
-     which looked broken. Reposition it to sit at the top-left of the
-     copy block, slightly behind the quote text, where it acts as a
-     decorative anchor rather than fighting the image. Smaller too,
-     since at desktop sizes it dominates a narrow viewport. */
-  .voice__mark {
-    top: -18px;
-    left: -4px;
-    font-size: clamp(96px, 30vw, 140px);
-    line-height: .55;
-    opacity: .14;
-  }
-  .voice__copy {
-    /* Padding above the quote text so it sits beneath the mark
-       without colliding. */
-    padding-top: 14px;
-  }
+  /* On mobile, drop the giant " mark altogether — it's decorative on
+     desktop where there's room to breathe, but on a narrow viewport
+     it competes with the quote text and the image for limited space.
+     Cleaner without it. */
+  .voice__mark { display: none; }
   .announce__inner {
     grid-template-columns: auto 1fr auto;
     gap: 12px;
