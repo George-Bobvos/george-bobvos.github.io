@@ -1494,8 +1494,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  /* Brand column gets a bit more width since it carries more text; link
+     columns are equal and narrower. Reads as a balanced editorial trio. */
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
   padding-bottom: 70px;
   border-bottom: 1px solid rgba(247,241,232,.1);
 }
@@ -1546,21 +1548,19 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .footer__bottom {
   max-width: var(--max);
   margin: 30px auto 0;
-  /* Three items spanning the full container width:
-     first → far left, middle → centered, third → far right.
-     Mirrors the endpoints of the horizontal divider above. */
+  /* Mirror the top row's column proportions so each meta item sits
+     directly under its column. The third item right-aligns inside its
+     cell so it reaches the same right edge as the divider line above. */
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
   font-size: 12px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: rgba(247,241,232,.4);
 }
-.footer__bottom > span { display: block; }
-.footer__bottom > span:nth-child(1) { text-align: left; }
-.footer__bottom > span:nth-child(2) { text-align: center; }
-.footer__bottom > span:nth-child(3) { text-align: right; }
+.footer__bottom > span { display: block; text-align: left; }
+.footer__bottom > span:last-child { text-align: right; }
 
 /* ---------- WhatsApp floating ---------- */
 .whatsapp {
