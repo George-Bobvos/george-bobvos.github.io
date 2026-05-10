@@ -1175,9 +1175,9 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   color: var(--ink-muted);
 }
 /* Body paragraphs inside Filipa's copy column. Excludes the eyebrow
-   (which has its own styling) so it can render with the eyebrow's
-   small, uppercase, clay-colored typography like every other section. */
-.filipa__copy p:not(.eyebrow) { margin: 18px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.7; max-width: 56ch; }
+   (which has its own styling). Spacing and color only — sizing is
+   handled by the .lead class so it matches every other section. */
+.filipa__copy p:not(.eyebrow) { margin: 18px 0 0; color: var(--ink-soft); max-width: 56ch; }
 .filipa__copy .btn { margin-top: 32px; }
 
 /* ---------- QUOTE ---------- */
