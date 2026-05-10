@@ -2022,6 +2022,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .training__figure { min-height: clamp(360px, 56vh, 480px); height: auto; }
   .training__figure .img-frame img { height: clamp(360px, 56vh, 480px); }
   .footer__top { grid-template-columns: 1fr 1fr; gap: 30px; }
+  .footer__bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
   .voices__stage { margin-left: 0; min-height: 0; }
   .voice {
     position: relative;
