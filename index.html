@@ -17,6 +17,101 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ========== Merged About / Hero section ==========
+       The section uses .hero's two-column grid (copy left, image right)
+       but adds an eyebrow + section label and pulls in About content
+       (body paragraph + facts grid) into the left column. */
+    .hero--about {
+      grid-template-rows: auto auto 1fr;
+      /* extra top padding so the section label has room above the eyebrow */
+      padding-top: clamp(120px, 14vw, 180px);
+    }
+    .hero--about .hero__section-label {
+      position: absolute;
+      left: var(--gutter);
+      top: clamp(72px, 11vw, 130px);
+    }
+    .hero--about .hero__eyebrow {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      margin: 0 0 14px;
+    }
+    .hero--about .hero__heading {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+      align-self: start;
+      margin-top: 0;
+    }
+    .hero--about .hero__foot {
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+    }
+    .hero--about .hero__image {
+      grid-column: 2 / 3;
+      grid-row: 1 / 4;
+    }
+    .hero--about .hero__body {
+      margin: 0;
+      max-width: 56ch;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+    .hero--about .hero__facts {
+      margin: 8px 0 4px;
+      max-width: 580px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+    .hero--about .hero__facts div {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .hero--about .hero__facts dt {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.6vw, 46px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+    .hero--about .hero__facts dd {
+      margin: 0;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    /* Tablet / mobile — collapse to one column, label flips inline */
+    @media (max-width: 1100px) {
+      .hero--about { grid-template-rows: auto auto auto auto; padding-top: clamp(100px, 12vw, 140px); }
+      .hero--about .hero__section-label {
+        position: static;
+        margin: 0 0 24px;
+        flex-direction: row;
+        gap: 14px;
+        align-items: center;
+      }
+      .hero--about .hero__eyebrow,
+      .hero--about .hero__heading,
+      .hero--about .hero__foot {
+        grid-column: 1 / -1;
+      }
+      .hero--about .hero__image {
+        grid-column: 1 / -1;
+        grid-row: auto;
+      }
+    }
+    @media (max-width: 760px) {
+      .hero--about .hero__facts { grid-template-columns: 1fr; gap: 18px; }
+    }
+  </style>
   <script>
     /* Anti-flash: if the visitor already dismissed the banner this session,
        hide it before the page paints to avoid a momentary flicker. The full
@@ -66,7 +161,7 @@
 </aside>
 
 <header class="nav" id="nav">
-  <a href="#home" class="logo">
+  <a href="#about" class="logo">
     <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <ellipse cx="12" cy="5.4" rx="1.6" ry="3"/>
       <ellipse cx="12" cy="5.4" rx="1.6" ry="3" transform="rotate(45 12 12)"/>
@@ -135,7 +230,7 @@
             Begin practice
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a class="overture__scroll" href="#home" aria-label="Scroll into the site">
+          <a class="overture__scroll" href="#about" aria-label="Scroll into the site">
             <span>Scroll</span>
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
           </a>
@@ -144,11 +239,35 @@
     </div>
   </section>
 
-  <!-- ========================== HERO ========================== -->
-  <section id="home" class="hero">
-    <h1 class="display split" data-split><span class="hero__line">Slow down.</span><br><span class="hero__line">Stay <em>long.</em></span></h1>
+  <!-- ========================== ABOUT (merged with former hero) ========================== -->
+  <section id="about" class="hero hero--about">
+    <aside class="section__label hero__section-label">
+      <svg class="bloom" viewBox="0 0 24 24" aria-hidden="true">
+        <g class="bloom__petals">
+          <g transform="rotate(0 12 12)"><ellipse class="bloom__petal" style="--i:0" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+          <g transform="rotate(45 12 12)"><ellipse class="bloom__petal" style="--i:1" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+          <g transform="rotate(90 12 12)"><ellipse class="bloom__petal" style="--i:2" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+          <g transform="rotate(135 12 12)"><ellipse class="bloom__petal" style="--i:3" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+          <g transform="rotate(180 12 12)"><ellipse class="bloom__petal" style="--i:4" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+          <g transform="rotate(225 12 12)"><ellipse class="bloom__petal" style="--i:5" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+          <g transform="rotate(270 12 12)"><ellipse class="bloom__petal" style="--i:6" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+          <g transform="rotate(315 12 12)"><ellipse class="bloom__petal" style="--i:7" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
+        </g>
+        <circle class="bloom__core" cx="12" cy="12" r="2.2"/>
+      </svg>
+      <span class="num">02</span>
+      <span class="kicker">About</span>
+    </aside>
+    <p class="eyebrow hero__eyebrow">A practice, not a performance</p>
+    <h1 class="display display--md split hero__heading" data-split>Yoga, <em>without</em> pressure.</h1>
     <div class="hero__foot">
       <p class="lede">I am Filipa, <em>Pipa</em> to friends. Yoga has shaped my life for the past five years; it is no longer a choice, it is a commitment. I am here to grow a small community of people who want to move better, breathe deeper, and feel more at home in themselves. Just as I do.</p>
+      <p class="hero__body">My classes centre on Vinyasa, where each movement is guided by the breath. We move slowly, breathe deeply, and build strength. No perfect shapes. No rushing. Just space to listen, to reset, and to build a practice that feels like your own.</p>
+      <dl class="facts hero__facts">
+        <div><dt>200h</dt><dd>Yoga Teacher Training</dd></div>
+        <div><dt>India</dt><dd>Yoga Alliance Certified</dd></div>
+        <div><dt>BCN</dt><dd>Poblenou based</dd></div>
+      </dl>
       <div class="hero__actions">
         <a class="btn btn--primary" href="#contact">
           Begin practice
@@ -171,44 +290,6 @@
           <span class="hero__credential-meta">Yoga Alliance · Certified</span>
         </figcaption>
       </figure>
-    </div>
-  </section>
-  <!-- ========================== ABOUT ========================== -->
-  <section id="about" class="section section--intro">
-    <aside class="section__label">
-      <svg class="bloom" viewBox="0 0 24 24" aria-hidden="true">
-        <g class="bloom__petals">
-          <g transform="rotate(0 12 12)"><ellipse class="bloom__petal" style="--i:0" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
-          <g transform="rotate(45 12 12)"><ellipse class="bloom__petal" style="--i:1" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
-          <g transform="rotate(90 12 12)"><ellipse class="bloom__petal" style="--i:2" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
-          <g transform="rotate(135 12 12)"><ellipse class="bloom__petal" style="--i:3" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
-          <g transform="rotate(180 12 12)"><ellipse class="bloom__petal" style="--i:4" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
-          <g transform="rotate(225 12 12)"><ellipse class="bloom__petal" style="--i:5" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
-          <g transform="rotate(270 12 12)"><ellipse class="bloom__petal" style="--i:6" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
-          <g transform="rotate(315 12 12)"><ellipse class="bloom__petal" style="--i:7" cx="12" cy="5.4" rx="1.6" ry="3"/></g>
-        </g>
-        <circle class="bloom__core" cx="12" cy="12" r="2.2"/>
-      </svg>
-      <span class="num">02</span>
-      <span class="kicker">About</span>
-    </aside>
-    <div class="intro">
-      <figure class="intro__image">
-        <div class="img-frame">
-          <img src="./assets/namaste-pipa-2-final.jpeg" alt="A quiet, light-filled yoga space" loading="lazy">
-        </div>
-        <figcaption>The space where we practice.</figcaption>
-      </figure>
-      <div class="intro__copy">
-        <p class="eyebrow">A practice, not a performance</p>
-        <h2 class="display display--md">Yoga, <em>without</em> pressure.</h2>
-        <p class="lead drop">My classes centre on Vinyasa, where each movement is guided by the breath. We move slowly, breathe deeply, and build strength. No perfect shapes. No rushing. Just space to listen, to reset, and to build a practice that feels like your own.</p>
-        <dl class="facts">
-          <div><dt>200h</dt><dd>Yoga Teacher Training</dd></div>
-          <div><dt>India</dt><dd>Yoga Alliance Certified</dd></div>
-          <div><dt>BCN</dt><dd>Poblenou based</dd></div>
-        </dl>
-      </div>
     </div>
   </section>
   <!-- ========================== PRACTICE ========================== -->
