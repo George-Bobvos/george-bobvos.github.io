@@ -1547,6 +1547,12 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   text-transform: uppercase;
   color: rgba(247,241,232,.4);
 }
+/* Each span is a grid item — force block-level so it anchors to the
+   left edge of its column reliably, matching the columns above. */
+.footer__bottom > span {
+  display: block;
+  text-align: left;
+}
 .footer__sig { text-align: left; }
 .footer__sig em {
   font-family: var(--serif);
