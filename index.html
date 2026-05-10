@@ -17,186 +17,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* ========== Merged About — centerpiece section ==========
-       Editorial three-part composition:
-
-       1. TOP: standard .section__head (label in gutter, eyebrow +
-          headline + lede stacked above), matching Practice / Training.
-
-       2. MIDDLE: two-column .about-merged__media — body copy on the
-          left, large portrait + credential card on the right. Both
-          columns generously wide so paragraphs read naturally and the
-          image carries presence.
-
-       3. BOTTOM: full-width .about-merged__facts band, framed by a
-          rule above and below — three big serif numerals as a credential
-          strip. Acts as the visual close of the section.
-
-       4. CTA buttons sit at the very bottom, centered like a coda. */
-
-    /* Lift the top padding a touch — this section is the centerpiece
-       and benefits from extra air above. */
-    #about.section {
-      padding-top: clamp(110px, 15vw, 200px);
-    }
-
-    /* The .section__head's lede paragraph: keep it readable, generous,
-       and don't let it become a thin column. */
-    #about .section__head .lead {
-      max-width: 62ch;
-      margin-top: 28px;
-      font-size: clamp(18px, 1.55vw, 22px);
-      line-height: 1.6;
-    }
-
-    /* MIDDLE — two-column media block.
-       Left: body copy (wide, comfortable measure).
-       Right: portrait + credential card. */
-    .about-merged__media {
-      display: grid;
-      grid-template-columns: 1fr 1.05fr;
-      gap: clamp(48px, 7vw, 96px);
-      align-items: center;
-      margin-left: clamp(0px, 12vw, 200px);
-      margin-top: clamp(40px, 6vw, 72px);
-    }
-    .about-merged__copy {
-      max-width: 56ch;
-    }
-    .about-merged__copy p {
-      margin: 0 0 24px;
-      font-size: clamp(17px, 1.4vw, 20px);
-      line-height: 1.65;
-      color: var(--ink-soft);
-    }
-    .about-merged__copy p:last-child { margin-bottom: 0; }
-    /* Restore the editorial drop-cap on the second paragraph (the "M") */
-    .about-merged__copy .drop::first-letter {
-      font-family: var(--serif);
-      font-size: 4.4em;
-      font-weight: 400;
-      font-style: italic;
-      float: left;
-      line-height: .85;
-      padding: 8px 14px 0 0;
-      color: var(--clay);
-    }
-
-    /* The image figure — generous, with the credential card overlapping
-       its bottom-right corner. position:relative is the anchor. */
-    .about-merged__figure {
-      position: relative;
-      margin: 0;
-    }
-    .about-merged__figure .img-frame {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-img);
-      background: var(--paper-warm);
-    }
-    .about-merged__figure .img-frame img {
-      display: block;
-      width: 100%;
-      height: clamp(480px, 64vh, 680px);
-      object-fit: cover;
-      border-radius: var(--radius-img);
-    }
-
-    /* The credential card uses styles.css's existing .hero__credential
-       rules (size, padding, polaroid look, animation) — we just override
-       its position to anchor it onto this image's bottom-right corner. */
-    .about-merged__figure .hero__credential {
-      position: absolute;
-      right: -34px;
-      bottom: -56px;
-      z-index: 3;
-    }
-
-    /* BOTTOM — full-width facts band.
-       Sits across the section, framed by hairline rules. The numerals
-       are large serif italics to feel editorial, not infographic. */
-    .about-merged__facts {
-      margin: clamp(96px, 12vw, 140px) 0 0 clamp(0px, 12vw, 200px);
-      padding: 36px 0;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(24px, 4vw, 56px);
-    }
-    .about-merged__facts > div {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .about-merged__facts dt {
-      font-family: var(--serif);
-      font-size: clamp(44px, 5vw, 68px);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ink);
-      line-height: 1;
-      letter-spacing: -.02em;
-    }
-    .about-merged__facts dd {
-      margin: 0;
-      font-size: 11px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      font-weight: 600;
-    }
-
-    /* CTA row — centered, breathing under the facts band */
-    .about-merged__cta {
-      margin: clamp(40px, 5vw, 56px) 0 0 clamp(0px, 12vw, 200px);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    /* === Tablet & below === */
-    @media (max-width: 1100px) {
-      .about-merged__media {
-        grid-template-columns: 1fr;
-        gap: 56px;
-        margin-left: 0;
-        align-items: stretch;
-      }
-      /* On tablet/mobile, image goes first, copy below — feels more
-         natural in single-column reading order. */
-      .about-merged__figure { order: -1; }
-      .about-merged__figure .img-frame img {
-        height: clamp(420px, 60vh, 560px);
-      }
-      .about-merged__figure .hero__credential {
-        right: -20px;
-        bottom: -48px;
-      }
-      .about-merged__copy { max-width: none; }
-      .about-merged__facts { margin-left: 0; }
-      .about-merged__cta { margin-left: 0; }
-    }
-    @media (max-width: 760px) {
-      .about-merged__facts {
-        grid-template-columns: 1fr;
-        gap: 22px;
-        padding: 28px 0;
-      }
-      .about-merged__figure .img-frame img {
-        height: clamp(360px, 56vh, 460px);
-      }
-      .about-merged__figure .hero__credential {
-        right: -8px;
-        bottom: -42px;
-      }
-      .about-merged__copy .drop::first-letter {
-        font-size: 3.8em;
-        padding: 6px 10px 0 0;
-      }
-    }
-  </style>
   <script>
     /* Anti-flash: if the visitor already dismissed the banner this session,
        hide it before the page paints to avoid a momentary flicker. The full
@@ -324,7 +144,12 @@
     </div>
   </section>
 
-  <!-- ========================== ABOUT (centerpiece — merged with former hero) ========================== -->
+  <!-- ========================== ABOUT (centerpiece) ========================== -->
+  <!-- Uses the same wide, full-bleed container pattern as Training so we
+       have generous horizontal room. Section label sits in the gutter,
+       a top section__head holds the eyebrow + headline + lede, then the
+       two-column .about__media block places body copy + buttons on the
+       left and the portrait + facts band on the right. -->
   <section id="about" class="section section--about">
     <aside class="section__label">
       <svg class="bloom" viewBox="0 0 24 24" aria-hidden="true">
@@ -344,49 +169,48 @@
       <span class="kicker">About</span>
     </aside>
 
-    <!-- TOP BLOCK — same pattern as Practice / Training section heads -->
-    <header class="section__head">
-      <p class="eyebrow">A practice, not a performance</p>
-      <h2 class="display display--md">Yoga, <em>without</em> pressure.</h2>
-      <p class="lead">I am Filipa, <em>Pipa</em> to friends. Yoga has shaped my life for the past five years; it is no longer a choice, it is a commitment. I am here to grow a small community of people who want to move better, breathe deeper, and feel more at home in themselves. Just as I do.</p>
-    </header>
+    <div class="about">
+      <header class="section__head about__head">
+        <p class="eyebrow">A practice, not a performance</p>
+        <h2 class="display display--md">Yoga, <em>without</em> pressure.</h2>
+      </header>
 
-    <!-- MIDDLE BLOCK — body copy + portrait with credential card -->
-    <div class="about-merged__media">
-      <div class="about-merged__copy">
-        <p class="drop">My classes centre on Vinyasa, where each movement is guided by the breath. We move slowly, breathe deeply, and build strength. No perfect shapes. No rushing. Just space to listen, to reset, and to build a practice that feels like your own.</p>
-      </div>
-      <figure class="about-merged__figure">
-        <div class="img-frame">
-          <img src="./assets/namaste-pipa-final.jpeg" alt="Filipa Mourão Martinho" loading="eager">
-        </div>
-        <figure class="hero__credential" aria-label="Credentials">
-          <div class="hero__credential-photo">
-            <img src="./assets/hero-pipa.jpg" alt="Filipa Mourão Martinho" loading="eager">
+      <div class="about__media">
+        <div class="about__copy">
+          <p class="about__lede">I am Filipa, <em>Pipa</em> to friends. Yoga has shaped my life for the past five years; it is no longer a choice, it is a commitment. I am here to grow a small community of people who want to move better, breathe deeper, and feel more at home in themselves. Just as I do.</p>
+          <p class="about__body drop">My classes centre on Vinyasa, where each movement is guided by the breath. We move slowly, breathe deeply, and build strength. No perfect shapes. No rushing. Just space to listen, to reset, and to build a practice that feels like your own.</p>
+          <div class="about__actions">
+            <a class="btn btn--primary" href="#contact">
+              Begin practice
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#contact">Reach out</a>
           </div>
-          <figcaption class="hero__credential-cap">
-            <span class="hero__credential-eyebrow">200H · YTT</span>
-            <span class="hero__credential-title">Trained in <em>India</em></span>
-            <span class="hero__credential-meta">Yoga Alliance · Certified</span>
-          </figcaption>
-        </figure>
-      </figure>
-    </div>
+        </div>
 
-    <!-- BOTTOM BLOCK — credential strip across the section -->
-    <dl class="about-merged__facts">
-      <div><dt>200h</dt><dd>Yoga Teacher Training</dd></div>
-      <div><dt>India</dt><dd>Yoga Alliance Certified</dd></div>
-      <div><dt>BCN</dt><dd>Poblenou based</dd></div>
-    </dl>
-
-    <!-- CTA row -->
-    <div class="about-merged__cta">
-      <a class="btn btn--primary" href="#contact">
-        Begin practice
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a class="btn btn--ghost" href="#contact">Reach out</a>
+        <div class="about__visual">
+          <figure class="about__figure">
+            <div class="img-frame">
+              <img src="./assets/namaste-pipa-final.jpeg" alt="Filipa Mourão Martinho" loading="eager">
+            </div>
+            <figure class="hero__credential" aria-label="Credentials">
+              <div class="hero__credential-photo">
+                <img src="./assets/hero-pipa.jpg" alt="Filipa Mourão Martinho" loading="eager">
+              </div>
+              <figcaption class="hero__credential-cap">
+                <span class="hero__credential-eyebrow">200H · YTT</span>
+                <span class="hero__credential-title">Trained in <em>India</em></span>
+                <span class="hero__credential-meta">Yoga Alliance · Certified</span>
+              </figcaption>
+            </figure>
+          </figure>
+          <dl class="about__facts">
+            <div><dt>200h</dt><dd>Yoga Teacher Training</dd></div>
+            <div><dt>India</dt><dd>Yoga Alliance Certified</dd></div>
+            <div><dt>BCN</dt><dd>Poblenou based</dd></div>
+          </dl>
+        </div>
+      </div>
     </div>
   </section>
   <!-- ========================== PRACTICE ========================== -->
