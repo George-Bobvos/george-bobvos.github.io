@@ -719,8 +719,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   /* Paragraphs sit on a comfortable, generous measure. Slightly under
      the column width so the longest line never feels stretched. */
   max-width: 56ch;
-  display: flex;
-  flex-direction: column;
 }
 /* The lede sits with the same spacing the .lead class gets in
    .section__head — small gap below the headline, then breathing
@@ -749,12 +747,12 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  /* Buttons hug the bottom of the copy column when there's extra space. */
-  margin-top: auto;
-  padding-top: 8px;
+  /* Buttons sit naturally right under the body paragraph — no forced
+     bottom-anchor. The copy column's natural height drives the layout. */
 }
 
-/* Right column — image stretches to match the copy column's height. */
+/* Right column — image stretches to match the copy column's natural
+   height, no more, no less. */
 .about__visual {
   display: flex;
   flex-direction: column;
@@ -762,22 +760,17 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .about__figure {
   position: relative;
   margin: 0;
+  /* height: 100% lets the figure expand to fill the grid cell, which
+     in turn is sized by .about__media's align-items: stretch — i.e.
+     the height of the (taller) sibling .about__copy column. */
   height: 100%;
-  /* Cap the figure so even with very short copy, it doesn't try to
-     match a giant headline + lede + body + buttons stack literally —
-     keeps the image looking like a photograph, not a wall. */
-  max-height: 720px;
 }
 .about__figure .img-frame {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-img);
   background: var(--paper-warm);
-  /* Fill the figure's height — which is set by the sibling copy column
-     via align-items: stretch on .about__media. */
   height: 100%;
-  /* Floor — never collapse below this on tall narrow viewports. */
-  min-height: 420px;
 }
 .about__figure .img-frame img {
   display: block;
@@ -808,7 +801,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   }
   .about__figure .img-frame img { height: clamp(420px, 60vh, 560px); }
   .about__copy { max-width: none; }
-  .about__actions { margin-top: 8px; }
 }
 @media (max-width: 760px) {
   .about__figure .img-frame {
