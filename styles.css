@@ -2020,6 +2020,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .section__head, .filipa, .intro, .training__copy, .contact__copy, .schedule, .schedule__foot, .page-head { margin-left: 0; }
   .contact__inner { grid-template-columns: 1fr; }
   .filipa, .intro { grid-template-columns: 1fr; gap: 36px; }
+  /* On mobile, image follows the copy column (text reads first, image
+     below) — same pattern as the About section's reading order. */
+  .filipa__image { order: 2; }
+  .filipa__copy { order: 1; }
   .training { grid-template-columns: 1fr; gap: 48px; }
   .training__figure { min-height: clamp(360px, 56vh, 480px); height: auto; }
   .training__figure .img-frame img { height: clamp(360px, 56vh, 480px); }
