@@ -467,15 +467,19 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   to   { transform: scale(1.00); }
 }
 .overture__veil {
+  /* Lighter, top-only veil — leaves the bottom of the photograph
+     mostly clean so the sunset reads. The bottom darkening is just
+     enough to keep the cream tagline + button readable on bright
+     skies without dominating the picture. */
   position: absolute; inset: 0; z-index: 1;
   background:
     linear-gradient(
       180deg,
-      rgba(26, 20, 17, 0.55) 0%,
-      rgba(26, 20, 17, 0.42) 22%,
-      rgba(26, 20, 17, 0.32) 45%,
-      rgba(26, 20, 17, 0.20) 70%,
-      rgba(26, 20, 17, 0.45) 100%
+      rgba(26, 20, 17, 0.42) 0%,
+      rgba(26, 20, 17, 0.22) 18%,
+      rgba(26, 20, 17, 0.08) 50%,
+      rgba(26, 20, 17, 0.20) 78%,
+      rgba(26, 20, 17, 0.55) 100%
     );
   pointer-events: none;
 }
@@ -495,24 +499,28 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .overture__meta .label { color: rgba(247, 241, 232, 0.78); }
 .overture__bottom {
-  grid-row: 2 / 3;
-  align-self: start;
+  /* Grid row 3 = the bottom of the section. The bottom block sits
+     anchored to the bottom-left edge of the photograph, like a magazine
+     caption rather than a competing headline. */
+  grid-row: 3 / 4;
+  align-self: end;
   justify-self: start;
-  margin-top: clamp(40px, 6vh, 80px);
   display: flex; flex-direction: column; align-items: flex-start;
-  gap: clamp(20px, 3vh, 32px);
+  gap: clamp(16px, 2.4vh, 28px);
 }
 .overture__line {
+  /* Sized to match the rest of the site's section headlines (display--md).
+     Reads as the photograph's caption rather than a poster headline. */
   margin: 0;
   font-family: var(--serif);
   font-weight: 300;
   font-style: italic;
-  font-size: clamp(54px, 9.4vw, 148px);
-  line-height: .92;
-  letter-spacing: -.035em;
+  font-size: clamp(34px, 5.4vw, 72px);
+  line-height: 1;
+  letter-spacing: -.025em;
   color: var(--paper);
   white-space: nowrap;
-  text-shadow: 0 2px 30px rgba(26, 20, 17, 0.35);
+  text-shadow: 0 2px 24px rgba(26, 20, 17, 0.35);
 }
 .overture__line em { font-style: italic; font-weight: 400; color: var(--clay); }
 .btn--overture {
@@ -537,11 +545,11 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .overture__scroll:hover svg { transform: translateY(2px); }
 @media (max-width: 760px) {
   .overture { min-height: 520px; max-height: none; }
-  .overture__inner { padding: 96px var(--gutter) 72px; }
+  .overture__inner { padding: 96px var(--gutter) 56px; }
   .overture__meta { padding-bottom: 12px; }
   .overture__meta .label { font-size: 10px; letter-spacing: .18em; }
-  .overture__line { font-size: clamp(44px, 12vw, 74px); white-space: normal; line-height: .98; }
-  .overture__bottom { gap: 18px; }
+  .overture__line { font-size: clamp(30px, 7.5vw, 44px); line-height: 1; }
+  .overture__bottom { gap: 14px; }
   .overture__actions { gap: 12px; }
   .btn--overture { padding: 14px 24px; font-size: 13px; }
 }
