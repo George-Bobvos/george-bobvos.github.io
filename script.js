@@ -116,6 +116,7 @@
     '.benefits li', '.filipa', '.sessions .session', '.sessions__note',
     '.contact__copy', '.contact__form', '.hero__foot', '.hero__image',
     '.hero__meta', '.facts', '.intro__image', '.intro__copy',
+    '.about__figure', '.training__figure',
     '.filipa__image', '.filipa__copy',
     '.page-head', '.schedule', '.schedule__foot',
     '.voices', '.voices__nav'
