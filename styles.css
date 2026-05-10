@@ -768,12 +768,15 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .about__figure:hover .img-frame img { transform: scale(1.02); }
 
 /* Credential card — inherits the .hero__credential look, anchored to the
-   image's bottom-right corner. */
+   image's bottom-right corner. Force it visible (the JS-driven .is-visible
+   reveal that the original hero used isn't wired up for this section). */
 .about__figure .hero__credential {
   position: absolute;
   right: -28px;
   bottom: -52px;
   z-index: 3;
+  opacity: 1;
+  transform: rotate(2.5deg) translate(0, 0) scale(1);
 }
 
 /* Facts band — sits underneath the image only, not the whole section.
@@ -1752,8 +1755,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 /* ---------- Smooth image loading ---------- */
 .card__image,
 .intro__image .img-frame,
-.filipa__image .img-frame,
-.about__figure .img-frame {
+.filipa__image .img-frame {
   position: relative;
   overflow: hidden;
   background-color: var(--paper-warm);
@@ -1764,8 +1766,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .card__image::before,
 .intro__image .img-frame::before,
-.filipa__image .img-frame::before,
-.about__figure .img-frame::before {
+.filipa__image .img-frame::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1782,8 +1783,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .card__image.is-loaded::before,
 .intro__image .img-frame.is-loaded::before,
-.filipa__image .img-frame.is-loaded::before,
-.about__figure .img-frame.is-loaded::before {
+.filipa__image .img-frame.is-loaded::before {
   opacity: 0;
   animation: none;
 }
@@ -1793,8 +1793,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .card__image > img,
 .intro__image .img-frame > img,
-.filipa__image .img-frame > img,
-.about__figure .img-frame > img {
+.filipa__image .img-frame > img {
   position: relative;
   z-index: 2;
   opacity: 0;
@@ -1808,8 +1807,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .card__image.is-loaded > img,
 .intro__image .img-frame.is-loaded > img,
-.filipa__image .img-frame.is-loaded > img,
-.about__figure .img-frame.is-loaded > img {
+.filipa__image .img-frame.is-loaded > img {
   opacity: 1;
   transform: scale(1);
   filter: blur(0);
