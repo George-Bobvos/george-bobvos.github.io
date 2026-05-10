@@ -1839,7 +1839,8 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 .intro__image.reveal,
 .filipa__image.reveal,
-.about__figure.reveal {
+.about__figure.reveal,
+.training__figure.reveal {
   opacity: 0;
   transform: translateY(44px) scale(.965);
   clip-path: inset(8% 0 0 0);
@@ -1851,7 +1852,8 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 .intro__image.reveal.is-visible,
 .filipa__image.reveal.is-visible,
-.about__figure.reveal.is-visible {
+.about__figure.reveal.is-visible,
+.training__figure.reveal.is-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
   clip-path: inset(0 0 0 0);
