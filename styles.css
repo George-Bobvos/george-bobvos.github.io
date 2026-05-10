@@ -763,22 +763,28 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   position: relative;
   margin: 0;
   height: 100%;
+  /* Cap the figure so even with very short copy, it doesn't try to
+     match a giant headline + lede + body + buttons stack literally —
+     keeps the image looking like a photograph, not a wall. */
+  max-height: 720px;
 }
 .about__figure .img-frame {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-img);
   background: var(--paper-warm);
+  /* Fill the figure's height — which is set by the sibling copy column
+     via align-items: stretch on .about__media. */
   height: 100%;
-  /* Floor — never collapse below this even if the copy column is short.
-     Ceiling controlled by the copy column's natural height. */
-  min-height: clamp(480px, 60vh, 640px);
+  /* Floor — never collapse below this on tall narrow viewports. */
+  min-height: 420px;
 }
 .about__figure .img-frame img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 30%;
   border-radius: var(--radius-img);
   transition: transform 1.4s var(--ease-out);
 }
