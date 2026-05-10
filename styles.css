@@ -1490,33 +1490,14 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   padding: 80px var(--gutter) 36px;
   border-top: 1px solid rgba(247,241,232,.08);
 }
-.footer__cols {
+.footer__top {
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-  /* Each column holds a heading, links, and a meta line at the bottom.
-     align-items: stretch lets columns of varying height share the same
-     bottom edge, where the .footer__meta lines align. */
-  align-items: stretch;
-}
-.footer__cols > div {
-  /* Flex column lets the meta line stick to the bottom regardless of
-     how much content is above it, so all three meta lines align. */
-  display: flex;
-  flex-direction: column;
-}
-/* Pushes the meta line to the bottom of its column */
-.footer__meta {
-  margin-top: auto !important;
-  padding-top: 24px;
-  border-top: 1px solid rgba(247,241,232,.1);
-  font-size: 12px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: rgba(247,241,232,.4) !important;
-  line-height: 1.4 !important;
+  padding-bottom: 70px;
+  border-bottom: 1px solid rgba(247,241,232,.1);
 }
 .footer__brand p {
   margin: 16px 0 0;
@@ -1561,6 +1542,23 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   text-transform: none;
   color: var(--clay);
   margin-left: 2px;
+}
+.footer__bottom {
+  max-width: var(--max);
+  margin: 30px auto 0;
+  /* Same equal three-column grid as .footer__top so each item sits
+     directly beneath its matching column above. */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(247,241,232,.4);
+}
+.footer__bottom > span {
+  display: block;
+  text-align: left;
 }
 
 /* ---------- WhatsApp floating ---------- */
@@ -2032,7 +2030,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .training__figure { min-height: clamp(360px, 56vh, 480px); height: auto; }
   .training__figure .img-frame img { height: clamp(360px, 56vh, 480px); }
   .footer__top { grid-template-columns: 1fr 1fr; gap: 30px; }
-  .footer__cols { grid-template-columns: 1fr 1fr; gap: 30px; }
   .voices__stage { margin-left: 0; min-height: 0; }
   .voice {
     position: relative;
@@ -2057,7 +2054,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .benefits li { border-right: 0; border-bottom: 1px solid var(--line); padding: 28px 0; }
   .benefits li:nth-child(2n) { padding-left: 24px; border-left: 1px solid var(--line); }
   .footer__top { grid-template-columns: 1fr; }
-  .footer__cols { grid-template-columns: 1fr; gap: 36px; }
+  .footer__bottom { grid-template-columns: 1fr; gap: 12px; }
   .contact__form { grid-template-columns: 1fr; }
   .schedule__row { grid-template-columns: 56px 1fr 1fr; gap: 14px; padding: 18px 0; }
   .schedule__day { font-size: 22px; }
