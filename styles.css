@@ -797,7 +797,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
     gap: 48px;
     align-items: stretch;
   }
-  .about__visual { order: -1; }
   .about__figure .img-frame {
     min-height: clamp(420px, 60vh, 560px);
     height: auto;
@@ -834,6 +833,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   width: 100%;
   height: 380px;
   object-fit: cover;
+  /* Anchor to the bottom so when the photo is taller than the frame,
+     the crop happens at the top, not the bottom (keeps the subject's
+     pose visible rather than cropping their feet/mat off). */
+  object-position: center bottom;
   transition: transform 1.2s var(--ease-out);
 }
 .card:hover .card__image img { transform: scale(1.04); }
