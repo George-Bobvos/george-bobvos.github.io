@@ -704,7 +704,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
    the lede follows at the same rhythm as Practice / Training. */
 .about__heading {
   margin: 6px 0 28px;
-  max-width: 14ch;
 }
 
 /* Two-column body block — copy on the left, portrait on the right.
@@ -725,32 +724,17 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 /* The lede sits with the same spacing the .lead class gets in
    .section__head — small gap below the headline, then breathing
    room before the body paragraph. Matches Practice / Training. */
-.about__lede {
-  margin: 0 0 28px;
-  font-size: clamp(17px, 1.5vw, 21px);
-  line-height: 1.55;
-  color: var(--ink-soft);
-}
-.about__lede em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--clay);
-  font-size: 1.06em;
-  letter-spacing: -.005em;
-}
-.about__body {
-  margin: 0 0 36px;
-  font-size: clamp(17px, 1.5vw, 21px);
-  line-height: 1.55;
-  color: var(--ink-soft);
-}
+/* The eyebrow + headline + leads sit at the top of the copy column,
+   directly next to the image. Both paragraphs use the standard .lead
+   class so they match every other section's body text exactly. The
+   second paragraph carries .drop for the editorial dropcap M. */
+.about__copy .lead { margin-top: 24px; }
+.about__copy .lead.drop { margin-top: 28px; }
 .about__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  /* Buttons sit naturally right under the body paragraph — no forced
-     bottom-anchor. The copy column's natural height drives the layout. */
+  margin-top: 32px;
 }
 
 /* Right column — image stretches to match the copy column's natural
@@ -792,7 +776,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 /* Tablet & mobile — collapse to one column. Image goes first (above the
    text) so the visual lands first, then copy + buttons read below. */
 @media (max-width: 1100px) {
-  .about__heading { max-width: none; }
   .about__media {
     grid-template-columns: 1fr;
     gap: 48px;
@@ -811,10 +794,6 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
     min-height: clamp(360px, 56vh, 460px);
   }
   .about__figure .img-frame img { height: clamp(360px, 56vh, 460px); }
-  .about__lede,
-  .about__body {
-    font-size: 17px;
-  }
 }
 
 /* ---------- PRACTICE cards ---------- */
@@ -986,7 +965,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   text-transform: uppercase;
   color: var(--ink-muted);
 }
-.filipa__copy p { margin: 18px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.7; max-width: 56ch; }
+/* Body paragraphs inside Filipa's copy column. Excludes the eyebrow
+   (which has its own styling) so it can render with the eyebrow's
+   small, uppercase, clay-colored typography like every other section. */
+.filipa__copy p:not(.eyebrow) { margin: 18px 0 0; color: var(--ink-soft); font-size: 16px; line-height: 1.7; max-width: 56ch; }
 .filipa__copy .btn { margin-top: 32px; }
 
 /* ---------- QUOTE ---------- */
@@ -1585,14 +1567,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   line-height: 1.6;
 }
 
-/* ---------- Display headings — single-line emphasis ---------- */
-.training__title    { font-size: clamp(36px, 5.4vw, 64px); }
-.voices__title      { font-size: clamp(34px, 5.2vw, 70px); }
+/* ---------- Display headings — single-line emphasis on quote/schedule ---------- */
 .quote .display     { font-size: clamp(40px, 6.4vw, 88px); }
 .page-head .display--lg { font-size: clamp(44px, 6.4vw, 88px); }
 @media (min-width: 1101px) {
-  .training__title,
-  .voices__title,
   .quote .display,
   .page-head .display--lg { white-space: nowrap; }
 }
