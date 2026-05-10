@@ -19,44 +19,57 @@
   <link rel="stylesheet" href="styles.css" />
   <style>
     /* ========== Merged About / Hero section ==========
-       The section uses .hero's two-column grid (copy left, image right)
-       but adds an eyebrow + section label and pulls in About content
-       (body paragraph + facts grid) into the left column. */
+       Mirrors the layout of .section sections (Practice, Filipa, etc):
+       — Section label sits in a fixed left gutter column
+       — Content (eyebrow + headline + copy + facts + buttons) is
+         indented to clear the label, same as section__head/.intro/.filipa
+       — Right column holds the image + credential card */
     .hero--about {
-      grid-template-rows: auto auto 1fr;
-      /* Generous top padding so the absolutely-positioned section label
-         clears the eyebrow and headline below it. */
-      padding-top: clamp(160px, 18vw, 240px);
+      grid-template-columns: 1.35fr 1fr;
+      grid-template-rows: auto auto auto 1fr;
+      gap: 0 60px;
+      /* Match other sections' top padding so the section label sits at
+         the same vertical position visitors see in Practice / Filipa. */
+      padding-top: clamp(96px, 14vw, 180px);
     }
+    /* Section label — absolute, anchored to the page gutter, exactly
+       like every other .section__label on the site. */
     .hero--about .hero__section-label {
       position: absolute;
       left: var(--gutter);
-      /* Sit the label well above the eyebrow line — 78px nav + announce
-         banner + breathing room. */
-      top: clamp(108px, 13vw, 160px);
+      top: clamp(96px, 14vw, 180px);
+      flex-direction: column;
+      gap: 6px;
     }
+    /* Content stack — eyebrow, headline, foot — all indented to clear
+       the section label, matching how .section__head / .intro / .filipa
+       are pushed right by clamp(0px, 12vw, 200px). */
     .hero--about .hero__eyebrow {
       grid-column: 1 / 2;
       grid-row: 1 / 2;
       margin: 0 0 18px;
+      margin-left: clamp(0px, 12vw, 200px);
     }
     .hero--about .hero__heading {
       grid-column: 1 / 2;
       grid-row: 2 / 3;
       align-self: start;
       margin-top: 0;
+      margin-left: clamp(0px, 12vw, 200px);
+      max-width: 12ch;
     }
     .hero--about .hero__foot {
       grid-column: 1 / 2;
-      grid-row: 3 / 4;
+      grid-row: 3 / 5;
+      margin-left: clamp(0px, 12vw, 200px);
+      margin-top: clamp(20px, 2.5vw, 32px);
     }
     .hero--about .hero__image {
       grid-column: 2 / 3;
-      grid-row: 1 / 4;
+      grid-row: 1 / 5;
     }
-    /* Body paragraph — match the lede's size/weight, and bring back the
-       Fraunces italic drop-cap on the first letter (the original "M"
-       effect from the About section). */
+    /* Body paragraph — match the lede's size/weight, with the original
+       Fraunces italic drop-cap "M" effect from the About section. */
     .hero--about .hero__body {
       margin: 0;
       max-width: 52ch;
@@ -104,10 +117,11 @@
       font-weight: 500;
     }
 
-    /* Tablet / mobile — collapse to one column, label flips inline */
+    /* Tablet / mobile — collapse to one column, label flips inline above content */
     @media (max-width: 1100px) {
       .hero--about {
-        grid-template-rows: auto auto auto auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto;
         padding-top: clamp(100px, 12vw, 140px);
       }
       .hero--about .hero__section-label {
@@ -121,10 +135,14 @@
       .hero--about .hero__heading,
       .hero--about .hero__foot {
         grid-column: 1 / -1;
+        margin-left: 0;
       }
+      .hero--about .hero__heading { max-width: none; }
       .hero--about .hero__image {
         grid-column: 1 / -1;
         grid-row: auto;
+        margin-top: 40px;
+        padding-bottom: 70px;
       }
     }
     @media (max-width: 760px) {
