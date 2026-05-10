@@ -699,17 +699,18 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
      here keeps it proportional to the smaller body text. */
   .lead.drop::first-letter { font-size: 4em; line-height: .85; }
   /* ---------- Images — sized for phones ----------
-     All section images get a meaningful reduction so they feel
-     photographic rather than wall-tall on a narrow viewport. */
+     All section images get a substantial reduction so they read as
+     small photographic accents next to the copy rather than dominating
+     the viewport. */
   .about__figure .img-frame img,
-  .about__figure .img-frame { height: clamp(220px, 36vh, 290px); min-height: 0; }
-  .filipa__image img { height: clamp(220px, 36vh, 290px); }
+  .about__figure .img-frame { height: clamp(160px, 24vh, 200px); min-height: 0; }
+  .filipa__image img { height: clamp(160px, 24vh, 200px); }
   .training__figure { min-height: 0; max-height: none; height: auto; }
-  .training__figure .img-frame img { height: clamp(200px, 38vw, 290px); }
+  .training__figure .img-frame img { height: clamp(140px, 28vw, 200px); }
   /* Card images on practice section — still single column, just shorter */
-  .card__image img { height: clamp(180px, 46vw, 240px); }
+  .card__image img { height: clamp(140px, 36vw, 180px); }
   /* Voice testimonial image — already had a clamp, tighten the upper end */
-  .voice__image img { height: clamp(220px, 38vw, 300px); }
+  .voice__image img { height: clamp(160px, 28vw, 220px); }
   /* Section labels (the bloom + 01 ABOUT) — slightly tighter on mobile */
   .section__label { gap: 10px; margin-bottom: 12px; }
   .section__label .num { font-size: 20px; }
