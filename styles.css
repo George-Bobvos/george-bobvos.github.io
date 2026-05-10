@@ -126,7 +126,15 @@ section[id], .hero { scroll-margin-top: 84px; }
   color: var(--clay);
 }
 .display--lg { font-size: clamp(48px, 9vw, 132px); }
-.display--md { font-size: clamp(40px, 6.6vw, 92px); letter-spacing: -.025em; }
+.display--md {
+  /* Sized so every section headline ("Yoga, without pressure.",
+     "Rooted in ancient yoga.", "A little more about me.", etc.) fits
+     on a single line at every viewport — from narrow mobile (~340px
+     content) up to desktop. Nowrap enforces the rule. */
+  font-size: clamp(30px, 5vw, 64px);
+  letter-spacing: -.025em;
+  white-space: nowrap;
+}
 .display--sm { font-size: clamp(32px, 4vw, 56px); letter-spacing: -.02em; }
 
 .lead {
@@ -393,7 +401,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 /* ---------- Section primitives ---------- */
 .section {
   position: relative;
-  padding: clamp(96px, 14vw, 180px) var(--gutter);
+  padding: clamp(72px, 10vw, 130px) var(--gutter);
   max-width: var(--max);
   margin: 0 auto;
 }
@@ -429,7 +437,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 
 .section__head {
   max-width: 880px;
-  margin: 0 0 clamp(48px, 7vw, 88px);
+  margin: 0 0 clamp(36px, 5vw, 64px);
 }
 
 /* ---------- OVERTURE (sunset) ---------- */
@@ -1004,7 +1012,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 
 /* ---------- QUOTE ---------- */
 .quote {
-  padding: clamp(120px, 16vw, 200px) var(--gutter);
+  padding: clamp(96px, 12vw, 150px) var(--gutter);
   background: var(--ink);
   color: var(--paper);
   text-align: center;
@@ -1251,7 +1259,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .contact__inner {
   max-width: var(--max);
   margin: 0 auto;
-  padding: clamp(96px, 14vw, 180px) var(--gutter);
+  padding: clamp(72px, 10vw, 130px) var(--gutter);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(40px, 6vw, 84px);
@@ -1598,13 +1606,9 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   line-height: 1.6;
 }
 
-/* ---------- Display headings — single-line emphasis on quote/schedule ---------- */
-.quote .display     { font-size: clamp(40px, 6.4vw, 88px); }
-.page-head .display--lg { font-size: clamp(44px, 6.4vw, 88px); }
-@media (min-width: 1101px) {
-  .quote .display,
-  .page-head .display--lg { white-space: nowrap; }
-}
+/* ---------- Display headings — schedule + quote keep nowrap ---------- */
+.quote .display     { font-size: clamp(30px, 5vw, 64px); white-space: nowrap; }
+.page-head .display--lg { font-size: clamp(30px, 5vw, 64px); white-space: nowrap; }
 
 /* ---------- Bloom ornament ---------- */
 .bloom {
