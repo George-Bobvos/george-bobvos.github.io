@@ -2109,3 +2109,91 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   .schedule-preview { gap: 12px 16px; }
   .schedule-preview__text { font-size: 13px; }
 }
+
+/* ============================================================
+   REDUCED MOTION — global guard
+   ------------------------------------------------------------
+   Users who set "prefers-reduced-motion: reduce" (often people
+   prone to motion sickness, vestibular disorders, or who simply
+   prefer a calmer experience) get a stripped-down version: no
+   marquee, no parallax, no scale-on-hover, no reveal animations.
+   Layout and color stay identical. Functionality stays intact.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  /* Kill all animations and transitions outright. The shorter
+     duration (vs 0s) preserves any final-state behavior in
+     case some elements rely on the transition end. */
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Marquee: stop scrolling outright */
+  .marquee__track { animation: none !important; }
+  /* Parallax / hover scales: hold at base position */
+  [data-parallax] img,
+  .about__figure .img-frame img,
+  .training__figure .img-frame img,
+  .filipa__image .img-frame > img,
+  .card .card__image img {
+    transform: none !important;
+  }
+  /* Reveal-on-scroll: just show the elements immediately */
+  .reveal, .reveal.is-visible,
+  [data-split] .word { opacity: 1 !important; transform: none !important; }
+  /* Section-nav petal bloom: skip the unfolding animation */
+  .section-nav__bloom .bloom__petal { transform: scaleY(1) !important; }
+}
+
+/* ============================================================
+   FOCUS — keyboard navigation visibility
+   ------------------------------------------------------------
+   Every interactive element needs a visible focus ring for
+   keyboard users (Tab navigation). The base :focus-visible
+   rule above sets a clay outline, but several custom-styled
+   elements (testimonial face dots, section-nav blooms, mobile
+   menu, etc.) need their own focus treatment so the ring sits
+   correctly around their non-rectangular shape.
+   ============================================================ */
+.section-nav__dot:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+.voices__dot:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 5px;
+  border-radius: 50%;
+}
+.nav__menu:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+.card:focus-within {
+  outline: 2px solid var(--clay);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+.announce__close:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+/* Form fields get a clay underline on focus instead of a heavy ring */
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--clay);
+}
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 2px;
+}
+/* Cursor signal on the testimonial swipe area — hints that it's draggable */
+.voices__stage { cursor: grab; }
+.voices__stage:active { cursor: grabbing; }
