@@ -1677,7 +1677,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   transition-delay: calc(var(--i, 0) * 75ms);
 }
 .is-visible .bloom__core { transform: scale(1); }
-.section__label--light .bloom { color: var(--paper); }
+.section__label--light .bloom { color: var(--clay); }
 .section__label--light .bloom__petal { fill-opacity: 0; }
 .section__label--light.is-visible .bloom__petal { fill-opacity: .9; }
 @media (max-width: 760px) {
