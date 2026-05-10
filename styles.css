@@ -689,13 +689,27 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
      (gutter is normally 5vw; on phones that's tight). Bump for tap-edge
      comfort. */
   :root { --gutter: 24px; }
-  /* Card images are a bit shorter on single-column mobile so the cards
-     don't feel wall-tall before you reach the body text. */
-  .card__image img { height: clamp(280px, 70vw, 380px); }
-  /* Training image stacks below copy on mobile — cap height so it
-     doesn't dwarf the section. */
+  /* ---------- Body text — sized for phones ----------
+     Lead paragraphs feel right at 17px on a desktop column but a touch
+     heavy on a narrow mobile viewport. Drop to 15.5px with a tighter
+     line-height so paragraphs read as comfortable phone copy rather
+     than magazine-spread copy. */
+  .lead { font-size: 15.5px; line-height: 1.55; }
+  /* The drop-cap M / I scales with the paragraph, so dropping its size
+     here keeps it proportional to the smaller body text. */
+  .lead.drop::first-letter { font-size: 4em; line-height: .85; }
+  /* ---------- Images — sized for phones ----------
+     All section images get a ~15% reduction so they feel photographic
+     rather than wall-tall on a narrow viewport. */
+  .about__figure .img-frame img,
+  .about__figure .img-frame { height: clamp(300px, 48vh, 380px); min-height: 0; }
+  .filipa__image img { height: clamp(300px, 48vh, 380px); }
   .training__figure { min-height: 0; max-height: none; height: auto; }
-  .training__figure .img-frame img { height: clamp(320px, 60vw, 460px); }
+  .training__figure .img-frame img { height: clamp(280px, 50vw, 380px); }
+  /* Card images on practice section — still single column, just shorter */
+  .card__image img { height: clamp(240px, 60vw, 320px); }
+  /* Voice testimonial image — already had a clamp, tighten the upper end */
+  .voice__image img { height: clamp(280px, 50vw, 380px); }
   /* Section labels (the bloom + 01 ABOUT) — slightly tighter on mobile */
   .section__label { gap: 10px; margin-bottom: 12px; }
   .section__label .num { font-size: 20px; }
@@ -704,6 +718,9 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   /* Form fields get a touch more vertical room on mobile so the typing
      experience is more comfortable. */
   .field input, .field select, .field textarea { padding: 12px 14px; }
+  /* Schedule preview & section intro/practice notes match the reduced
+     body text scale for consistency. */
+  .schedule-preview__text { font-size: 12.5px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .overture__bg img { animation: none !important; transform: none !important; }
