@@ -807,7 +807,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 /* ---------- PRACTICE cards ---------- */
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 28px;
 }
 .card {
@@ -997,6 +997,11 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   object-fit: cover;
   border-radius: var(--radius-img);
 }
+/* Same gentle hover scale as the About hero image — keeps both portraits
+   reacting consistently when hovered. Targets the loaded state so the
+   blur-up transition is already complete. */
+.filipa__image:hover .img-frame.is-loaded > img,
+.filipa__image:hover .img-frame > img { transform: scale(1.02); }
 .filipa__image figcaption {
   margin-top: 12px;
   font-size: 11px;
@@ -1790,6 +1795,18 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   font-weight: 400;
   color: var(--clay);
   font-size: 1.06em;
+  letter-spacing: -.005em;
+}
+
+/* Italic emphasis inside body lead paragraphs ("Pipa", "India", etc.) —
+   same Fraunces italic in clay as the display headlines, but at a size
+   that flows naturally inside the running text. */
+.lead em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--clay);
+  font-size: 1.08em;
   letter-spacing: -.005em;
 }
 
