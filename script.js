@@ -119,7 +119,8 @@
     '.about__figure', '.training__figure',
     '.filipa__image', '.filipa__copy',
     '.page-head', '.schedule', '.schedule__foot',
-    '.voices', '.voices__nav'
+    '.voices', '.voices__nav',
+    '.collage__item'
   ];
   autoReveal.forEach(sel => {
     document.querySelectorAll(sel).forEach((el, i) => {
