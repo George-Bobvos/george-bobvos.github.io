@@ -620,37 +620,45 @@
   </section>
 
   <!-- ========================== COLLAGE ==========================
-       A quiet visual close-off after Voices. Five beach-session
-       photographs in an asymmetric editorial grid that collapses
-       gracefully to a 2-column staggered layout on mobile.
+       Magazine-grid photo essay after Voices. Five 3:4 portrait
+       photographs shown at their natural aspect ratio (no cropping
+       anywhere) with varied sizing to create editorial rhythm.
 
-       Composition (desktop, 12-col grid, 3 rows):
-         img 1 — tall left   (col 1-5, row 1-2)   group on pier w/ skyline
-         img 2 — wide top    (col 6-12, row 1)    seated meditation
-         img 3 — wide mid    (col 6-9, row 2)     group reclined stretch
-         img 4 — wide right  (col 9-12, row 2-3)  group plank
-         img 5 — wide bottom (col 1-9, row 3)     reclined twist w/ skyline
+       Three rows on desktop:
+         row 1 — large left + small right (asymmetric pair, ends right)
+         row 2 — small left + large right (asymmetric pair, inverted)
+         row 3 — single medium-sized centerpiece, centered
 
-       The grid is intentionally unnumbered — no eyebrow, no section
-       label. Just a thin clay rule above it and the photographs. -->
+       On mobile, rows stack vertically and photo widths stagger
+       (full-width / narrow-right / narrow-left / full-width / narrow-center)
+       so the section keeps a visually interesting flow on phones too.
+
+       Unnumbered, label-less — just a thin clay rule above and a
+       quiet caption below. -->
   <section class="collage" aria-label="Moments from the mat">
     <div class="collage__rule" aria-hidden="true"></div>
     <div class="collage__grid">
-      <figure class="collage__item collage__item--1">
-        <img src="./assets/collage-beach-1.jpg" alt="Group savasana on the Poblenou pier with the Barcelona skyline" loading="lazy">
-      </figure>
-      <figure class="collage__item collage__item--2">
-        <img src="./assets/collage-beach-2.jpg" alt="Seated meditation facing the sea" loading="lazy">
-      </figure>
-      <figure class="collage__item collage__item--3">
-        <img src="./assets/collage-beach-3.jpg" alt="Group reclined stretch above the water" loading="lazy">
-      </figure>
-      <figure class="collage__item collage__item--4">
-        <img src="./assets/collage-beach-4.jpg" alt="Plank pose facing the horizon" loading="lazy">
-      </figure>
-      <figure class="collage__item collage__item--5">
-        <img src="./assets/collage-beach-5.jpg" alt="Reclined twist on the concrete pier" loading="lazy">
-      </figure>
+      <div class="collage__row">
+        <figure class="collage__item collage__item--lg">
+          <img src="./assets/collage-beach-1.jpg" alt="Group savasana on the Poblenou pier with the Barcelona skyline" loading="lazy">
+        </figure>
+        <figure class="collage__item collage__item--sm">
+          <img src="./assets/collage-beach-2.jpg" alt="Seated meditation facing the sea" loading="lazy">
+        </figure>
+      </div>
+      <div class="collage__row">
+        <figure class="collage__item collage__item--sm">
+          <img src="./assets/collage-beach-3.jpg" alt="Group reclined stretch above the water" loading="lazy">
+        </figure>
+        <figure class="collage__item collage__item--lg">
+          <img src="./assets/collage-beach-4.jpg" alt="Plank pose facing the horizon" loading="lazy">
+        </figure>
+      </div>
+      <div class="collage__row collage__row--center">
+        <figure class="collage__item collage__item--md">
+          <img src="./assets/collage-beach-5.jpg" alt="Reclined twist on the concrete pier" loading="lazy">
+        </figure>
+      </div>
     </div>
     <p class="collage__caption">
       <span class="collage__caption-mark" aria-hidden="true">·</span>
