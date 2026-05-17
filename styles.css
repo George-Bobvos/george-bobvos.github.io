@@ -2247,34 +2247,21 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 .voices__stage:active { cursor: grabbing; }
 
 /* ============================================================
-   COLLAGE — magazine-grid photo essay after Voices
+   COLLAGE — three photographs after Voices
    ------------------------------------------------------------
-   Five photographs, all 3:4 portrait, shown at their natural
-   aspect ratio (NO cropping anywhere — `object-fit: cover` was
-   the bug in v1). Variation comes from *size*, not from
-   cropping different shapes out of each photo.
+   Three 3:4 photographs in a calm, equal-sized row. No
+   cropping (object-fit: contain on every image), no asymmetry,
+   no clever tricks — just three moments from the practice
+   sitting next to each other with breathing room between them.
 
-   Composition rules:
-     - Every photo declares aspect-ratio: 3 / 4. Width varies.
-     - Heights auto-derive from width × aspect ratio, so the
-       grid rows size themselves to the photos rather than the
-       photos being forced into the rows.
-     - No object-fit. Photos display whole.
-
-   Layout strategy:
-     Desktop: 3 staggered rows, each row is an asymmetric pair
-       row 1 — large left (60% width) + small right (40%)
-       row 2 — small left (40%) + large right (60%), inverted
-       row 3 — single centered photo at medium width (50%)
-       The alternating large/small creates editorial rhythm,
-       and the centered row 3 acts as a quiet closing beat.
-     Tablet: simpler 2-up rows, photo 5 centered below.
-     Mobile: vertical stack with width variation (some full,
-       some narrowed) so it doesn't feel like a boring list.
+   Desktop: row of three, equal widths, equal gaps.
+   Tablet:  row of three, slightly tighter.
+   Mobile:  vertical stack, three photos top-to-bottom at the
+            same width, evenly spaced.
    ============================================================ */
 
 /* Section shell — same gutter/max-width pattern as the rest of
-   the site, sitting after Voices on the cream paper background. */
+   the site. */
 .collage {
   position: relative;
   padding: clamp(64px, 9vw, 110px) var(--gutter) clamp(72px, 10vw, 120px);
@@ -2282,8 +2269,8 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   margin: 0 auto;
 }
 
-/* Top rule — a short clay hairline, centered, signaling the
-   transition out of Voices without being a hard divider. */
+/* A short clay hairline above the photos, signaling the
+   transition out of Voices without a hard divider. */
 .collage__rule {
   width: 56px;
   height: 1px;
@@ -2292,72 +2279,41 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   margin: 0 auto clamp(36px, 5vw, 56px);
 }
 
-/* The grid is just a flex container of rows. Each row controls
-   its own internal layout. Gap between rows is generous (these
-   are photos that want breathing room), gap inside rows is tight
-   so paired photos read as a duo. */
+/* The row of three. Equal columns, equal gaps, photos align
+   to the top of the row so any tiny height variance reads as a
+   shared baseline rather than a wave. */
 .collage__grid {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(20px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2vw, 28px);
+  align-items: start;
 }
 
-/* Each row is a flex container that arranges its photos
-   horizontally with a generous gap. align-items: flex-end so
-   when two photos of different sizes sit side-by-side, their
-   bottoms align — like images dropped onto a magazine baseline.
-   justify-content: space-between pushes the asymmetric pair to
-   the edges so the photos breathe in the row rather than
-   clustering on one side. */
-.collage__row {
-  display: flex;
-  gap: clamp(20px, 3vw, 40px);
-  align-items: flex-end;
-  justify-content: space-between;
-}
-/* The second row inverts the visual weight — small left, large
-   right — by reversing the source order, so the eye zig-zags
-   from row 1 (large-left, small-right) to row 2 (small-left,
-   large-right). */
-.collage__row--reverse {
-  /* Keep DOM order but reverse the visual layout. */
-}
-/* Center-aligned row variant — used for row 3 (the single
-   closing photograph) so it sits in the middle of the section
-   rather than left-anchored. */
-.collage__row--center {
-  justify-content: center;
-}
-
-/* Each photo. The wrapping figure declares aspect-ratio so the
-   browser reserves space correctly during image load (no layout
-   shift), and the inner <img> fills the figure naturally without
-   any cover-crop hack. */
+/* Each photo wrapper. aspect-ratio: 3 / 4 reserves the right
+   space during image load (no layout shift) and ensures all
+   three photos have identical proportions even if the source
+   files differ slightly. */
 .collage__item {
   margin: 0;
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-img);
   background: var(--paper-warm);
-  box-shadow: 0 14px 36px rgba(26, 20, 17, 0.10);
-  /* Every photo is 3:4 portrait. Width set by the variant
-     classes below; height derives automatically. */
   aspect-ratio: 3 / 4;
-  /* Don't let flex stretch the item. */
-  flex: 0 0 auto;
+  box-shadow: 0 14px 36px rgba(26, 20, 17, 0.10);
   transition: box-shadow .5s var(--ease), transform .5s var(--ease);
 }
 .collage__item img {
   display: block;
   width: 100%;
   height: 100%;
-  /* Critical: contain, not cover. The figure already matches
-     the photo's natural ratio (3:4), so contain shows the full
-     photo edge-to-edge with no cropping. If for any reason a
-     photo doesn't match exactly, we get letterboxing on cream,
-     which is preferable to amputating the image. */
-  object-fit: contain;
-  background: var(--paper-warm);
+  /* object-fit: cover is safe here because every photo IS
+     exactly 3:4 and the wrapper IS exactly 3:4 — so cover and
+     contain produce identical output. cover is chosen because
+     it avoids the chance of letterboxing if a future photo
+     differs by a pixel or two from the declared ratio. */
+  object-fit: cover;
+  object-position: center center;
   transition: transform 1.4s var(--ease-out);
 }
 .collage__item:hover {
@@ -2367,27 +2323,7 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   transform: scale(1.025);
 }
 
-/* ---------- Size variants ----------
-   Width is the only thing that changes per photo. Heights
-   derive from width × 4/3 (the inverse of 3:4 aspect ratio).
-
-   Sizes use clamps so they scale fluidly:
-     --lg: ~38% of container at desktop, 70% at mobile
-     --md: ~32% / ~55%
-     --sm: ~24% / ~45%
-
-   The lg/md/sm progression gives three distinct photo scales,
-   which is what creates the magazine rhythm. */
-.collage__item--lg { width: clamp(260px, 38vw, 460px); }
-.collage__item--md { width: clamp(220px, 32vw, 380px); }
-.collage__item--sm { width: clamp(180px, 24vw, 300px); }
-
-/* ---------- Desktop placements ----------
-   These class combinations are applied in the HTML to compose
-   the three rows. Nothing fancy needed beyond width control;
-   the rows + flex handle alignment. */
-
-/* Soft caption sitting under the magazine essay. */
+/* Soft caption beneath the row. */
 .collage__caption {
   margin: clamp(36px, 5vw, 56px) 0 0;
   text-align: center;
@@ -2410,53 +2346,38 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
 }
 
 /* ---------- Tablet (≤1100px) ----------
-   The asymmetric pairs still work but the photos need a bit
-   more space, so we widen the size clamps. */
+   Keep the row of three but tighten gaps and pull the
+   stack-vertically breakpoint up to 900 so this range doesn't
+   show photos at uncomfortably small sizes. */
 @media (max-width: 1100px) {
-  .collage__item--lg { width: clamp(260px, 56vw, 460px); }
-  .collage__item--md { width: clamp(220px, 44vw, 380px); }
-  .collage__item--sm { width: clamp(180px, 38vw, 300px); }
-  .collage__row { gap: 14px; }
+  .collage__grid { gap: 14px; }
 }
 
-/* ---------- Mobile (≤760px) ----------
-   On phones the side-by-side asymmetric pairs would make each
-   photo too small to enjoy, so we collapse rows to vertical
-   stacks. But to keep the magazine rhythm and avoid a boring
-   straight-down line of full-width portraits, we narrow some
-   photos and shift their alignment — small ones float to the
-   left or right edge, big ones fill the full width.
-
-   Row 1: photo 1 full-width, photo 2 narrowed and pushed right
-   Row 2: photo 3 narrowed and pushed left, photo 4 full-width
-   Row 3: photo 5 narrowed and centered
-
-   This produces a visually staggered vertical flow that feels
-   editorial rather than gallery-like. */
-@media (max-width: 760px) {
+/* ---------- Narrow tablet & mobile (≤900px) ----------
+   Stack vertically. The threshold sits above the usual 760
+   mobile cutoff because three side-by-side photos start to
+   feel cramped before that — at 800-900px wide, three columns
+   give each photo only ~250px which is too small to read the
+   bodies and skyline detail comfortably. Stacking earlier
+   keeps each photograph at a satisfying size all the way down
+   to phone widths. */
+@media (max-width: 900px) {
   .collage {
-    padding-top: clamp(48px, 8vw, 72px);
-    padding-bottom: clamp(56px, 9vw, 88px);
+    padding-top: clamp(48px, 8vw, 88px);
+    padding-bottom: clamp(56px, 9vw, 100px);
   }
   .collage__rule {
     margin-bottom: clamp(24px, 5vw, 36px);
   }
-  .collage__grid { gap: 22px; }
-  .collage__row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 22px;
+  .collage__grid {
+    grid-template-columns: 1fr;
+    gap: clamp(14px, 3vw, 22px);
+    /* Cap the width so photos sit comfortably inside the
+       viewport rather than going gutter-to-gutter, which can
+       feel oversized on tablets. */
+    max-width: 460px;
+    margin: 0 auto;
   }
-  /* Per-photo widths and alignment for the staggered vertical flow. */
-  .collage__item--lg { width: 100%; }
-  .collage__item--md { width: 72%; }
-  .collage__item--sm { width: 64%; }
-  /* Alignment shifts — using nth-of-type so we don't need extra
-     classes in the HTML. Photos 2 and 5 push to the right, photo
-     3 stays at the left. Photo 4 stays full-width. */
-  .collage__item:nth-of-type(2) { align-self: flex-end; }
-  .collage__item:nth-of-type(3) { align-self: flex-start; }
-  .collage__item:nth-of-type(5) { align-self: center; }
   .collage__caption {
     font-size: 10px;
     letter-spacing: .2em;
@@ -2464,18 +2385,10 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   }
 }
 
-/* ---------- Very narrow phones (≤360px) ----------
-   At very small viewports the narrowed photos start to feel
-   cramped, so widen them up a bit. */
-@media (max-width: 360px) {
-  .collage__item--md { width: 84%; }
-  .collage__item--sm { width: 76%; }
-}
-
 /* ---------- Reveal animation ----------
    Same .reveal → .is-visible pattern as the rest of the site,
-   with a per-item stagger so the magazine assembles itself
-   rather than appearing all at once. */
+   with a gentle per-item stagger so the three photos enter in
+   sequence rather than all at once. */
 .collage__item.reveal {
   opacity: 0;
   transform: translateY(36px) scale(.975);
@@ -2488,10 +2401,8 @@ body.has-overture .nav:not(.is-scrolled) .nav__soon {
   transform: translateY(0) scale(1);
 }
 .collage__item:nth-of-type(1).reveal { transition-delay: 0s; }
-.collage__item:nth-of-type(2).reveal { transition-delay: .08s; }
-.collage__item:nth-of-type(3).reveal { transition-delay: .16s; }
-.collage__item:nth-of-type(4).reveal { transition-delay: .24s; }
-.collage__item:nth-of-type(5).reveal { transition-delay: .32s; }
+.collage__item:nth-of-type(2).reveal { transition-delay: .12s; }
+.collage__item:nth-of-type(3).reveal { transition-delay: .24s; }
 
 @media (prefers-reduced-motion: reduce) {
   .collage__item.reveal,
